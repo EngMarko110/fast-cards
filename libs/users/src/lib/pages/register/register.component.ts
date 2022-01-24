@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../../..';
 
 @Component({
   selector: 'users-register',
@@ -7,20 +9,34 @@ import { Validators } from '@angular/forms';
   styles: []
 })
 export class RegisterComponent implements OnInit {
-  registerFormGroup: any;
+  registerFormGroup:FormGroup;
   formBuilder: any;
-  constructor() {}
+  constructor(private authServ:AuthService, private router:Router) {
+
+    this._initRegisterForm();
+  }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
-    this._initRegisterForm();
   }
   private _initRegisterForm() {
-    this.registerFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      phone: ['']
+    this.registerFormGroup = new FormGroup({
+      name:new FormControl('', Validators.required),
+      email:new FormControl('', [Validators.required, Validators.email]),
+      password:new FormControl('', Validators.required) ,
+      phone:new FormControl ('')
     });
+    // this.registerFormGroup.valueChanges.subscribe((changes)=>{
+    //   console.log(changes);
+      
+    // })
+  }
+  onSubmit(user:any){
+    this.authServ.signUp(user).subscribe((response)=>{      
+      console.log('Register: ',response);
+      this.router.navigate(['/']);
+
+    })
+    
   }
 }

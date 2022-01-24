@@ -1,8 +1,9 @@
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { LocalstorageService } from './localstorage.service';
 
@@ -22,6 +23,12 @@ export class AuthService {
     return this.http.post<User>(`${this.apiURLUsers}/login`, { email, password });
   }
 
+signUp(user:User){
+  return this.http.post<User>(`${this.apiURLUsers}/register`,user).pipe(
+    catchError(err=>{return throwError(err.message);})
+  );
+  
+}  
   logout() {
     this.token.removeToken();
     this.router.navigate(['/login']);
