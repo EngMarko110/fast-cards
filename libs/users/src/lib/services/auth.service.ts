@@ -12,7 +12,6 @@ import { LocalstorageService } from './localstorage.service';
 })
 export class AuthService {
   apiURLUsers = environment.apiUrl + 'users';
-
   constructor(
     private http: HttpClient,
     private token: LocalstorageService,

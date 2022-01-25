@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,8 +20,7 @@ import { MessageService } from 'primeng/api';
 import { JwtInterceptor, UsersModule } from '@bluebits/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
-const routes: Routes = [{ path: '', component: HomePageComponent }];
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
+    // RouterModule.forRoot(routes),
     HttpClientModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
@@ -43,7 +44,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     UiModule,
     OrdersModule,
     ToastModule,
-    UsersModule
+    UsersModule,
+    ButtonModule
   ],
   providers: [
     MessageService,

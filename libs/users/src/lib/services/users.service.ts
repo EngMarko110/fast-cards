@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from '@env/environment';
@@ -13,7 +13,7 @@ declare const require;
 })
 export class UsersService {
   apiURLUsers = environment.apiUrl + 'users';
-
+  private username = new Subject<string>();
   constructor(private http: HttpClient, private usersFacade: UsersFacade) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -68,5 +68,13 @@ export class UsersService {
 
   isCurrentUserAuth() {
     return this.usersFacade.isAuthenticated$;
+  }
+
+   // listener for adding overlay when focus on input search 
+   getUsernameistner() {
+    return this.username.asObservable()
+  }
+  setUsernameListener(value: string) {
+    this.username.next(value)
   }
 }

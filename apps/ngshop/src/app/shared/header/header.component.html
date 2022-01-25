@@ -5,13 +5,54 @@
         <img src="assets/images/logo.png" alt="logo" />
       </div>
     </div>
-    <div class="p-col-4 search"><products-search></products-search></div>
-    <div class="p-col-3 p-offset-1 navigation">
+    <div class="p-col-4 search">
+      <products-search></products-search>
+    </div>
+    <!-- p-offset-1 -->
+    <div class="p-col-3  navigation">
       <ngshop-nav></ngshop-nav>
     </div>
-    <div class="p-col-1 tools">
-      <i class="pi pi-user p-text-secondary" style="font-size: 1.5rem"></i>
+    <div class="p-col-2 tools">
+
+
+      <span class="dropdown">
+        <a class="dropdown-toggle item" data-toggle="dropdown">
+          <ng-template #icon>
+            <i class="pi pi-user p-text-secondary  "></i>
+          </ng-template>
+          
+           <ng-template #name>
+            <span class="p-text-secondary name">{{username|titlecase}}</span> 
+           </ng-template>
+           <ng-container *ngIf="username then name;else icon"></ng-container>
+        </a>
+        <div class="dropdown-menu dropdown-content">
+          <div class="menu_btn_container">
+            <ng-template #notAuth>
+              <button pButton pRipple type="button" label="Login" class="p-button-rounded"
+                (click)="navigateToAuth('login')"></button>
+              <div class="dropdown-divider"></div>
+              <p class="text-center"><span>New Customer?</span></p>
+              <a (click)="navigateToAuth('register')">Register now</a>
+              <div class="dropdown-divider"></div>
+            </ng-template>
+            <ng-template #auth>
+              <img src="assets/images/logo.png" alt="logo" />
+              <button pButton pRipple type="button" label="Logout" class="p-button-rounded"
+              (click)="logOut()"></button>
+            <div class="dropdown-divider"></div>
+            </ng-template>
+            <ng-container *ngIf="username then auth;else notAuth"></ng-container>        
+          </div>
+        </div>
+      </span>
+
+
+
+
+
       <orders-cart-icon></orders-cart-icon>
     </div>
+
   </div>
 </header>
