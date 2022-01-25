@@ -16,20 +16,21 @@ export class AuthService {
     private http: HttpClient,
     private token: LocalstorageService,
     private router: Router
-  ) {}
+  ) { }
 
   login(email: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.apiURLUsers}/login`, { email, password });
   }
 
-signUp(user:User){
-  return this.http.post<User>(`${this.apiURLUsers}/register`,user).pipe(
-    catchError(err=>{return throwError(err.message);})
-  );
-  
-}  
+  signUp(user: User) {
+    return this.http.post<User>(`${this.apiURLUsers}/register`, user).pipe(
+      catchError(err => { return throwError(err.message); })
+    );
+
+  }
   logout() {
     this.token.removeToken();
+    localStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
 }

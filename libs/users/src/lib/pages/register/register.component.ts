@@ -1,3 +1,4 @@
+import { UsersService } from '../../..';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -11,7 +12,10 @@ import { AuthService } from '../../..';
 export class RegisterComponent implements OnInit {
   registerFormGroup:FormGroup;
   formBuilder: any;
-  constructor(private authServ:AuthService, private router:Router) {
+  constructor(private authServ:AuthService,
+     private router:Router,
+     private usersServ:UsersService
+    ) {
 
     this._initRegisterForm();
   }
@@ -33,8 +37,9 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit(user:any){
     this.authServ.signUp(user).subscribe((response)=>{      
-      // console.log('Register: ',response);
-      localStorage.setItem('userId',response?.id)
+      console.log('Register: ',response);
+      this.usersServ.setUsernameListener(response.name)
+      // localStorage.setItem('userId',response?.id)
       this.router.navigate(['/']);
     })
     

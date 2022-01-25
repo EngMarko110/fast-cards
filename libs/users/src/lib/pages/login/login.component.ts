@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 
 @Component({
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private localstorageService: LocalstorageService,
-    private router: Router
+    private router: Router,
+    private userserv:UsersService,
+
   ) {}
 
   ngOnInit(): void {
@@ -38,11 +41,12 @@ export class LoginComponent implements OnInit {
     this.isSubmitted = true;
 
     if (this.loginFormGroup.invalid) return;
-
-    this.auth.login(this.loginForm.email.value, this.loginForm.password.value).subscribe(
+     this.auth.login(this.loginForm.email.value, this.loginForm.password.value).subscribe(
       (user) => {
         this.authError = false;
         this.localstorageService.setToken(user.token);
+        console.log(user['user'].name);
+        this.userserv.setUsernameListener(user['user'].name)
         this.router.navigate(['/']);
       },
       (error: HttpErrorResponse) => {

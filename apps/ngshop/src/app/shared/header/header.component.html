@@ -22,7 +22,7 @@
           </ng-template>
           
            <ng-template #name>
-            <span class="p-text-secondary name">{{username|titlecase}}</span> 
+            <span class="p-text-secondary name" routerLink="/profile-page" >{{username|titlecase}}</span> 
            </ng-template>
            <ng-container *ngIf="username then name;else icon"></ng-container>
         </a>
@@ -31,7 +31,6 @@
             <ng-template #notAuth>
               <button pButton pRipple type="button" label="Login" class="p-button-rounded"
                 (click)="navigateToAuth('login')"></button>
-              <div class="dropdown-divider"></div>
               <p class="text-center"><span>New Customer?</span></p>
               <a (click)="navigateToAuth('register')">Register now</a>
               <div class="dropdown-divider"></div>
