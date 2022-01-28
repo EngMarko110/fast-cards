@@ -11,7 +11,6 @@ import * as fromUsers from './state/users.reducer';
 import { UsersEffects } from './state/users.effects';
 import { UsersFacade } from './state/users.facade';
 import { RegisterComponent } from './pages/register/register.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -22,10 +21,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-  {
-    path: 'profile-page',
-    component: ProfilePageComponent
-  }
+  
 ];
 
 @NgModule({
@@ -39,7 +35,7 @@ const routes: Routes = [
     StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     EffectsModule.forFeature([UsersEffects])
   ],
-  declarations: [LoginComponent, ProfilePageComponent, RegisterComponent],
+  declarations: [LoginComponent,  RegisterComponent],
   providers: [UsersFacade]
 })
 export class UsersModule {}

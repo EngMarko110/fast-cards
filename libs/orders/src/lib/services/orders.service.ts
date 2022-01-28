@@ -12,7 +12,7 @@ export class OrdersService {
   apiURLOrders = environment.apiUrl + 'orders';
   apiURLProducts = environment.apiUrl + 'products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiURLOrders);
@@ -22,6 +22,10 @@ export class OrdersService {
     return this.http.get<Order>(`${this.apiURLOrders}/${orderId}`);
   }
 
+  getOrderByUserId(userId: any): Observable<Order> {
+    return this.http.get<Order>(`${this.apiURLOrders}/get/userorders/${userId}`)
+  }
+  
   createOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.apiURLOrders, order);
   }

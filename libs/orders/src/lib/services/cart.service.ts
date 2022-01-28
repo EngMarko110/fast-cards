@@ -9,7 +9,7 @@ export const CART_KEY = 'cart';
 export class CartService {
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
 
-  constructor() {}
+  constructor() { }
 
   initCartLocalStorage() {
     const cart: Cart = this.getCart();
@@ -48,7 +48,6 @@ export class CartService {
           } else {
             item.quantity = item.quantity + cartItem.quantity;
           }
-
           return item;
         }
       });

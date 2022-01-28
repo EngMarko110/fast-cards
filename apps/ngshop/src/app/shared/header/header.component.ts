@@ -12,7 +12,7 @@ export class HeaderComponent {
   username: any;
   constructor(private router: Router, private userServ: UsersService,private authServ:AuthService) {
     this.getUserName();
-    this.userServ.getUsernameistner().subscribe((data)=>{
+    this.userServ.getUsernameListner().subscribe((data)=>{
       this.username=data;
       console.log('username',this.username);
       
@@ -28,11 +28,11 @@ export class HeaderComponent {
     let userId = localStorage.getItem('userId')
     this.userServ.getUser(userId).subscribe((response) => {
      this.userServ.setUsernameListener(response.name);
-      console.log({ response });
     })
   }
   logOut(){
     this.authServ.logout();
+    localStorage.removeItem('userId');
     this.userServ.setUsernameListener('')
   }
 }
