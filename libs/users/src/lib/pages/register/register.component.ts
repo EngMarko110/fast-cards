@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
 
     // })
   }
+<<<<<<< HEAD
   onSubmit(user: any) {
     this.authServ.signUp(user).subscribe((response) => {
       console.log("Register: ", response);
@@ -41,5 +42,18 @@ export class RegisterComponent implements OnInit {
       // localStorage.setItem('userId',response?.id)
       this.router.navigate(["/"]);
     });
+=======
+  onSubmit(user:any){
+    this.authServ.signUp(user).subscribe((response)=>{      
+      console.log('Register: ',response);
+      this.usersServ.setUsernameListener(response.name)
+      localStorage.setItem('userId',response?.id)
+      this.router.navigate(['/']);
+    },
+    err=>{
+      console.log({err});
+      
+    })    
+>>>>>>> 6c8b78b499d39575c4b0123fa5a44fba21d88e3a
   }
 }

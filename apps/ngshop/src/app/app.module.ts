@@ -1,3 +1,5 @@
+import { CoreModule } from './shared/core/core.module';
+import { UserProfileModule } from './../../../../libs/users/src/lib/user-profile/user-profile.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
@@ -21,7 +23,6 @@ import { JwtInterceptor, UsersModule } from '@bluebits/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {ButtonModule} from 'primeng/button';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import {ButtonModule} from 'primeng/button';
     HeaderComponent,
     FooterComponent,
     NavComponent,
-    MessagesComponent
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,9 @@ import {ButtonModule} from 'primeng/button';
     OrdersModule,
     ToastModule,
     UsersModule,
-    ButtonModule
+    ButtonModule,
+    UserProfileModule,
+    CoreModule
   ],
   providers: [
     MessageService,

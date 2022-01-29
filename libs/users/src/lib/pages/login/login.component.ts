@@ -45,7 +45,12 @@ export class LoginComponent implements OnInit {
       (user) => {
         this.authError = false;
         this.localstorageService.setToken(user.token);
+<<<<<<< HEAD
        // console.log(user['user'].name);
+=======
+        console.log(user['user'].name);
+        localStorage.setItem('userId',user['user'].id)
+>>>>>>> 6c8b78b499d39575c4b0123fa5a44fba21d88e3a
         this.userserv.setUsernameListener(user['user'].name)
         this.router.navigate(['/']);
       },

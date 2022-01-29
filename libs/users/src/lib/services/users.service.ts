@@ -71,7 +71,7 @@ export class UsersService {
   }
 
    // listener for adding overlay when focus on input search 
-   getUsernameistner() {
+   getUsernameListner() {
     return this.username.asObservable()
   }
   setUsernameListener(value: string) {
