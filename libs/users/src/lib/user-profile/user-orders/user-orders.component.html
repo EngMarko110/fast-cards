@@ -1,1 +1,41 @@
-<p>user-orders {{orderList|json}}</p>
+<div class="row border border-left-0 border-right-0 border-top-0 p-2">
+    <div class="col">
+        <h4>Orders List ({{this.orderList.length}})</h4>
+    </div>
+</div>
+<div class="table-responsive-sm">
+    <table class="table table-hover text-center table-striped">
+        <thead class="bg-dark text-light">
+            <tr>
+                <!-- <th scope="col">Order Num</th> -->
+                <th scope="col">Price</th>
+                <th scope="col">Product</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orderList ;let i=index">
+                <td>{{order.totalPrice}}</td>
+                <td>
+                    <users-order-items [orderItems]=order.orderItems></users-order-items>
+                </td>
+                <td>{{order.dateOrdered}} </td>
+                <td>{{order.status}}</td>
+               
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+<!-- </ng-template>
+  <ng-template #alert>
+    <div class="row p-5 d-flex justify-content-center align-items-center">
+      <div class="alert  alert-light" role="alert">
+        You are not make any order back to <a routerLink="/" class="alert-link">Home</a>.
+        OR to your <a routerLink="/user/cart" class="alert-link">Carts</a>.
+      </div>
+    </div>
+  </ng-template>
+  <ng-container *ngIf="orderList.length!==0 then orders; else alert"></ng-container>
+   -->

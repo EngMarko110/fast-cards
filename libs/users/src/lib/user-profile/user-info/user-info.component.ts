@@ -1,5 +1,5 @@
 import { User } from './../../models/user';
-import { UsersService } from '@bluebits/users';
+import { UsersService, AuthService } from '@bluebits/users';
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../models/user.class';
 
@@ -11,7 +11,7 @@ import { IUser } from '../../models/user.class';
 export class UserInfoComponent implements OnInit {
 userInfo:User={name:'',email:'',phone:'',country:''};
 loading:boolean=false;
-constructor(private userServ:UsersService) { 
+constructor(private userServ:UsersService,private authServ:AuthService) { 
   this.getUserInfo();
 }
 
@@ -27,5 +27,9 @@ ngOnInit(): void {
         console.log({response});       
       })
     }
+  }
+  logout(){
+    this.authServ.logout();
+    this.userServ.setUsernameListener('')
   }
 }

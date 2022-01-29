@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { AuthService } from "../../..";
+import { LocalstorageService } from "../../services/localstorage.service";
 
 @Component({
   selector: "users-register",
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authServ: AuthService,
     private router: Router,
-    private usersServ: UsersService
+    private usersServ: UsersService,
+    private localstorageService: LocalstorageService
   ) {
     this._initRegisterForm();
   }
@@ -37,7 +39,8 @@ export class RegisterComponent implements OnInit {
   onSubmit(user: any) {
     this.authServ.signUp(user).subscribe(
       (response) => {
-        console.log("Register: ", response);
+        console.log("Register: ", response.token);
+        // this.localstorageService.setToken(response.token);
         this.usersServ.setUsernameListener(response.name);
         localStorage.setItem("userId", response?.id);
         this.router.navigate(["/"]);
