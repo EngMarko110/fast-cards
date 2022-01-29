@@ -1,42 +1,33 @@
 <div class="row p-5">
-    <ng-template #show>
-        <div class="col-sm-2">
-            <img src="https://img.icons8.com/color/48/000000/administrator-male.png" alt="userImg"
-                class="rounded-circle mx-auto d-block">
-            <!-- <img src=""  alt="userImg"  class="rounded-circle w-100 d-block"> -->
-        </div>
-        <div class="col-sm-9 ">
-            <div class="card p-4  bg-white">
-                <form class="form-group" #userForm="ngForm">
-                    <!-- {{userInfo|json}} -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>First Name:</label>
-                                <input type="text" name="firstname" [(ngModel)]="userInfo.name" class="form-control"
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Phone Number:</label>
-                                <input type="text" name="lastname" [(ngModel)]="userInfo.phone" class="form-control"
-                                    readonly>
-                            </div>
+    <div class="col-sm-12">
+        <div class="card p-4  bg-white">
+            <form class="form-group" #userForm="ngForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input type="text" name="firstname" [(ngModel)]="userInfo.name" class="form-control"
+                                readonly>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" name="email" [(ngModel)]="userInfo.email" class="form-control" readonly>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Phone Number:</label>
+                            <input type="text" name="lastname" [(ngModel)]="userInfo.phone" class="form-control"
+                                readonly>
+                        </div>
                     </div>
-
-
-                </form>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" [(ngModel)]="userInfo.email" class="form-control" readonly>
+                </div>
+            </form>
         </div>
-    </ng-template>
-    <ng-template #spinner>
-        <app-spinner></app-spinner>
-    </ng-template>
-    <ng-container *ngIf="loading then show; else spinner"></ng-container>
+    </div>
+</div>
+<div class="row d-flex justify-content-end">
+    <div class="col-3 float-right">
+        <p-button label="Logout" icon="pi pi-arrow-left" (click)="logout()"></p-button>
+    </div>
 </div>

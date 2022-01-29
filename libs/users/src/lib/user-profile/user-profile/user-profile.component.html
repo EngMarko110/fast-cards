@@ -1,5 +1,23 @@
-<a routerLink="/user/profile">profile</a><br>
-<a routerLink="/user/carts">carts</a><br>
-<a routerLink="/user/orders">orders</a>
-
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row wrapper">
+        <nav id="mySidenav" class="nav d-fixed col-sm-3 col-md-2">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a routerLink="/user/profile" class="nav-link">
+                        <i class="far fa-user"></i>Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/user/carts" class="nav-link">
+                        <i class="fas fa-shopping-cart icon"></i>Carts</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/user/orders" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>Orders</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="content" class="col-sm-9 col-md-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

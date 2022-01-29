@@ -20,7 +20,7 @@ export class UserOrdersComponent implements OnInit {
     if (userId != null) {
       this.orderServ.getOrderByUserId(userId).subscribe((response) => {
         this.orderList = response;
-        console.log({ response });
+        console.log("orderList: ", response);
 
       })
     }
