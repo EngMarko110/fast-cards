@@ -18,9 +18,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Email:</label>
-                    <input type="email" name="email" [(ngModel)]="userInfo.email" class="form-control" readonly>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" name="email" [(ngModel)]="userInfo.email" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Wallet:</label>
+                            <input type="number" name="walletBalance" [(ngModel)]="userInfo.walletBalance" class="form-control" readonly>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
