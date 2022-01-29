@@ -39,7 +39,7 @@ export class UsersFormComponent implements OnInit {
       email: ["", [Validators.required, Validators.email]],
       phone: ["", Validators.required],
       isAdmin: [false],
-      //walletBalance: [''],
+      walletBalance: [""],
       //  apartment: [''],
       //  zip: [''],
       // city: [''],
@@ -109,7 +109,7 @@ export class UsersFormComponent implements OnInit {
           this.userForm.email.setValue(user.email);
           this.userForm.phone.setValue(user.phone);
           this.userForm.isAdmin.setValue(user.isAdmin);
-          //         this.userForm.walletBalance.setValue(user.walletBalance);
+          this.userForm.walletBalance.setValue(user.walletBalance);
           //  this.userForm.apartment.setValue(user.apartment);
           //   this.userForm.zip.setValue(user.zip);
           //  this.userForm.city.setValue(user.city);
@@ -134,7 +134,7 @@ export class UsersFormComponent implements OnInit {
       password: this.userForm.password.value,
       phone: this.userForm.phone.value,
       isAdmin: this.userForm.isAdmin.value,
-      //  street: this.userForm.street.value,
+      walletBalance: this.userForm.walletBalance.value,
       //  apartment: this.userForm.apartment.value,
       //   zip: this.userForm.zip.value,
       //   city: this.userForm.city.value,

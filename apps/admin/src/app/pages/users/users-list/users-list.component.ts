@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { User, UsersService } from '@bluebits/users';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { User, UsersService } from "@bluebits/users";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'admin-users-list',
-  templateUrl: './users-list.component.html',
-  styles: []
+  selector: "admin-users-list",
+  templateUrl: "./users-list.component.html",
+  styles: [],
 })
 export class UsersListComponent implements OnInit, OnDestroy {
   users: User[] = [];
@@ -32,9 +32,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   deleteUser(userId: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to Delete this User?',
-      header: 'Delete User',
-      icon: 'pi pi-exclamation-triangle',
+      message: "Do you want to Delete this User?",
+      header: "Delete User",
+      icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.usersService
           .deleteUser(userId)
@@ -43,20 +43,20 @@ export class UsersListComponent implements OnInit, OnDestroy {
             () => {
               this._getUsers();
               this.messageService.add({
-                severity: 'success',
-                summary: 'Success',
-                detail: 'User is deleted!'
+                severity: "success",
+                summary: "Success",
+                detail: "User is deleted!",
               });
             },
             () => {
               this.messageService.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'User is not deleted!'
+                severity: "error",
+                summary: "Error",
+                detail: "User is not deleted!",
               });
             }
           );
-      }
+      },
     });
   }
 

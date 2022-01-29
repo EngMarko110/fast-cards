@@ -1,29 +1,28 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { UsersService } from '../../services/users.service';
-import { LocalstorageService } from '../../services/localstorage.service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
+import { UsersService } from "../../services/users.service";
+import { LocalstorageService } from "../../services/localstorage.service";
 
 @Component({
-  selector: 'users-login',
-  templateUrl: './login.component.html',
-  styles: []
+  selector: "users-login",
+  templateUrl: "./login.component.html",
+  styles: [],
 })
 export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
   isSubmitted = false;
   authError = false;
-  authMessage = 'Email or Password are wrong';
+  authMessage = "Email or Password are wrong";
 
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private localstorageService: LocalstorageService,
     private router: Router,
-    private userserv:UsersService,
-
+    private userserv: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -32,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   private _initLoginForm() {
     this.loginFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
   }
 
@@ -41,26 +40,24 @@ export class LoginComponent implements OnInit {
     this.isSubmitted = true;
 
     if (this.loginFormGroup.invalid) return;
-     this.auth.login(this.loginForm.email.value, this.loginForm.password.value).subscribe(
-      (user) => {
-        this.authError = false;
-        this.localstorageService.setToken(user.token);
-<<<<<<< HEAD
-       // console.log(user['user'].name);
-=======
-        console.log(user['user'].name);
-        localStorage.setItem('userId',user['user'].id)
->>>>>>> 6c8b78b499d39575c4b0123fa5a44fba21d88e3a
-        this.userserv.setUsernameListener(user['user'].name)
-        this.router.navigate(['/']);
-      },
-      (error: HttpErrorResponse) => {
-        this.authError = true;
-        if (error.status !== 400) {
-          this.authMessage = 'Error in the Server, please try again later!';
+    this.auth
+      .login(this.loginForm.email.value, this.loginForm.password.value)
+      .subscribe(
+        (user) => {
+          this.authError = false;
+          this.localstorageService.setToken(user.token);
+          console.log(user["user"].name);
+          localStorage.setItem("userId", user["user"].id);
+          this.userserv.setUsernameListener(user["user"].name);
+          this.router.navigate(["/"]);
+        },
+        (error: HttpErrorResponse) => {
+          this.authError = true;
+          if (error.status !== 400) {
+            this.authMessage = "Error in the Server, please try again later!";
+          }
         }
-      }
-    );
+      );
   }
 
   get loginForm() {
