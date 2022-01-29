@@ -7,18 +7,35 @@
       </div>
     </div>
     <!-- <p>result {{registerFormGroup.value}}</p> -->
-    <form class="register-form" (ngSubmit)="onSubmit(registerFormGroup.value)" [formGroup]="registerFormGroup">
+    <form
+      class="register-form"
+      (ngSubmit)="onSubmit(registerFormGroup.value)"
+      [formGroup]="registerFormGroup"
+    >
       <div>
-        <input type="text" formControlName="name" pInputText placeholder="Name" />
+        <input
+          type="text"
+          formControlName="name"
+          pInputText
+          placeholder="Name"
+        />
       </div>
       <div>
         <input type="text" placeholder="Email" formControlName="email" />
       </div>
 
-      <div><input type="password" placeholder="Password" formControlName="password" /></div>
-      <div><input type="Phone" placeholder="Phone" formControlName="phone" /></div>
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <div>
+        <input type="Phone" placeholder="Phone" formControlName="phone" />
+      </div>
       <button type="submit">Register</button>
-      <p class="message">Have Account? <a routerLink="/login" >Login</a></p>
+      <p class="message">Have Account? <a routerLink="/login">Login</a></p>
     </form>
   </div>
 </div>

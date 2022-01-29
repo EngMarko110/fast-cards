@@ -6,7 +6,7 @@ export class User {
   phone?: string;
   token?: string;
   isAdmin?: true;
-  //   street?: string;
+  // walletBalance?: Number;
   //  apartment?: string;
   //  zip?: string;
   //  city?: string;

@@ -1,6 +1,9 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card [header]="editmode ? 'Edit User' : 'Add User'" subheader="You can add or edit users here">
+  <p-card
+    [header]="editmode ? 'Edit User' : 'Add User'"
+    subheader="You can add or edit users here"
+  >
     <div class="p-grid p-mb-5">
       <div class="p-col-12">
         <p-toolbar>
@@ -29,22 +32,42 @@
             <div class="p-field p-col-4">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" pInputText />
-              <small *ngIf="userForm.name.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="userForm.name.invalid && isSubmitted"
+                class="p-error"
                 >Name is required</small
               >
             </div>
             <div class="p-field p-col-4">
               <label for="email">Email</label>
-              <input formControlName="email" id="email" type="text" pInputText />
-              <small *ngIf="userForm.email.invalid && isSubmitted" class="p-error"
-                ><span *ngIf="userForm.email.errors.required">email is required</span>
-                <span *ngIf="userForm.email.errors.email">email is invalid</span></small
+              <input
+                formControlName="email"
+                id="email"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="userForm.email.invalid && isSubmitted"
+                class="p-error"
+                ><span *ngIf="userForm.email.errors.required"
+                  >email is required</span
+                >
+                <span *ngIf="userForm.email.errors.email"
+                  >email is invalid</span
+                ></small
               >
             </div>
             <div class="p-field p-col-4">
               <label for="password">Password</label>
-              <input formControlName="password" id="password" type="password" pInputText />
-              <small *ngIf="userForm.password.invalid && isSubmitted" class="p-error"
+              <input
+                formControlName="password"
+                id="password"
+                type="password"
+                pInputText
+              />
+              <small
+                *ngIf="userForm.password.invalid && isSubmitted"
+                class="p-error"
                 >Password is required</small
               >
             </div>
@@ -55,7 +78,9 @@
                 formControlName="phone"
                 placeholder="(999) 999-9999"
               ></p-inputMask>
-              <small *ngIf="userForm.phone.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="userForm.phone.invalid && isSubmitted"
+                class="p-error"
                 >phone is required</small
               >
             </div>

@@ -20,9 +20,12 @@
         <p-table [value]="users" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
               <th>Email</th>
               <th>Is Admin</th>
+              <!--    <th>Wallet balance</th>-->
               <th>Country</th>
               <th></th>
             </tr>
@@ -31,6 +34,7 @@
             <tr>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
+
               <td>
                 <p-tag
                   *ngIf="user.isAdmin"
@@ -45,6 +49,7 @@
                   [rounded]="true"
                 ></p-tag>
               </td>
+              <!--  <td>{{ user.walletBalance }}</td>-->
               <td>{{ getCountryName(user.country) }}</td>
               <td>
                 <p-button

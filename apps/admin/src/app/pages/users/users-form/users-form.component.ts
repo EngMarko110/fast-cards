@@ -1,15 +1,15 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { UsersService, User } from '@bluebits/users';
-import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Location } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { UsersService, User } from "@bluebits/users";
+import { MessageService } from "primeng/api";
+import { timer } from "rxjs";
 
 @Component({
-  selector: 'admin-users-form',
-  templateUrl: './users-form.component.html',
-  styles: []
+  selector: "admin-users-form",
+  templateUrl: "./users-form.component.html",
+  styles: [],
 })
 export class UsersFormComponent implements OnInit {
   form: FormGroup;
@@ -34,16 +34,16 @@ export class UsersFormComponent implements OnInit {
 
   private _initUserForm() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      name: ["", Validators.required],
+      password: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      phone: ["", Validators.required],
       isAdmin: [false],
-      // street: [''],
+      //walletBalance: [''],
       //  apartment: [''],
       //  zip: [''],
       // city: [''],
-      country: ['']
+      country: [""],
     });
   }
 
@@ -55,9 +55,9 @@ export class UsersFormComponent implements OnInit {
     this.usersService.createUser(user).subscribe(
       (user: User) => {
         this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `User ${user.name} is created!`
+          severity: "success",
+          summary: "Success",
+          detail: `User ${user.name} is created!`,
         });
         timer(2000)
           .toPromise()
@@ -67,9 +67,9 @@ export class UsersFormComponent implements OnInit {
       },
       () => {
         this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'User is not created!'
+          severity: "error",
+          summary: "Error",
+          detail: "User is not created!",
         });
       }
     );
@@ -79,9 +79,9 @@ export class UsersFormComponent implements OnInit {
     this.usersService.updateUser(user).subscribe(
       () => {
         this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'User is updated!'
+          severity: "success",
+          summary: "Success",
+          detail: "User is updated!",
         });
         timer(2000)
           .toPromise()
@@ -91,9 +91,9 @@ export class UsersFormComponent implements OnInit {
       },
       () => {
         this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'User is not updated!'
+          severity: "error",
+          summary: "Error",
+          detail: "User is not updated!",
         });
       }
     );
@@ -109,7 +109,7 @@ export class UsersFormComponent implements OnInit {
           this.userForm.email.setValue(user.email);
           this.userForm.phone.setValue(user.phone);
           this.userForm.isAdmin.setValue(user.isAdmin);
-          //  this.userForm.street.setValue(user.street);
+          //         this.userForm.walletBalance.setValue(user.walletBalance);
           //  this.userForm.apartment.setValue(user.apartment);
           //   this.userForm.zip.setValue(user.zip);
           //  this.userForm.city.setValue(user.city);
@@ -138,7 +138,7 @@ export class UsersFormComponent implements OnInit {
       //  apartment: this.userForm.apartment.value,
       //   zip: this.userForm.zip.value,
       //   city: this.userForm.city.value,
-      country: this.userForm.country.value
+      country: this.userForm.country.value,
     };
     if (this.editmode) {
       this._updateUser(user);
