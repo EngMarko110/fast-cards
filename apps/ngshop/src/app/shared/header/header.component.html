@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
   <div class="p-grid">
     <div class="p-col-3">
       <div class="logo">
@@ -8,7 +8,6 @@
     <div class="p-col-4 search">
       <products-search></products-search>
     </div>
-    <!-- p-offset-1 -->
     <div class="p-col-3  navigation">
       <ngshop-nav></ngshop-nav>
     </div>
@@ -45,45 +44,62 @@
       </span>
       <orders-cart-icon></orders-cart-icon>
     </div>
-
   </div>
-</header>
-<!-- <header>
+</header> -->
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-      <img src="assets/images/logo.png" alt="logo" />
+  <a class="navbar-brand">
+    <img src="assets/images/logo.png" alt="logo" />
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/home">Home</a>
+      <a class="nav-item nav-link" routerLink="/products">Products</a>
+      <a class="nav-item nav-link" routerLink="/contacts">Contacts</a>
+    </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown
+    <div>
+      <products-search></products-search>
+    </div>
+    <div class="navbar-nav ml-auto action-buttons">
+      <div class="nav-item dropdown">    
+        <a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" routerLink="/login">
+          <ng-template #icon>
+            <i class="far fa-user" style="font-size: 2rem;"></i>
+          </ng-template>
+          <ng-template #name>
+            <span class="p-text-secondary name" routerLink="/user/profile" >{{username|titlecase}}</span> 
+          </ng-template>
+          <ng-container *ngIf="username then name;else icon"></ng-container>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-menu">
+          <ng-template #notAuth>
+            <a  class="dropdown-item text-center" routerLink="/login">
+              Login
+              <i class="fas fa-sign-in-alt"></i>
+            </a>
+          </ng-template>
+          <ng-template #auth>
+            <a  class="dropdown-item text-center">Logout
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </ng-template>
+          <ng-container *ngIf="username then auth;else notAuth"></ng-container>    
+          
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      </div>
+
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-4">
+          <orders-cart-icon></orders-cart-icon>
+        </a>
+      </div>
+
+    </div>
   </div>
 </nav>
-</header> -->
