@@ -18,10 +18,11 @@
 }
 .navbar .navbar-brand {
   padding-left: 0;
-  // font-size: 20px;
   padding-right: 50px;
 }
-
+.navbar-toggler{
+  color:white;
+}
 .navbar .form-inline {
   display: inline-block;
 }
@@ -29,7 +30,7 @@
   color: #fff;
   font-size: 20px;
   cursor: pointer;
-  
+
 }
 .search-box {
   position: relative;
@@ -50,14 +51,8 @@
   padding: 7px;
   height: 100%;
 }
-.search-box i {
-  color: #a0a5b1;
-  font-size: 19px;
-}
-.navbar .sign-up-btn {
-  min-width: 110px;
-  max-height: 36px;
-}
+
+
 .navbar .dropdown-menu {
   color: #999;
   font-weight: normal;
@@ -67,7 +62,7 @@
 }
 .navbar a,
 .navbar a:active {
-  color: #888;
+ color:white;
   padding: 8px 20px;
   background: transparent;
   line-height: normal;
@@ -92,17 +87,8 @@
   margin-bottom: 15px;
   font-size: 13px;
 }
-.navbar .btn-primary,
-.navbar .btn-primary:active {
-  color: #fff;
-  background: #33cabb !important;
-  border: none;
-}
-.navbar .btn-primary:hover,
-.navbar .btn-primary:focus {
-  color: #fff;
-  background: #31bfb1 !important;
-}
+
+
 .navbar .social-btn .btn,
 .navbar .social-btn .btn:hover {
   color: #fff;
@@ -116,24 +102,7 @@
   width: 47%;
   text-decoration: none;
 }
-.navbar .social-btn .facebook-btn {
-  background: #507cc0;
-}
-.navbar .social-btn .facebook-btn:hover {
-  background: #4676bd;
-}
-.navbar .social-btn .twitter-btn {
-  background: #64ccf1;
-}
-.navbar .social-btn .twitter-btn:hover {
-  background: #4ec7ef;
-}
-.navbar .social-btn .btn i {
-  margin-right: 5px;
-  font-size: 16px;
-  position: relative;
-  top: 2px;
-}
+
 .or-seperator {
   margin-top: 32px;
   text-align: center;
