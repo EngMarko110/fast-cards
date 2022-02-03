@@ -1,61 +1,67 @@
-<!-- <header>
-  <div class="p-grid">
-    <div class="p-col-3">
-      <div class="logo">
-        <img src="assets/images/logo.png" alt="logo" />
-      </div>
-    </div>
-    <div class="p-col-4 search">
-      <products-search></products-search>
-    </div>
-    <div class="p-col-3  navigation">
-      <ngshop-nav></ngshop-nav>
-    </div>
-    <div class="p-col-2 tools">
-      <span class="dropdown">
-        <a class="dropdown-toggle item" data-toggle="dropdown">
-          <ng-template #icon>
-            <i class="pi pi-user p-text-secondary  "></i>
-          </ng-template>
-          
-           <ng-template #name>
-            <span class="p-text-secondary name" routerLink="/user/profile" >{{username|titlecase}}</span> 
-           </ng-template>
-           <ng-container *ngIf="username then name;else icon"></ng-container>
-        </a>
-        <div class="dropdown-menu dropdown-content">
-          <div class="menu_btn_container">
-            <ng-template #notAuth>
-              <button pButton pRipple type="button" label="Login" class="p-button-rounded"
-                (click)="navigateToAuth('login')"></button>
-              <p class="text-center"><span>New Customer?</span></p>
-              <a (click)="navigateToAuth('register')">Register now</a>
-              <div class="dropdown-divider"></div>
-            </ng-template>
-            <ng-template #auth>
-              <img src="assets/images/logo.png" alt="logo" />
-              <button pButton pRipple type="button" label="Logout" class="p-button-rounded"
-              (click)="logOut()"></button>
-            <div class="dropdown-divider"></div>
-            </ng-template>
-            <ng-container *ngIf="username then auth;else notAuth"></ng-container>        
+<div class="container-fluid">
+  <div id="mySidepanel" class="sidepanel opacity-effect">
+    <img src="./../../../assets/images/logo.png" alt="logo" width="150" height="100"/>
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
+    <a routerLink="/">Home</a>
+    <a routerLink="products">Products</a>
+    <a routerLink="contacts">Contact</a>
+  </div>
+  
+  <header>
+        <div class="row search-container opacity-effect align-items-center">
+      <div class="col-md-7 col-lg-8 ">
+        <div class="row no-gutters align-items-center">
+          <div class="col-md-1 col-1">
+            <!-- <button class="openbtn">&#9776;</button> -->
+            <button class="btn openbtn"><i class="fas fa-bars"></i></button>
+          </div>
+          <div class="col-md-2  col-3 ">
+            <!-- <a routerLink="/">
+              <img src="./../../../assets/images/logo.png" alt="logo" style="width: 100%; height: 100%" />
+            </a> -->
+          </div>
+          <div class="col-md-9 col-8 pl-2">
+            <div class="form-group">
+              <input type="text" style="margin-top: 1%" class="form-control" #search
+                placeholder="what are you looking for?" />
+            </div>
           </div>
         </div>
-      </span>
-      <orders-cart-icon></orders-cart-icon>
+      </div>
+      <div class="col-lg-4 col-md-5">
+        <div class="row no-gutters align-items-center">
+          <!-- <div class="col d-flex justify-content-center">
+            <a class="logout">
+              logout &nbsp;&nbsp; <i class="far fa-user"></i></a>
+          </div> -->
+          <div class="col d-flex justify-content-center">
+            <a class="signin" routerLink="/user/profile">
+              Sign In &nbsp;&nbsp; <i class="far fa-user"></i></a>
+          </div>
+
+          <div class="col  d-flex justify-content-center">
+            <a class="" routerLink="/user/carts">
+              Cart&nbsp;<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</header> -->
+  </header>
+
+</div>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand">
     <img src="assets/images/logo.png" alt="logo" />
   </a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <i class="fas fa-bars"></i>
     </button>
-  <!-- Collection of nav links, forms, and other content for toggling -->
   <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/">Home</a>
@@ -63,9 +69,7 @@
       <a class="nav-item nav-link" routerLink="/contacts">Contacts</a>
     </div>
 
-    <div>
-      <products-search></products-search>
-    </div>
+    
     <div class="navbar-nav ml-auto action-buttons">
       <div class="nav-item dropdown">    
         <a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" routerLink="/login">
@@ -94,12 +98,8 @@
         </div>
       </div>
 
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle mr-4">
-          <orders-cart-icon></orders-cart-icon>
-        </a>
-      </div>
+    
 
     </div>
   </div>
-</nav>
+</nav> -->
