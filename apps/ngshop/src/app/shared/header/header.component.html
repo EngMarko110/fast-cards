@@ -2,9 +2,9 @@
   <div id="mySidepanel" class="sidepanel opacity-effect">
     <img src="./../../../assets/images/logo.png" alt="logo" width="150" height="100"/>
     <a href="javascript:void(0)" class="closebtn">&times;</a>
-    <a routerLink="/">Home</a>
-    <a routerLink="products">Products</a>
-    <a routerLink="contacts">Contact</a>
+    <a class="item" routerLink="/">Home</a>
+    <a class="item" routerLink="products">Products</a>
+    <a class="item" routerLink="contacts">Contact</a>
   </div>
   
   <header>
@@ -50,56 +50,3 @@
   </header>
 
 </div>
-
-
-
-
-
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">
-    <img src="assets/images/logo.png" alt="logo" />
-  </a>
-  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-    <i class="fas fa-bars"></i>
-    </button>
-  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" routerLink="/products">Products</a>
-      <a class="nav-item nav-link" routerLink="/contacts">Contacts</a>
-    </div>
-
-    
-    <div class="navbar-nav ml-auto action-buttons">
-      <div class="nav-item dropdown">    
-        <a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" routerLink="/login">
-          <ng-template #icon>
-            <i class="far fa-user" style="font-size: 2rem;"></i>
-          </ng-template>
-          <ng-template #name>
-            <span class="p-text-secondary name" routerLink="/user/profile" >{{username|titlecase}}</span> 
-          </ng-template>
-          <ng-container *ngIf="username then name;else icon"></ng-container>
-        </a>
-        <div class="dropdown-menu">
-          <ng-template #notAuth>
-            <a  class="dropdown-item text-center" routerLink="/login">
-              Login
-              <i class="fas fa-sign-in-alt"></i>
-            </a>
-          </ng-template>
-          <ng-template #auth>
-            <a  class="dropdown-item text-center">Logout
-              <i class="fas fa-sign-out-alt"></i>
-            </a>
-          </ng-template>
-          <ng-container *ngIf="username then auth;else notAuth"></ng-container>    
-          
-        </div>
-      </div>
-
-    
-
-    </div>
-  </div>
-</nav> -->

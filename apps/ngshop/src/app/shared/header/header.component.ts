@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
       $('.openbtn').on('click',function(){
         document.getElementById("mySidepanel").style.width = "250px";
       });
-      $('.closebtn').on('click',function(){
+      $('.closebtn,.item').on('click',function(){
         document.getElementById("mySidepanel").style.width = "0px";
       });
     });
