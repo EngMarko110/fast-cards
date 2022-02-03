@@ -35,9 +35,17 @@
               logout &nbsp;&nbsp; <i class="far fa-user"></i></a>
           </div> -->
           <div class="col d-flex justify-content-center">
-            <a class="signin" routerLink="/user/profile">
-              Sign In &nbsp;&nbsp; <i class="far fa-user"></i></a>
+            <ng-template #auth>
+              <a class="signin" routerLink="/user/profile">
+               {{username}} &nbsp;&nbsp; <i class="far fa-user"></i></a>
+            </ng-template>
+            <ng-template #noAuth>
+              <a class="signin" routerLink="/login">
+                Sign In &nbsp;&nbsp; <i class="far fa-user"></i></a>
+            </ng-template>
+            
           </div>
+          <ng-container *ngIf="username then auth;else noAuth"></ng-container>
 
           <div class="col  d-flex justify-content-center">
             <a class="" routerLink="/user/carts">
