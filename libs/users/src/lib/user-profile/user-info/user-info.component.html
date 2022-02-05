@@ -1,6 +1,6 @@
 <div class="row p-5">
     <div class="col-sm-12">
-        <div class="card p-4  bg-white">
+        <div class="card p-4  opacity-effect text-light">
             <form class="form-group" #userForm="ngForm">
                 <div class="row">
                     <div class="col-sm-6">
@@ -38,6 +38,6 @@
 </div>
 <div class="row d-flex justify-content-end">
     <div class="col-3 float-right">
-        <p-button label="Logout" icon="pi pi-arrow-left" (click)="logout()"></p-button>
+        <button  (click)="logout()" class="btn logout-btn">Logout <i class="fas fa-sign-out-alt"></i></button>
     </div>
 </div>

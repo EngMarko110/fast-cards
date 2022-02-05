@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 const routes: Routes = [
   { path: '', component: HomePageComponent },
+  {
+    path: 'user', loadChildren: () => import('./../../../../libs/users/src/lib/user-profile/user-profile.module')
+      .then(m => m.UserProfileModule),
+  },
 
 ];
 
