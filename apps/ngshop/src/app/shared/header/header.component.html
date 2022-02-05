@@ -1,60 +1,47 @@
-<div class="container-fluid">
-  <div id="mySidepanel" class="sidepanel">
-    <img src="./../../../assets/images/logo.png" alt="logo" width="150" height="100"/>
-    <a href="javascript:void(0)" class="closebtn">&times;</a>
-    <a class="item" routerLink="/">Home</a>
-    <a class="item" routerLink="products">Products</a>
-    <a class="item" routerLink="contacts">Contact</a>
-  </div>
-  
-  <header>
-        <div class="row search-container opacity-effect align-items-center">
-      <div class="col-md-7 col-lg-8 ">
-        <div class="row no-gutters align-items-center">
-          <div class="col-md-1 col-1">
-            <!-- <button class="openbtn">&#9776;</button> -->
-            <button class="btn openbtn"><i class="fas fa-bars"></i></button>
-          </div>
-          <div class="col-md-2  col-3 ">
-            <!-- <a routerLink="/">
-              <img src="./../../../assets/images/logo.png" alt="logo" style="width: 100%; height: 100%" />
-            </a> -->
-          </div>
-          <div class="col-md-9 col-8 pl-2">
-            <div class="form-group">
-              <input type="text" style="margin-top: 1%" class="form-control" #search
-                placeholder="what are you looking for?" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-5">
-        <div class="row no-gutters align-items-center">
-          <!-- <div class="col d-flex justify-content-center">
-            <a class="logout">
-              logout &nbsp;&nbsp; <i class="far fa-user"></i></a>
-          </div> -->
-          <div class="col d-flex justify-content-center">
-            <ng-template #auth>
-              <a class="signin" routerLink="/user/profile">
-               {{username}} &nbsp;&nbsp; <i class="far fa-user"></i></a>
-            </ng-template>
-            <ng-template #noAuth>
-              <a class="signin" routerLink="/login">
-                Sign In &nbsp;&nbsp; <i class="far fa-user"></i></a>
-            </ng-template>
-            
-          </div>
-          <ng-container *ngIf="username then auth;else noAuth"></ng-container>
-
-          <div class="col  d-flex justify-content-center">
-            <a class="" routerLink="/user/carts">
-              Cart&nbsp;<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
+<header>
+  <div class="p-grid">
+    <div class="p-col-3">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="logo" />
       </div>
     </div>
-  </header>
+    <!-- <i class="fas fa-sign-out-alt"></i> -->
+    <div class="p-col-4 search">
+      <products-search></products-search>
+    </div>
+    <div class="p-col-3 p-offset-1 navigation">
+      <ngshop-nav></ngshop-nav>
+    </div>
+    <div class="p-col-1 tools">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="authdropdown" data-toggle="dropdown"
+          aria-expanded="false">
+          <ng-template #auth>
+            <span>{{username}}</span>
+          </ng-template>
+          <ng-template #noAuth>
+            <i class="pi pi-user p-text-secondary" style="font-size: 1.5rem"></i>
+          </ng-template>
+          <ng-container *ngIf="username then auth ; else noAuth"></ng-container>
+        </button>
 
-</div>
+        <div class="dropdown-menu text-center" aria-labelledby="authdropdown">
+          <ng-template #login>
+            <a class="dropdown-item text-info" routerLink="/login">
+              Login <i class="fas fa-sign-in-alt"></i>
+            </a>
+          </ng-template>
+          <ng-template #logout>
+            <a class="dropdown-item text-danger" (click)="logOut()">
+              Logout <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </ng-template>
+          <ng-container *ngIf="username then logout ; else login"></ng-container>
+
+        </div>
+      </div>
+      <!-- <i class="pi pi-user p-text-secondary" style="font-size: 1.5rem"></i> -->
+      <orders-cart-icon></orders-cart-icon>
+    </div>
+  </div>
+</header>

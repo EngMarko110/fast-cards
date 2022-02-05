@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit {
   }
   logOut() {
     this.authServ.logout();
-    localStorage.removeItem('userId');
-    this.userServ.setUsernameListener('')
+    this.userServ.setUsernameListener('');
   }
 }
