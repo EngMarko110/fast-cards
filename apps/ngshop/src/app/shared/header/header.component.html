@@ -30,6 +30,13 @@
             <a class="dropdown-item text-info" routerLink="/login">
               Login <i class="fas fa-sign-in-alt"></i>
             </a>
+            <div class="dropdown-divider"></div>
+            <small class="separator text-muted">New Customer?</small>
+              <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item text-info" routerLink="/register">
+             Register <i class="fas fa-sign-in-alt"></i>
+            </a>
+
           </ng-template>
           <ng-template #logout>
             <a class="dropdown-item text-danger" (click)="logOut()">
