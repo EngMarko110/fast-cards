@@ -42,7 +42,7 @@ export class UsersFormComponent implements OnInit {
       walletBalance: [""],
       //  apartment: [''],
       //  zip: [''],
-      // city: [''],
+      //  city: [''],
       country: [""],
     });
   }
