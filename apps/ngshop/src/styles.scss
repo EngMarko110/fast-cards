@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../../../styles/ngshop.scss';
+@import "../../../styles/ngshop.scss";
+// darkred #8B0000	rgb(139, 0, 0)    FireBrick	#B22222	rgb(178, 34, 34)
+// Maroon	#800000	rgb(128, 0, 0)    Brown	#A52A2A	rgb(165, 42, 42)
+
+body {
+    background-color: rgb(51, 1, 1);
+}
+// .container-fluid {
+//   min-height: 80vh;
+// }
+.opacity-effect{
+  background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+.text-color{
+  color:rgb(51, 1, 1);
+}

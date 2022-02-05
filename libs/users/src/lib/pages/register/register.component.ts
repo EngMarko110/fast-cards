@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(["/"]);
       },
       (err) => {
-        console.log({ err });
+        console.log( 'err' );
       }
     );
   }

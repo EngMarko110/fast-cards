@@ -1,89 +1,60 @@
-<header>
-  <div class="p-grid">
-    <div class="p-col-3">
-      <div class="logo">
-        <img src="assets/images/logo.png" alt="logo" />
-      </div>
-    </div>
-    <div class="p-col-4 search">
-      <products-search></products-search>
-    </div>
-    <!-- p-offset-1 -->
-    <div class="p-col-3  navigation">
-      <ngshop-nav></ngshop-nav>
-    </div>
-    <div class="p-col-2 tools">
-      <span class="dropdown">
-        <a class="dropdown-toggle item" data-toggle="dropdown">
-          <ng-template #icon>
-            <i class="pi pi-user p-text-secondary  "></i>
-          </ng-template>
-          
-           <ng-template #name>
-            <span class="p-text-secondary name" routerLink="/user/profile" >{{username|titlecase}}</span> 
-           </ng-template>
-           <ng-container *ngIf="username then name;else icon"></ng-container>
-        </a>
-        <div class="dropdown-menu dropdown-content">
-          <div class="menu_btn_container">
-            <ng-template #notAuth>
-              <button pButton pRipple type="button" label="Login" class="p-button-rounded"
-                (click)="navigateToAuth('login')"></button>
-              <p class="text-center"><span>New Customer?</span></p>
-              <a (click)="navigateToAuth('register')">Register now</a>
-              <div class="dropdown-divider"></div>
-            </ng-template>
-            <ng-template #auth>
-              <img src="assets/images/logo.png" alt="logo" />
-              <button pButton pRipple type="button" label="Logout" class="p-button-rounded"
-              (click)="logOut()"></button>
-            <div class="dropdown-divider"></div>
-            </ng-template>
-            <ng-container *ngIf="username then auth;else notAuth"></ng-container>        
+<div class="container-fluid">
+  <div id="mySidepanel" class="sidepanel">
+    <img src="./../../../assets/images/logo.png" alt="logo" width="150" height="100"/>
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
+    <a class="item" routerLink="/">Home</a>
+    <a class="item" routerLink="products">Products</a>
+    <a class="item" routerLink="contacts">Contact</a>
+  </div>
+  
+  <header>
+        <div class="row search-container opacity-effect align-items-center">
+      <div class="col-md-7 col-lg-8 ">
+        <div class="row no-gutters align-items-center">
+          <div class="col-md-1 col-1">
+            <!-- <button class="openbtn">&#9776;</button> -->
+            <button class="btn openbtn"><i class="fas fa-bars"></i></button>
+          </div>
+          <div class="col-md-2  col-3 ">
+            <!-- <a routerLink="/">
+              <img src="./../../../assets/images/logo.png" alt="logo" style="width: 100%; height: 100%" />
+            </a> -->
+          </div>
+          <div class="col-md-9 col-8 pl-2">
+            <div class="form-group">
+              <input type="text" style="margin-top: 1%" class="form-control" #search
+                placeholder="what are you looking for?" />
+            </div>
           </div>
         </div>
-      </span>
-      <orders-cart-icon></orders-cart-icon>
-    </div>
+      </div>
+      <div class="col-lg-4 col-md-5">
+        <div class="row no-gutters align-items-center">
+          <!-- <div class="col d-flex justify-content-center">
+            <a class="logout">
+              logout &nbsp;&nbsp; <i class="far fa-user"></i></a>
+          </div> -->
+          <div class="col d-flex justify-content-center">
+            <ng-template #auth>
+              <a class="signin" routerLink="/user/profile">
+               {{username}} &nbsp;&nbsp; <i class="far fa-user"></i></a>
+            </ng-template>
+            <ng-template #noAuth>
+              <a class="signin" routerLink="/login">
+                Sign In &nbsp;&nbsp; <i class="far fa-user"></i></a>
+            </ng-template>
+            
+          </div>
+          <ng-container *ngIf="username then auth;else noAuth"></ng-container>
 
-  </div>
-</header>
-<!-- <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-      <img src="assets/images/logo.png" alt="logo" />
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="col  d-flex justify-content-center">
+            <a class="" routerLink="/user/carts">
+              Cart&nbsp;<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-</header> -->
+      </div>
+    </div>
+  </header>
+
+</div>

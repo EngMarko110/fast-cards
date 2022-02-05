@@ -1,0 +1,14 @@
+.logout-btn{
+    /* color:#fff; */
+    background-color: #fff;
+    color:rgb(51, 1, 1);
+
+    /* background-color: rgba(0, 0, blue, alpha); */
+}
+.logout-btn:hover{
+    /* color:#fff; */
+    background-color:rgb(104, 37, 37);;
+    color:#fff;
+
+    /* background-color: rgba(0, 0, blue, alpha); */
+}
