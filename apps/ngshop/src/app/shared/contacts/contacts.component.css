@@ -1,0 +1,14 @@
+.btn{
+    background-color: #fff;
+    border: 1px sold rgb(41, 40, 40);
+    border-radius: 10%;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    margin: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+.social-row{
+    display: flex;
+    flex-flow: column;
+}
