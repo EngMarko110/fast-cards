@@ -23,6 +23,7 @@ import { JwtInterceptor, UsersModule } from '@bluebits/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {ButtonModule} from 'primeng/button';
+import { ContactsComponent } from './shared/contacts/contacts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import {ButtonModule} from 'primeng/button';
     FooterComponent,
     NavComponent,
     MessagesComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
