@@ -24,6 +24,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {ButtonModule} from 'primeng/button';
 import { ContactsComponent } from './shared/contacts/contacts.component';
+import { AboutComponent } from './shared/about/about.component';
+import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
+import { FaqPageComponent } from './shared/faq-page/faq-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +36,9 @@ import { ContactsComponent } from './shared/contacts/contacts.component';
     NavComponent,
     MessagesComponent,
     ContactsComponent,
+    AboutComponent,
+    PrivacyPolicyComponent,
+    FaqPageComponent,
   ],
   imports: [
     BrowserModule,
