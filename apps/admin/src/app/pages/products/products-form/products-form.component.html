@@ -32,22 +32,37 @@
             <div class="p-field p-col">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" pInputText />
-              <small *ngIf="productForm.name.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.name.invalid && isSubmitted"
+                class="p-error"
                 >Name is required</small
               >
             </div>
             <div class="p-field p-col">
               <label for="brand">Brand</label>
-              <input formControlName="brand" id="brand" type="text" pInputText />
-              <small *ngIf="productForm.brand.invalid && isSubmitted" class="p-error"
+              <input
+                formControlName="brand"
+                id="brand"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="productForm.brand.invalid && isSubmitted"
+                class="p-error"
                 >Brand is required</small
               >
             </div>
             <div class="p-field p-col">
               <label for="price">Price</label><br />
-              <p-inputNumber formControlName="price" mode="decimal" [useGrouping]="false">
+              <p-inputNumber
+                formControlName="price"
+                mode="decimal"
+                [useGrouping]="false"
+              >
               </p-inputNumber>
-              <small *ngIf="productForm.price.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.price.invalid && isSubmitted"
+                class="p-error"
                 >Price is required</small
               >
             </div>
@@ -55,9 +70,15 @@
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-4">
               <label for="countInStock">countInStock</label><br />
-              <p-inputNumber formControlName="countInStock" mode="decimal" [useGrouping]="false">
+              <p-inputNumber
+                formControlName="countInStock"
+                mode="decimal"
+                [useGrouping]="false"
+              >
               </p-inputNumber>
-              <small *ngIf="productForm.countInStock.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.countInStock.invalid && isSubmitted"
+                class="p-error"
                 >Count in stock is required</small
               >
             </div>
@@ -74,10 +95,31 @@
                 placeholder="Select a Category"
               ></p-dropdown>
 
-              <small *ngIf="productForm.category.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.category.invalid && isSubmitted"
+                class="p-error"
                 >Category is required</small
               >
             </div>
+
+            <div class="p-field p-col-4">
+              <label for="category">sub category</label><br />
+              <p-dropdown
+                [options]="subCatagories"
+                formControlName="subCatagories"
+                optionLabel="name"
+                optionValue="id"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Sub Category"
+              ></p-dropdown>
+
+              <!--   <small *ngIf="productForm.category.invalid && isSubmitted" class="p-error"
+                >Category is required</small
+              >
+            --></div>
+
             <div class="p-field p-col-4">
               <label for="isFeatured">Is Featured</label><br />
               <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
@@ -90,13 +132,18 @@
                 [rows]="7"
                 [cols]="30"
               ></textarea>
-              <small *ngIf="productForm.description.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.description.invalid && isSubmitted"
+                class="p-error"
                 >Description is required</small
               >
             </div>
             <div class="p-field p-col-12">
               <label for="richDescription">Product Details</label><br />
-              <p-editor formControlName="richDescription" [style]="{ height: '320px' }"></p-editor>
+              <p-editor
+                formControlName="richDescription"
+                [style]="{ height: '320px' }"
+              ></p-editor>
             </div>
             <div class="p-field p-col-12">
               <label for="name">Main Image</label>
@@ -106,7 +153,9 @@
                 accept="image/*"
                 (change)="onImageUpload($event)"
               />
-              <small *ngIf="productForm.image.invalid && isSubmitted" class="p-error"
+              <small
+                *ngIf="productForm.image.invalid && isSubmitted"
+                class="p-error"
                 >Image is required</small
               >
               <div class="p-col-2 p-mt-2 p-pl-0">

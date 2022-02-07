@@ -1,22 +1,27 @@
-import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { CategoriesService, Product, ProductsService } from '@bluebits/products';
-import { MessageService } from 'primeng/api';
-import { Subject, timer } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Location } from "@angular/common";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import {
+  CategoriesService,
+  Product,
+  ProductsService,
+} from "@bluebits/products";
+import { MessageService } from "primeng/api";
+import { Subject, timer } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'admin-products-form',
-  templateUrl: './products-form.component.html',
-  styles: []
+  selector: "admin-products-form",
+  templateUrl: "./products-form.component.html",
+  styles: [],
 })
 export class ProductsFormComponent implements OnInit, OnDestroy {
   editmode = false;
   form: FormGroup;
   isSubmitted = false;
   catagories = [];
+  subCatagories = []; //
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
   endsubs$: Subject<any> = new Subject();
@@ -43,15 +48,18 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
 
   private _initForm() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      brand: ['', Validators.required],
-      price: ['', Validators.required],
-      category: ['', Validators.required],
-      countInStock: ['', Validators.required],
-      description: ['', Validators.required],
-      richDescription: [''],
-      image: ['', Validators.required],
-      isFeatured: [false]
+      name: ["", Validators.required],
+      brand: ["", Validators.required],
+      price: ["", Validators.required],
+      category: ["", Validators.required],
+      //
+      subCategory: [""],
+      //
+      countInStock: ["", Validators.required],
+      description: ["", Validators.required],
+      richDescription: [""],
+      image: ["", Validators.required],
+      isFeatured: [false],
     });
   }
 
@@ -71,9 +79,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
       .subscribe(
         (product: Product) => {
           this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `Product ${product.name} is created!`
+            severity: "success",
+            summary: "Success",
+            detail: `Product ${product.name} is created!`,
           });
           timer(2000)
             .toPromise()
@@ -83,9 +91,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         },
         () => {
           this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Product is not created!'
+            severity: "error",
+            summary: "Error",
+            detail: "Product is not created!",
           });
         }
       );
@@ -98,9 +106,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Product is updated!'
+            severity: "success",
+            summary: "Success",
+            detail: "Product is updated!",
           });
           timer(2000)
             .toPromise()
@@ -110,9 +118,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         },
         () => {
           this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Product is not updated!'
+            severity: "error",
+            summary: "Error",
+            detail: "Product is not updated!",
           });
         }
       );
@@ -165,7 +173,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
     const file = event.target.files[0];
     if (file) {
       this.form.patchValue({ image: file });
-      this.form.get('image').updateValueAndValidity();
+      this.form.get("image").updateValueAndValidity();
       const fileReader = new FileReader();
       fileReader.onload = () => {
         this.imageDisplay = fileReader.result;
