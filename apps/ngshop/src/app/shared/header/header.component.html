@@ -32,13 +32,22 @@
             </a>
             <div class="dropdown-divider"></div>
             <small class="separator text-muted">New Customer?</small>
-              <!-- <div class="dropdown-divider"></div> -->
             <a class="dropdown-item text-info" routerLink="/register">
-             Register <i class="fas fa-sign-in-alt"></i>
+              Register <i class="fas fa-sign-in-alt"></i>
             </a>
-
+            
           </ng-template>
           <ng-template #logout>
+            <a class="dropdown-item text-info" routerLink="/user/profile">
+              Profile
+            </a>
+            <a class="dropdown-item text-info" routerLink="/user/orders">
+              Orders
+            </a>
+            <a class="dropdown-item text-info" routerLink="/user/carts">
+              Carts
+            </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" (click)="logOut()">
               Logout <i class="fas fa-sign-out-alt"></i>
             </a>
@@ -47,8 +56,8 @@
 
         </div>
       </div>
-      <!-- <i class="pi pi-user p-text-secondary" style="font-size: 1.5rem"></i> -->
       <orders-cart-icon></orders-cart-icon>
+
     </div>
   </div>
 </header>
