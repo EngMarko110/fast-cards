@@ -22,7 +22,7 @@ import { MessageService } from 'primeng/api';
 import { JwtInterceptor, UsersModule } from '@bluebits/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { ContactsComponent } from './shared/contacts/contacts.component';
 import { AboutComponent } from './shared/about/about.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
@@ -39,6 +39,7 @@ import { FaqPageComponent } from './shared/faq-page/faq-page.component';
     AboutComponent,
     PrivacyPolicyComponent,
     FaqPageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -58,10 +59,11 @@ import { FaqPageComponent } from './shared/faq-page/faq-page.component';
     UserProfileModule,
     CoreModule
   ],
+  
   providers: [
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

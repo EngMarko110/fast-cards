@@ -1,3 +1,4 @@
+import { StoreService } from './../../../../../../apps/ngshop/src/app/shared/services/store.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class ProductsSearchComponent implements OnInit {
-
-  constructor() { }
+searchInput;
+  constructor(private storeServ:StoreService) { }
 
   ngOnInit(): void {
   }
-
+  search(value: string): void {
+    console.log({value});
+    this.storeServ.setInputValue(value);
+    
+  }
 }

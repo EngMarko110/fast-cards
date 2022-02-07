@@ -1,3 +1,4 @@
+import { FilterPipe } from './../../../../apps/ngshop/src/app/shared/pipes/filter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrdersModule } from '@bluebits/orders';
@@ -32,6 +33,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     OrdersModule,
     RouterModule.forChild(routes),
     ButtonModule,
@@ -39,7 +41,8 @@ const routes: Routes = [
     FormsModule,
     RatingModule,
     InputNumberModule,
-    UiModule
+    UiModule,
+   
   ],
   declarations: [
     ProductsSearchComponent,
@@ -47,7 +50,8 @@ const routes: Routes = [
     ProductItemComponent,
     FeaturedProductsComponent,
     ProductsListComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    FilterPipe
   ],
   exports: [
     ProductsSearchComponent,
@@ -58,4 +62,4 @@ const routes: Routes = [
     ProductPageComponent
   ]
 })
-export class ProductsModule {}
+export class ProductsModule { }
