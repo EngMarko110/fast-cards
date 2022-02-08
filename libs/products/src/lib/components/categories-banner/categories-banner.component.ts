@@ -1,3 +1,4 @@
+import { StoreService } from './../../../../../../apps/ngshop/src/app/shared/services/store.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,9 +12,10 @@ import { CategoriesService } from '../../services/categories.service';
 })
 export class CategoriesBannerComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
+  inputSearch:string='';
   endSubs$: Subject<any> = new Subject();
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService,private storeServ:StoreService) {}
 
   ngOnInit(): void {
     this.categoriesService
@@ -22,6 +24,9 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
       .subscribe((categories) => {
         this.categories = categories;
       });
+      this.storeServ.getInputValue().subscribe((value)=>{
+        this.inputSearch=value;
+      })
   }
 
   ngOnDestroy() {
