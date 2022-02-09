@@ -1,3 +1,4 @@
+import { SubcategoryComponent } from './components/subcategory/subcategory.component';
 import { FilterPipe } from './../../../../apps/ngshop/src/app/shared/pipes/filter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,11 +19,11 @@ import { UiModule } from '@bluebits/ui';
 
 const routes: Routes = [
   {
-    path: 'products',
-    component: ProductsListComponent
+    path: 'subcategory/:categoryid',
+    component: SubcategoryComponent
   },
   {
-    path: 'category/:categoryid',
+    path: 'products/:subCategoryId',
     component: ProductsListComponent
   },
   {
