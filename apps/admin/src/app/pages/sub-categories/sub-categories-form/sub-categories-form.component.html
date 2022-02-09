@@ -1,10 +1,10 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editmode ? 'Edit Category' : 'Add Category'"
-    subheader="You can add or edit categories here"
+    [header]="editmode ? 'Edit Sub Category' : 'Add Sub Category'"
+    subheader="You can add or edit sub categories here"
   >
-    <div class="p-grid p-mb-5" *ngIf="!isReadOnly">
+    <div class="p-grid p-mb-5">
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left"></div>
@@ -31,26 +31,14 @@
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
               <label for="name">Name</label>
-              <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />
-              <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error"
+              <input formControlName="name" id="name" type="text" pInputText />
+              <small *ngIf="subCategoryForm.name.invalid && isSubmitted" class="p-error"
                 >Name is required</small
               >
-            </div>
-            <div class="p-field p-col">
-              <label for="icon">Icon</label>
-              <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
-              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
-                >Icon is required</small
-              >
-            </div>
-            <div class="p-field p-col">
-              <label for="color">Color</label><br />
-              <p-colorPicker formControlName="color" [disabled]="isReadOnly"></p-colorPicker>
             </div>
           </div>
         </form>
       </div>
     </div>
   </p-card>
-  <div class="d-flex justify-content-center"><admin-sub-categories-list [parentCategory]="currentCategoryId"></admin-sub-categories-list></div>
 </div>
