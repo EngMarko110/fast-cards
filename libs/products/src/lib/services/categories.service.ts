@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category';
+import { Category, SubCategory } from '../models/category';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -30,5 +30,26 @@ export class CategoriesService {
 
   deleteCategory(categoryId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLCategories}/${categoryId}`);
+  }
+
+  getSubCategories(parentCategory: string): Observable<SubCategory[]> {
+    const url = `${this.apiURLCategories}/${parentCategory}/subCategories`;
+    return this.http.get<SubCategory[]>(url);
+  }
+  getSubCategory(subCategoryId: string): Observable<SubCategory> {
+    const url = `${this.apiURLCategories}/subCategories/${subCategoryId}`;
+    return this.http.get<SubCategory>(url);
+  }
+  createSubCategory(subCategory: SubCategory): Observable<SubCategory> {
+    const url = `${this.apiURLCategories}/subCategories/new`;
+    return this.http.post<SubCategory>(url, subCategory);
+  }
+  updateSubCategory(subCategory: SubCategory): Observable<SubCategory> {
+    const url = `${this.apiURLCategories}/subCategories/edit/${subCategory._id}`;
+    return this.http.put<SubCategory>(url, subCategory);
+  }
+  deleteSubCategory(subCategoryId: string): Observable<any> {
+    const url = `${this.apiURLCategories}/subCategories/${subCategoryId}`;
+    return this.http.delete<any>(url);
   }
 }

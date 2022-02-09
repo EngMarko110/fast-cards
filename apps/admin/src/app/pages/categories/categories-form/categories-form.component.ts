@@ -18,6 +18,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   editmode = false;
   currentCategoryId: string;
   endsubs$: Subject<any> = new Subject();
+  public isReadOnly: boolean;
 
   constructor(
     private messageService: MessageService,
@@ -120,6 +121,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
 
   private _checkEditMode() {
     this.route.params.pipe(takeUntil(this.endsubs$)).subscribe((params) => {
+      if (params.isReadOnly && params.isReadOnly === "true") this.isReadOnly = params.isReadOnly;
       if (params.id) {
         this.editmode = true;
         this.currentCategoryId = params.id;
