@@ -1,3 +1,4 @@
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@bluebits/products';
@@ -12,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class CategoriesListComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   endsubs$: Subject<any> = new Subject();
+  searchText;
 
   constructor(
     private categoriesService: CategoriesService,

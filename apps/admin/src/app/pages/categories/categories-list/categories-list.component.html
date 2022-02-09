@@ -10,14 +10,21 @@
               label="New"
               icon="pi pi-plus"
               routerLink="form"
-            ></p-button>
+            ></p-button> 
+          </div>
+          <div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search">         
+            </span>
+            <!-- {{searchText}} -->
           </div>
         </p-toolbar>
       </div>
     </div>
     <div class="p-grid">
       <div class="p-col-12">
-        <p-table [value]="categories" styleClass="p-datatable-gridlines">
+        <p-table [value]="categories|filter:searchText:'name'" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>

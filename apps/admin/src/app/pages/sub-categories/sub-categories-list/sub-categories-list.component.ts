@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SubCategoriesListComponent implements OnInit, OnDestroy {
   private endsubs$: Subject<any> = new Subject();
   public subCategories: SubCategory[] = [];
+  searchText;
   @Input() public parentCategory: string;
   constructor(
     private categoriesService: CategoriesService,

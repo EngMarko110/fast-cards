@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ProductsListComponent implements OnInit, OnDestroy {
   products = [];
   endsubs$: Subject<any> = new Subject();
-
+searchText;
   constructor(
     private productsService: ProductsService,
     private router: Router,
@@ -36,6 +36,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.endsubs$))
       .subscribe((products) => {
         this.products = products;
+        console.log({products})
       });
   }
 

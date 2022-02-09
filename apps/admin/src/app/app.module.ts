@@ -1,3 +1,4 @@
+import { FilterPipe } from './shared/pipes/filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -76,6 +77,7 @@ const UX_MODULE = [
     OrdersDetailComponent,
     SubCategoriesFormComponent,
     SubCategoriesListComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

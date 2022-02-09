@@ -12,6 +12,7 @@ import { takeUntil } from "rxjs/operators";
 })
 export class UsersListComponent implements OnInit, OnDestroy {
   users: User[] = [];
+  searchText;
   endsubs$: Subject<any> = new Subject();
 
   constructor(
