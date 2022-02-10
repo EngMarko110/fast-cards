@@ -10,12 +10,17 @@
               label="New"
               icon="pi pi-plus"
               routerLink="form"
-            ></p-button> 
+            ></p-button>
           </div>
           <div>
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search">         
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="searchText"
+                placeholder="Search"
+              />
             </span>
             <!-- {{searchText}} -->
           </div>
@@ -24,10 +29,15 @@
     </div>
     <div class="p-grid">
       <div class="p-col-12">
-        <p-table [value]="categories|filter:searchText:'name'" styleClass="p-datatable-gridlines">
+        <p-table
+          [value]="categories | filter: searchText:'name'"
+          styleClass="p-datatable-gridlines"
+        >
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
               <th>Icon</th>
               <th>Color</th>
               <th></th>
@@ -35,10 +45,20 @@
           </ng-template>
           <ng-template pTemplate="body" let-category>
             <tr>
-              <td><a (click)="getCategoryDetails(category.id)">{{ category.name }}</a></td>
-              <td><i style="font-size: 2rem" class="pi" [ngClass]="'pi-' + category.icon"></i></td>
+              <td>
+                <a (click)="getCategoryDetails(category.id)">
+                  {{ category.name }}</a
+                >
+              </td>
               <td>
                 <i
+                  style="font-size: 2rem"
+                  class="pi"
+                  [ngClass]="'pi-' + category.icon"
+                ></i>
+              </td>
+              <td>
+               <i
                   class="pi pi-circle-on"
                   style="font-size: 2rem"
                   [ngStyle]="{ color: category.color }"
@@ -58,7 +78,7 @@
                 <p-button
                   (click)="createSubCategory(category.id)"
                   styleClass="p-button-primary"
-                  icon="pi pi-pencil"
+                  icon="pi pi-plus"
                 ></p-button>
               </td>
             </tr>
