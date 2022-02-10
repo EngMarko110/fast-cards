@@ -52,6 +52,7 @@ const routes: Routes = [
     FeaturedProductsComponent,
     ProductsListComponent,
     ProductPageComponent,
+    SubcategoryComponent,
     FilterPipe
   ],
   exports: [

@@ -6,7 +6,9 @@ export class Category {
   checked?: boolean;
 }
 export class SubCategory {
-   _id?: string;
-    parentCategory: string;
-     name: string;
-     }
+  _id?: string;
+  parentCategory: string;
+  name: string;
+  icon:string;
+  color:string;
+}
