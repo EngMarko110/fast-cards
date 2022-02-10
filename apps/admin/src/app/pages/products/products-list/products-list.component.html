@@ -33,6 +33,9 @@
               <th pSortableColumn="category">
                 Category <p-sortIcon field="category"></p-sortIcon>
               </th>
+              <th pSortableColumn="subCategory">
+                Sub Category <p-sortIcon field="subCategory"></p-sortIcon>
+              </th>
               <th pSortableColumn="created">
                 Created at <p-sortIcon field="created"></p-sortIcon>
               </th>
@@ -46,6 +49,7 @@
               <td>{{ product.price }}</td>
               <td>{{ product.countInStock }}</td>
               <td>{{ product.category.name }}</td>
+              <td><p *ngIf="product.subCategory">{{ product.subCategory.name }}</p></td>
               <td>{{ product.dateCreated | date: 'short' }}</td>
               <td>
                 <p-button

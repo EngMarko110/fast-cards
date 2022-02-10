@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import {
   CategoriesService,
+  Category,
   Product,
   ProductsService,
 } from "@bluebits/products";
@@ -22,6 +23,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
   isSubmitted = false;
   catagories = [];
   subCatagories = []; //
+  selectedCategory: string;
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
   endsubs$: Subject<any> = new Subject();
@@ -44,6 +46,13 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.endsubs$.next();
     this.endsubs$.complete();
+  }
+
+  public getSubCategories(parentCategoryId?: string) {
+    const parentCategory = this.editmode ? parentCategoryId : this.selectedCategory;
+    this.categoriesService.getSubCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCategories) => {
+      this.subCatagories = subCategories;
+    });
   }
 
   private _initForm() {
@@ -132,11 +141,12 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         this.editmode = true;
         this.currentProductId = params.id;
         this.productsService
-          .getProduct(params.id)
-          .pipe(takeUntil(this.endsubs$))
-          .subscribe((product) => {
+        .getProduct(params.id)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe((product) => {
             this.productForm.name.setValue(product.name);
             this.productForm.category.setValue(product.category.id);
+            this.productForm.subCategory.setValue(product.subCategory._id);
             this.productForm.brand.setValue(product.brand);
             this.productForm.price.setValue(product.price);
             this.productForm.countInStock.setValue(product.countInStock);
@@ -146,6 +156,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
             this.imageDisplay = product.image;
             this.productForm.image.setValidators([]);
             this.productForm.image.updateValueAndValidity();
+            this.getSubCategories(product.category.id);
           });
       }
     });
