@@ -89,6 +89,7 @@
                 formControlName="category"
                 optionLabel="name"
                 optionValue="id"
+                [(ngModel)]="selectedCategory"
                 [filter]="true"
                 filterBy="name"
                 [showClear]="true"
@@ -103,22 +104,34 @@
             </div>
 
             <div class="p-field p-col-4">
-              <label for="category">sub category</label><br />
+              <label for="subCategory">sub category</label><br />
               <p-dropdown
+                *ngIf="!editmode"
+                (click)="getSubCategories()"
                 [options]="subCatagories"
-                formControlName="subCatagories"
+                formControlName="subCategory"
                 optionLabel="name"
-                optionValue="id"
+                optionValue="_id"
                 [filter]="true"
                 filterBy="name"
                 [showClear]="true"
                 placeholder="Select a Sub Category"
               ></p-dropdown>
-
-              <!--   <small *ngIf="productForm.category.invalid && isSubmitted" class="p-error"
-                >Category is required</small
-              >
-            --></div>
+              <p-dropdown
+                *ngIf="editmode"
+                [options]="subCatagories"
+                formControlName="subCategory"
+                optionLabel="name"
+                optionValue="_id"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Sub Category"
+              ></p-dropdown>
+              <small *ngIf="productForm.subCategory.invalid && isSubmitted" class="p-error">
+                Sub Category is required
+              </small>
+            </div>
 
             <div class="p-field p-col-4">
               <label for="isFeatured">Is Featured</label><br />
