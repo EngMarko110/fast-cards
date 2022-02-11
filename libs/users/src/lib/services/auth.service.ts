@@ -23,8 +23,8 @@ export class AuthService {
   }
 
   signUp(user: User) {
-    return this.http.post<User>(`${this.apiURLUsers}/register`, user).pipe(
-      catchError(err => { return throwError(err.message); })
+    return this.http.post<User>(`${this.apiURLUsers}/register`, user)
+    .pipe(  catchError(err => { return throwError(err.message); })
     );
 
   }

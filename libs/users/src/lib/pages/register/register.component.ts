@@ -11,6 +11,7 @@ import { LocalstorageService } from "../../services/localstorage.service";
   styles: [],
 })
 export class RegisterComponent implements OnInit {
+  duplicateErr:boolean=false;
   registerFormGroup: FormGroup;
   formBuilder: any;
   constructor(
@@ -31,23 +32,20 @@ export class RegisterComponent implements OnInit {
       password: new FormControl("", Validators.required),
       phone: new FormControl(""),
     });
-    // this.registerFormGroup.valueChanges.subscribe((changes)=>{
-    //   console.log(changes);
-
-    // })
+    
   }
   onSubmit(user: any) {
     this.authServ.signUp(user).subscribe(
       (response) => {
-        console.log("Register: ", response.token);
+        // console.log("Register: ", response.token);
         this.localstorageService.setToken(response.token); //
         this.usersServ.setUsernameListener(response.name);
         localStorage.setItem("userId", response?.id);
         this.router.navigate(["/"]);
       },
-      (err) => {
-        console.log( 'err' );
-      }
+        (error) => {
+          this.duplicateErr = true;
+        }
     );
   }
 }

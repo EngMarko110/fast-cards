@@ -18,9 +18,6 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
   constructor(private categoriesServ: CategoriesService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((parmas) => {
       this.parentCategory = parmas.get('categoryid');
-
-      // console.log('cateId:',parmas.get('categoryid'));
-      console.log('cateId type: ', this.parentCategory);
     })
   }
 
