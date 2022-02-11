@@ -18,6 +18,8 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
   public editmode = false;
   public currentCategoryId: string;
   public currentSubCategoryId: string;
+  public isReadOnly: boolean;
+
   constructor(
     private messageService: MessageService,
     private formBuilder: FormBuilder,
@@ -26,7 +28,11 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
   public ngOnInit(): void {
-    this.form = this.formBuilder.group({ name: ["", Validators.required] });
+    this.form = this.formBuilder.group({
+      name: ["", Validators.required],
+      icon: ["", Validators.required], //
+      color: ["#fff"], //
+    });
     this._checkEditMode();
   }
   public ngOnDestroy(): void {
@@ -40,8 +46,8 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
       _id: this.currentSubCategoryId,
       parentCategory: this.currentCategoryId,
       name: this.subCategoryForm.name.value,
-      icon: "",
-      color: "",
+      icon: this.subCategoryForm.icon.value,
+      color: this.subCategoryForm.color.value,
     };
     if (this.editmode) this._updateSubCategory(subCategory);
     else this._addSubCategory(subCategory);
@@ -109,6 +115,8 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.endsubs$))
               .subscribe((subCategory) => {
                 this.subCategoryForm.name.setValue(subCategory.name);
+                this.subCategoryForm.icon.setValue(subCategory.icon);
+                this.subCategoryForm.color.setValue(subCategory.color);
               });
           }
         }
