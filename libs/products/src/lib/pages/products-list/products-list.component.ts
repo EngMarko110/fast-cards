@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { param } from 'jquery';
 import { Category } from '../../models/category';
 import { Product } from '../../models/product';
 import { CategoriesService } from '../../services/categories.service';
@@ -14,24 +15,34 @@ export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   isCategoryPage: boolean;
+  subId: any
 
   constructor(
     private prodService: ProductsService,
     private catService: CategoriesService,
     private route: ActivatedRoute
-  ) {}
+  ) {
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
-      params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
-    });
-    this._getCategories();
   }
 
-  private _getProducts(categoriesFilter?: string[]) {
-    this.prodService.getProducts(categoriesFilter).subscribe((resProducts) => {
+  ngOnInit(): void {
+    // this.route.params.subscribe((params) => {
+    //   params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
+    //   params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
+    // });
+    this.route.paramMap.subscribe((params) => {
+      this.subId = params.get('subCategoryId');
+      console.log('sub id: ', this.subId);
+    });
+    this._getCategories();
+    this._getProducts();
+  }
+
+  private _getProducts() {
+    this.prodService.getProductsBySubCategoryId(this.subId).subscribe((resProducts) => {
       this.products = resProducts;
+      console.log({resProducts});
+      
     });
   }
 
@@ -46,6 +57,6 @@ export class ProductsListComponent implements OnInit {
       .filter((category) => category.checked)
       .map((category) => category.id);
 
-    this._getProducts(selectedCategories);
+    // this._getProducts(selectedCategories);
   }
 }

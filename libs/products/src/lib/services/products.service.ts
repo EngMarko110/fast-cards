@@ -46,4 +46,7 @@ export class ProductsService {
   getFeaturedProducts(count: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiURLProducts}/get/featured/${count}`);
   }
+  getProductsBySubCategoryId(subId: any): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiURLProducts}/subCategories/${subId}/product`);
+  }
 }
