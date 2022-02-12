@@ -4,7 +4,7 @@
     [header]="editmode ? 'Edit Sub Category' : 'Add Sub Category'"
     subheader="You can add or edit sub categories here"
   >
-    <div class="p-grid p-mb-5">
+    <div class="p-grid p-mb-5" *ngIf="!isReadOnly">
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left"></div>
@@ -31,16 +31,24 @@
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
               <label for="name">Name</label>
-              <input formControlName="name" id="name" type="text" pInputText />
+              <input
+                style="margin: 0 0 0 0"
+                formControlName="name"
+                id="name"
+                type="text"
+                [readOnly]="isReadOnly"
+                pInputText
+              />
               <small
                 *ngIf="subCategoryForm.name.invalid && isSubmitted"
                 class="p-error"
                 >Name is required</small
               >
 
-              <div class="p-field p-col">
+              <div class="p-grid p-field p-col" style="padding-top: 20px">
                 <label for="icon">Icon</label>
                 <input
+                  style="margin: 0 0 0 0"
                   formControlName="icon"
                   id="icon"
                   type="text"
