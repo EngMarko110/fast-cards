@@ -23,7 +23,6 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.endSubs$))
       .subscribe((categories) => {
         this.categories = categories;
-        console.log({categories});
         
       });
       this.storeServ.getInputValue().subscribe((value)=>{

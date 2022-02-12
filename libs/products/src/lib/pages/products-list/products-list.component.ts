@@ -30,7 +30,6 @@ export class ProductsListComponent implements OnInit {
     // });
     this.route.paramMap.subscribe((params) => {
       this.subId = params.get("subCategoryId");
-      console.log("sub id: ", this.subId);
     });
     this._getCategories();
     this._getProducts();
@@ -41,7 +40,6 @@ export class ProductsListComponent implements OnInit {
       .getProductsBySubCategoryId(this.subId)
       .subscribe((resProducts) => {
         this.products = resProducts;
-        console.log({ resProducts });
       });
   }
 
