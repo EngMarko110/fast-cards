@@ -6,10 +6,14 @@
         <p>Please enter your information</p>
       </div>
       <p *ngIf="duplicateErr">
-        <span class="text-danger">This email is already exist.</span>
+       <span class="text-danger">This email is already exist.</span> 
       </p>
     </div>
-    <form class="register-form" (ngSubmit)="onSubmit(registerationForm.value)" [formGroup]="registerationForm">
+    <form
+      class="register-form"
+      (ngSubmit)="onSubmit(registerationForm.value)"
+      [formGroup]="registerationForm"
+    >
       <div>
         <input type="text" formControlName="name" pInputText placeholder="Name" />
       </div>

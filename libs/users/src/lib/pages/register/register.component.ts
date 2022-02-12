@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
       password: new FormControl("", [Validators.required, Validators.pattern("(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$")]),
       phone: new FormControl(""),
     });
-
   }
   onSubmit(user: any) {
     this.authServ.signUp(user).subscribe(
