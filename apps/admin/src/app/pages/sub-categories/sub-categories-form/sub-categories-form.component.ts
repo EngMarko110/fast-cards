@@ -1,4 +1,5 @@
 import { Location } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -70,12 +71,14 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
             .toPromise()
             .then(() => this.location.back());
         },
-        () => {
+        (error:HttpErrorResponse) => {
           this.messageService.add({
             severity: "error",
             summary: "Error",
-            detail: "Category is not created!",
+            detail: `${error.error.message}`,
           });
+          // console.log(`response: ${error.error.message}!`);
+
         }
       );
   }

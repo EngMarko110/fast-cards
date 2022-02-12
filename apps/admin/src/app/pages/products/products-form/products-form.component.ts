@@ -1,4 +1,5 @@
 import { Location } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -35,7 +36,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private location: Location,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._initForm();
@@ -98,11 +99,11 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
               this.location.back();
             });
         },
-        () => {
+        (error: HttpErrorResponse) => {
           this.messageService.add({
             severity: "error",
             summary: "Error",
-            detail: "Product is not created!",
+            detail: `${error.error.message}!`,
           });
         }
       );
@@ -141,9 +142,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         this.editmode = true;
         this.currentProductId = params.id;
         this.productsService
-        .getProduct(params.id)
-        .pipe(takeUntil(this.endsubs$))
-        .subscribe((product) => {
+          .getProduct(params.id)
+          .pipe(takeUntil(this.endsubs$))
+          .subscribe((product) => {
             this.productForm.name.setValue(product.name);
             this.productForm.category.setValue(product.category.id);
             this.productForm.subCategory.setValue(product.subCategory._id);

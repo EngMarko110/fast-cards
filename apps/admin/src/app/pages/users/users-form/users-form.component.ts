@@ -1,4 +1,5 @@
 import { Location } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -65,12 +66,14 @@ export class UsersFormComponent implements OnInit {
             this.location.back();
           });
       },
-      () => {
+      (error:HttpErrorResponse) => {
         this.messageService.add({
           severity: "error",
           summary: "Error",
-          detail: "User is not created!",
+          detail: `${error.error.message}`,
         });
+        // console.log(`${error.error.message}`);
+        // 41649857975549
       }
     );
   }
