@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -82,11 +83,11 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
               this.location.back();
             });
         },
-        () => {
+        ( error: HttpErrorResponse) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Category is not created!'
+            detail: `${error.error.message}!`
           });
         }
       );
