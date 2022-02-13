@@ -2,15 +2,11 @@
   <h3>Subcategoies</h3>
   <div class="p-grid">
     <div class="p-col-2" *ngFor="let subcategory of subCategories">
-      <div
-        class="category"
-        [routerLink]="'/products/' + subcategory._id"
-        [ngStyle]="{ backgroundColor: subcategory.color }"
-      >
-        <div class="category-icon">
-          <i class="pi pi-{{ subcategory.icon }}"></i>
-          <i class="subicon {{ subcategory.subicon }}"></i>
-          <img [src]="subCategory.subicon" /><!--   -->
+      <div class="category" routerLink="/products/{{subcategory._id}}"
+      [ngStyle]="{ backgroundColor: subcategory.color }">
+      <div class="category-icon">
+          <i class="pi pi-{{ subcategory.icon }}" ></i>
+          <img [src]="subcategory.subicon" />
         </div>
         <div class="category-name">{{ subcategory.name }}</div>
       </div>
