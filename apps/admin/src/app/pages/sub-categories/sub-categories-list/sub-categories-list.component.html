@@ -39,6 +39,8 @@
                 Name <p-sortIcon field="name"></p-sortIcon>
               </th>
               <th>Icon</th>
+              <th>Sub Icon</th>
+              <!--Sub Icon-->
               <th>Color</th>
               <th></th>
             </tr>
@@ -53,6 +55,16 @@
                   [ngClass]="'pi-' + subCategory.icon"
                 ></i>
               </td>
+              <!--Sub Icon-->
+              <td>
+                <i
+                  style="font-size: 2rem"
+                  class="subicon"
+                  [ngClass]="subCategory.subicon"
+                ></i>
+                <img [src]="subCategory.subicon" />
+              </td>
+              <!--    -->
               <td>
                 <i
                   class="pi pi-circle-on"

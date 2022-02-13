@@ -32,6 +32,7 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
       icon: ["", Validators.required], //
+      subicon: [""], //subIcon
       color: ["#fff"], //
     });
     this._checkEditMode();
@@ -48,6 +49,8 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
       parentCategory: this.currentCategoryId,
       name: this.subCategoryForm.name.value,
       icon: this.subCategoryForm.icon.value,
+      subicon: this.subCategoryForm.subicon.value,
+
       color: this.subCategoryForm.color.value,
     };
     if (this.editmode) this._updateSubCategory(subCategory);
@@ -71,14 +74,13 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
             .toPromise()
             .then(() => this.location.back());
         },
-        (error:HttpErrorResponse) => {
+        (error: HttpErrorResponse) => {
           this.messageService.add({
             severity: "error",
             summary: "Error",
             detail: `${error.error.message}`,
           });
           // console.log(`response: ${error.error.message}!`);
-
         }
       );
   }
@@ -119,6 +121,7 @@ export class SubCategoriesFormComponent implements OnInit, OnDestroy {
               .subscribe((subCategory) => {
                 this.subCategoryForm.name.setValue(subCategory.name);
                 this.subCategoryForm.icon.setValue(subCategory.icon);
+                this.subCategoryForm.subicon.setValue(subCategory.subicon); ///subIcon
                 this.subCategoryForm.color.setValue(subCategory.color);
               });
           }

@@ -9,6 +9,7 @@ export class SubCategory {
   _id?: string;
   parentCategory: string;
   name: string;
-  icon:string;
-  color:string;
+  icon: string;
+  subicon: string;
+  color: string;
 }
