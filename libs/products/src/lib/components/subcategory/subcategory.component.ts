@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class SubcategoryComponent implements OnInit, OnDestroy {
   public subCategories: SubCategory[] = [];
   public subcategories: any = [];
+  subColor;
   private endsubs$: Subject<any> = new Subject();
   parentCategory: any;
   constructor(private categoriesServ: CategoriesService, private activatedRoute: ActivatedRoute) {
@@ -23,6 +24,7 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._getSubCategories();
+    this._getCategories();
   }
   public ngOnDestroy(): void {
     this.endsubs$.next();
@@ -32,6 +34,12 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
     this.categoriesServ.getSubCategories(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCats) => {
       this.subCategories = subCats;
     console.log(this.subCategories)
+    });
+  }
+  private _getCategories(): void {
+    this.categoriesServ.getCategory(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((response) => {
+      this.subColor = response.color;
+      console.log({response});
     });
   }
  

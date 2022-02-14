@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SubCategoriesListComponent implements OnInit, OnDestroy {
   private endsubs$: Subject<any> = new Subject();
   public subCategories: SubCategory[] = [];
+  subColor;
   searchText;
   @Input() public parentCategory: string;
   constructor(
@@ -15,8 +16,11 @@ export class SubCategoriesListComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router,
-  ) {}
-  public ngOnInit(): void { this._getSubCategories(); }
+  ) { }
+  public ngOnInit(): void {
+    this._getSubCategories();
+    this.getCategory();
+  }
   public ngOnDestroy(): void {
     this.endsubs$.next();
     this.endsubs$.complete();
@@ -38,5 +42,11 @@ export class SubCategoriesListComponent implements OnInit, OnDestroy {
   public updateSubCategory(subCategoryId: string): void { this.router.navigateByUrl(`categories/${this.parentCategory}/subCategories/form/${subCategoryId}`); }
   private _getSubCategories(): void {
     this.categoriesService.getSubCategories(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCats) => this.subCategories = subCats);
+  }
+  getCategory() {
+    this.categoriesService.getCategory(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((response) => {
+      this.subColor=response.color;
+    }
+    );
   }
 }
