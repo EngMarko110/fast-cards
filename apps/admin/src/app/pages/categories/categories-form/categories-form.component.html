@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editmode ? 'Edit Category' : 'Add Category'"
+    [header]="isReadOnly ? formType + ' Details' : editmode ? 'Edit ' + formType : 'Add ' + formType"
     subheader="You can add or edit categories here"
   >
     <div class="p-grid p-mb-5" *ngIf="!isReadOnly">
@@ -52,5 +52,11 @@
       </div>
     </div>
   </p-card>
-  <div class="d-flex justify-content-center"><admin-sub-categories-list [parentCategory]="currentCategoryId"></admin-sub-categories-list></div>
+  <div class="d-flex justify-content-center" *ngIf="editmode">
+    <admin-categories-list
+      *ngIf="!currentSubCategoryId"
+      [mainCategory]="currentMainCategoryId" [category]="currentCategoryId" [editmode]="editmode">
+    </admin-categories-list>
+    <admin-products-list *ngIf="currentSubCategoryId" [mainCategory]="currentMainCategoryId" [category]="currentCategoryId" [subCategory]="currentSubCategoryId"></admin-products-list>
+  </div>
 </div>

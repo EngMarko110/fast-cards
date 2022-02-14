@@ -11,7 +11,7 @@ import { CategoriesService } from '../../services/categories.service';
   styles: []
 })
 export class CategoriesBannerComponent implements OnInit, OnDestroy {
-  categories: Category[] = [];
+  mainCategories: Category[] = [];
   inputSearch:string='';
   endSubs$: Subject<any> = new Subject();
 
@@ -19,10 +19,10 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categoriesService
-      .getCategories()
+      .getMainCategories()
       .pipe(takeUntil(this.endSubs$))
       .subscribe((categories) => {
-        this.categories = categories;
+        this.mainCategories = categories;
         console.log({categories});
         
       });

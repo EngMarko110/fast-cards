@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import {
   CategoriesService,
-  Category,
   Product,
   ProductsService,
 } from "@bluebits/products";
@@ -21,13 +20,15 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
   editmode = false;
   form: FormGroup;
   isSubmitted = false;
+  mainCatagories = [];
   catagories = [];
   subCatagories = []; //
+  selectedMainCategory: string;
   selectedCategory: string;
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
   endsubs$: Subject<any> = new Subject();
-
+  public isReadOnly: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private productsService: ProductsService,
@@ -39,7 +40,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._initForm();
-    this._getCategories();
+    this._getMainCategories();
     this._checkEditMode();
   }
 
@@ -48,11 +49,22 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
     this.endsubs$.complete();
   }
 
+  public getCategories(parentCategoryId?: string) {
+    const parentCategory = this.editmode ? parentCategoryId : this.selectedMainCategory;
+    if (parentCategory) {
+      this.categoriesService.getCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((categories) => {
+        this.catagories = categories;
+      });
+    }
+  }
+
   public getSubCategories(parentCategoryId?: string) {
     const parentCategory = this.editmode ? parentCategoryId : this.selectedCategory;
-    this.categoriesService.getSubCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCategories) => {
-      this.subCatagories = subCategories;
-    });
+    if (parentCategory) {
+      this.categoriesService.getSubCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCategories) => {
+        this.subCatagories = subCategories;
+      });
+    }
   }
 
   private _initForm() {
@@ -60,9 +72,10 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
       name: ["", Validators.required],
       brand: ["", Validators.required],
       price: ["", Validators.required],
+      mainCategory: ["", Validators.required],
       category: ["", Validators.required],
       //
-      subCategory: [""],
+      subCategory: ["", Validators.required],
       //
       countInStock: ["", Validators.required],
       description: ["", Validators.required],
@@ -72,12 +85,12 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _getCategories() {
+  private _getMainCategories() {
     this.categoriesService
-      .getCategories()
+      .getMainCategories()
       .pipe(takeUntil(this.endsubs$))
       .subscribe((categories) => {
-        this.catagories = categories;
+        this.mainCatagories = categories;
       });
   }
 
@@ -137,6 +150,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
 
   private _checkEditMode() {
     this.route.params.pipe(takeUntil(this.endsubs$)).subscribe((params) => {
+      if (params.isReadOnly && params.isReadOnly === "true") this.isReadOnly = params.isReadOnly;
       if (params.id) {
         this.editmode = true;
         this.currentProductId = params.id;
@@ -145,8 +159,9 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.endsubs$))
         .subscribe((product) => {
             this.productForm.name.setValue(product.name);
+            this.productForm.mainCategory.setValue(product.mainCategory.id);
             this.productForm.category.setValue(product.category.id);
-            this.productForm.subCategory.setValue(product.subCategory._id);
+            this.productForm.subCategory.setValue(product.subCategory.id);
             this.productForm.brand.setValue(product.brand);
             this.productForm.price.setValue(product.price);
             this.productForm.countInStock.setValue(product.countInStock);
@@ -156,6 +171,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
             this.imageDisplay = product.image;
             this.productForm.image.setValidators([]);
             this.productForm.image.updateValueAndValidity();
+            this.getCategories(product.mainCategory.id);
             this.getSubCategories(product.category.id);
           });
       }
