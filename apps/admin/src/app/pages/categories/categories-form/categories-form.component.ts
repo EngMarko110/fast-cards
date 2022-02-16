@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category } from '@bluebits/products';
 import { MessageService } from 'primeng/api';
 import { Subject, timer } from 'rxjs';
@@ -18,11 +18,14 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   editmode = false;
   currentMainCategoryId: string;
   currentCategoryId: string;
+  selectedMainCategory: string;
   currentSubCategoryId: string;
   endsubs$: Subject<any> = new Subject();
+  public mainCategories = [];
   public isReadOnly: boolean;
   public formType: string;
-
+  public categoriesUrlParam: string;
+  private isValid: boolean;
   constructor(
     private messageService: MessageService,
     private formBuilder: FormBuilder,
@@ -32,7 +35,9 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this._getMainCategories();
     this.form = this.formBuilder.group({
+      mainCategory: [''],
       name: ['', Validators.required],
       icon: ['', Validators.required],
       color: ['#fff']
@@ -56,7 +61,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
           this.currentMainCategoryId : this.formType === 'Category' ?
             this.currentCategoryId : this.formType === 'Sub Category' ?
               this.currentSubCategoryId : undefined,
-      mainCategory: this.formType === 'Category' || 'Sub Category' ? this.currentMainCategoryId : undefined,
+      mainCategory: !this.categoriesUrlParam && (this.formType === 'Category' || 'Sub Category') ? this.currentMainCategoryId : this.selectedMainCategory,
       category: this.formType === 'Sub Category' ? this.currentCategoryId : undefined,
       name: this.categoryForm.name.value,
       icon: this.categoryForm.icon.value,
@@ -76,7 +81,10 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   onCancle() {
     this.location.back();
   }
-
+  public isRequiredMainCategory(): boolean { return this.isValid; }
+  private _getMainCategories() {
+    this.categoriesService.getMainCategories().pipe(takeUntil(this.endsubs$)).subscribe((categories) => this.mainCategories = categories);
+  }
   private _addMainCategory(category: Category) {
     this.categoriesService.createMainCategory(category).pipe(takeUntil(this.endsubs$)).subscribe((category: Category) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `Main Category ${category.name} is created!` });
@@ -171,9 +179,13 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
           this.getCategory();
         }
       } else {
-        this.formType = 'Main Category';
-        this.currentMainCategoryId = params.id;
-        this.getMainCategory();
+        this.categoriesUrlParam = params.categories;
+        if (this.categoriesUrlParam) this.formType = 'Category';
+        else {
+          this.formType = 'Main Category';
+          this.currentMainCategoryId = params.id;
+          this.getMainCategory();
+        }
       }
     });
   }

@@ -29,6 +29,21 @@
       <div class="p-col-12">
         <form [formGroup]="form">
           <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-4" *ngIf="categoriesUrlParam">
+              <label for="mainCategory">Main Category</label>
+              <br>
+              <p-dropdown
+                [options]="mainCategories"
+                formControlName="mainCategory"
+                optionLabel="name"
+                optionValue="id"
+                [(ngModel)]="selectedMainCategory"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Main Category"
+              ></p-dropdown>
+            </div>
             <div class="p-field p-col">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />

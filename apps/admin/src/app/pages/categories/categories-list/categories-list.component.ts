@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CategoriesService, Category } from "@bluebits/products";
+import { CategoriesNames, CategoriesService, Category } from "@bluebits/products";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -14,9 +14,10 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
   endsubs$: Subject<any> = new Subject();
   searchText: any;
   public currentCategoryId: string;
-  @Input() public mainCategory: string;
+  public subHeader: string;
+  @Input() public listType: string;
+  @Input() private mainCategory: string;
   @Input() private category: string;
-  @Input() private editmode: string;
   constructor(
     private categoriesService: CategoriesService,
     private messageService: MessageService,
@@ -26,6 +27,8 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    const listTypeName = this.listType ? this.listType.toLowerCase() : 'categories';
+    this.subHeader = 'List of all ' + listTypeName;
     this.currentCategoryId = this.category;
     this._getList();
   }
@@ -74,16 +77,16 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
   }
   public createSideCategory(categoryId: string, mainCategoryid?: string) {
     if (mainCategoryid) this.router.navigateByUrl(`categories/${mainCategoryid}/subCategories/${categoryId}/form`);
-    this.route.params.pipe(takeUntil(this.endsubs$)).subscribe((params) => {
-      if (params.giftcards) this.router.navigateByUrl(`categories/${categoryId}/form`);
-      else this.router.navigateByUrl(`categories/${this.mainCategory}/subCategories/${categoryId}/form`);
-    });
+    else this.router.navigateByUrl(`categories/${categoryId}/form`);
   }
   public createCategory() {
     if (this.mainCategory) {
       if (this.category) this.router.navigateByUrl(`categories/${this.mainCategory}/subCategories/${this.category}/form`);
       else this.router.navigateByUrl(`categories/${this.mainCategory}/form`);
-    } else this.router.navigateByUrl(`categories/mainCategories/form`);
+    } else {
+      if (this.listType === CategoriesNames.mainCategories) this.router.navigateByUrl(`categories/mainCategories/form`);
+      else this.router.navigateByUrl(`categories/form`);
+    }
   }
   private _getList() {
     if (this.mainCategory) {
@@ -95,10 +98,8 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
         });
       } else this.categoriesService.getCategories(this.mainCategory).pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
     } else {
-      this.route.params.pipe(takeUntil(this.endsubs$)).subscribe((params) => {
-        if (params.giftcards) this.categoriesService.getMainCategories().pipe(takeUntil(this.endsubs$)).subscribe((mainCategories) => this.categories = mainCategories);
-        else this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
-      });
+      if (this.listType === 'Main Categories') this.categoriesService.getMainCategories().pipe(takeUntil(this.endsubs$)).subscribe((mainCategories) => this.categories = mainCategories);
+      else this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
     }
   }
   private categoriesMapper(subCategories: Category[], category: Category): any[] {

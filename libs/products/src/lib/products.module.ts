@@ -28,7 +28,7 @@ const routes: Routes = [
     component: SubcategoryComponent
   },
   {
-    path: 'products/:subCategoryId',
+    path: 'products/:categoryid',
     component: ProductsListComponent
   },
   {

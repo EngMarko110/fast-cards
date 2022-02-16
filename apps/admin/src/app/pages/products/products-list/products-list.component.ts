@@ -34,13 +34,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   private _getProducts() {
-    this.productsService
-      .getProducts([this.subCategory])
+    if (this.subCategory) this.productsService.getProductsBySubId(this.subCategory).pipe(takeUntil(this.endsubs$)).subscribe((products) => this.products = products);
+    else {
+      this.productsService
+      .getProducts()
       .pipe(takeUntil(this.endsubs$))
       .subscribe((products) => {
         this.products = products;
         console.log({products})
       });
+    }
   }
 
   updateOrGetProduct(productid: string, isReadOnly: string) {
