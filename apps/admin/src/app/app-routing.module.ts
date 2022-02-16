@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@bluebits/users';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
-import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CategoriesListsComponent } from './pages/categories/categories-lists/categories-lists.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
-import { SubCategoriesFormComponent } from './pages/sub-categories/sub-categories-form/sub-categories-form.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { ShellComponent } from './shared/shell/shell.component';
@@ -25,23 +24,35 @@ const routes: Routes = [
       },
       {
         path: 'categories',
-        component: CategoriesListComponent
+        component: CategoriesListsComponent
       },
       {
-        path: 'categories/form',
+        path: 'categories/mainCategories/form',
+        component: CategoriesFormComponent
+      },
+      {
+        path: 'categories/form/:listType',
+        component: CategoriesFormComponent
+      },
+      {
+        path: 'categories/:mainCategory/form',
+        component: CategoriesFormComponent
+      },
+      {
+        path: 'categories/:mainCategory/subCategories/:category/form',
+        component: CategoriesFormComponent
+      },
+      {
+        path: 'categories/form/:mainCategory/:category/:id/:isReadOnly',
+        component: CategoriesFormComponent
+      },
+      {
+        path: 'categories/form/:mainCategory/:id/:isReadOnly',
         component: CategoriesFormComponent
       },
       {
         path: 'categories/form/:id/:isReadOnly',
         component: CategoriesFormComponent
-      },
-      {
-        path: 'categories/:parentCategory/subCategories/form',
-        component: SubCategoriesFormComponent
-      },
-      {
-        path: 'categories/:parentCategory/subCategories/form/:id',
-        component: SubCategoriesFormComponent
       },
       {
         path: 'products',
@@ -52,7 +63,11 @@ const routes: Routes = [
         component: ProductsFormComponent
       },
       {
-        path: 'products/form/:id',
+        path: 'products/form/:mainCategory/:category/:subCategory',
+        component: ProductsFormComponent
+      },
+      {
+        path: 'products/form/:id/:isReadOnly',
         component: ProductsFormComponent
       },
       {

@@ -1,10 +1,10 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editmode ? 'Edit Product' : 'Add Product'"
+    [header]="isReadOnly ? 'Product Details' : editmode ? 'Edit Product' : 'Add Product'"
     subheader="You can add or edit products here"
   >
-    <div class="p-grid p-mb-5">
+    <div class="p-grid p-mb-5" *ngIf="!isReadOnly">
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left"></div>
@@ -31,7 +31,7 @@
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
               <label for="name">Name</label>
-              <input formControlName="name" id="name" type="text" pInputText />
+              <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />
               <small
                 *ngIf="productForm.name.invalid && isSubmitted"
                 class="p-error"
@@ -44,6 +44,7 @@
                 formControlName="brand"
                 id="brand"
                 type="text"
+                [readOnly]="isReadOnly"
                 pInputText
               />
               <small
@@ -57,6 +58,7 @@
               <p-inputNumber
                 formControlName="price"
                 mode="decimal"
+                readOnly="isReadOnly"
                 [useGrouping]="false"
               >
               </p-inputNumber>
@@ -69,22 +71,31 @@
           </div>
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-4">
-              <label for="countInStock">countInStock</label><br />
-              <p-inputNumber
-                formControlName="countInStock"
-                mode="decimal"
-                [useGrouping]="false"
-              >
-              </p-inputNumber>
+              <label for="mainCategory">main category</label><br />
+              <p-dropdown
+                [options]="mainCatagories"
+                formControlName="mainCategory"
+                optionLabel="name"
+                optionValue="id"
+                [(ngModel)]="selectedMainCategory"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Main Category"
+                [disabled]="isReadOnly"
+              ></p-dropdown>
+
               <small
-                *ngIf="productForm.countInStock.invalid && isSubmitted"
+                *ngIf="productForm.mainCategory.invalid && isSubmitted"
                 class="p-error"
-                >Count in stock is required</small
+                >Main Category is required</small
               >
             </div>
             <div class="p-field p-col-4">
               <label for="category">category</label><br />
               <p-dropdown
+                *ngIf="!editmode"
+                (click)="getCategories()"
                 [options]="catagories"
                 formControlName="category"
                 optionLabel="name"
@@ -94,8 +105,21 @@
                 filterBy="name"
                 [showClear]="true"
                 placeholder="Select a Category"
+                [disabled]="isReadOnly"
               ></p-dropdown>
-
+              <p-dropdown
+                *ngIf="editmode || isReadOnly"
+                [options]="catagories"
+                formControlName="category"
+                optionLabel="name"
+                optionValue="id"
+                [(ngModel)]="selectedCategory"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Category"
+                [disabled]="isReadOnly"
+              ></p-dropdown>
               <small
                 *ngIf="productForm.category.invalid && isSubmitted"
                 class="p-error"
@@ -111,22 +135,24 @@
                 [options]="subCatagories"
                 formControlName="subCategory"
                 optionLabel="name"
-                optionValue="_id"
+                optionValue="id"
                 [filter]="true"
                 filterBy="name"
                 [showClear]="true"
                 placeholder="Select a Sub Category"
+                [disabled]="isReadOnly"
               ></p-dropdown>
               <p-dropdown
-                *ngIf="editmode"
+                *ngIf="editmode || isReadOnly"
                 [options]="subCatagories"
                 formControlName="subCategory"
                 optionLabel="name"
-                optionValue="_id"
+                optionValue="id"
                 [filter]="true"
                 filterBy="name"
                 [showClear]="true"
                 placeholder="Select a Sub Category"
+                [disabled]="isReadOnly"
               ></p-dropdown>
               <small *ngIf="productForm.subCategory.invalid && isSubmitted" class="p-error">
                 Sub Category is required
@@ -135,7 +161,22 @@
 
             <div class="p-field p-col-4">
               <label for="isFeatured">Is Featured</label><br />
-              <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
+              <p-inputSwitch formControlName="isFeatured" [disabled]="isReadOnly"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-4">
+              <label for="countInStock">countInStock</label><br />
+              <p-inputNumber
+                formControlName="countInStock"
+                mode="decimal"
+                readOnly="isReadOnly"
+                [useGrouping]="false"
+              >
+              </p-inputNumber>
+              <small
+                *ngIf="productForm.countInStock.invalid && isSubmitted"
+                class="p-error"
+                >Count in stock is required</small
+              >
             </div>
             <div class="p-field p-col-12">
               <label for="description">Description</label><br />
@@ -144,6 +185,7 @@
                 formControlName="description"
                 [rows]="7"
                 [cols]="30"
+                [readOnly]="isReadOnly"
               ></textarea>
               <small
                 *ngIf="productForm.description.invalid && isSubmitted"
@@ -156,11 +198,13 @@
               <p-editor
                 formControlName="richDescription"
                 [style]="{ height: '320px' }"
+                [readonly]="isReadOnly"
               ></p-editor>
             </div>
             <div class="p-field p-col-12">
               <label for="name">Main Image</label>
               <input
+                *ngIf="!isReadOnly"
                 type="file"
                 class="p-inputtext"
                 accept="image/*"

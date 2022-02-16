@@ -1,15 +1,10 @@
 export class Category {
   id?: string;
+  mainCategory?: string;
+  category?: string;
   name?: string;
   icon?: string;
+  subicon?: string;
   color?: string;
   checked?: boolean;
-}
-export class SubCategory {
-  _id?: string;
-  parentCategory: string;
-  name: string;
-  icon: string;
-  subicon: string;
-  color: string;
 }
