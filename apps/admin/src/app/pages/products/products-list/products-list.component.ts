@@ -50,7 +50,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`products/form/${productid}/${isReadOnly}`);
   }
   createProduct() {
-    if (!(!this.mainCategory || !this.category || !this.subCategory)) this.router.navigateByUrl(`products/form/${this.mainCategory}/${this.category}/${this.subCategory}`);
+    if (this.mainCategory && this.category && this.subCategory) this.router.navigateByUrl(`products/form/${this.mainCategory}/${this.category}/${this.subCategory}`);
     this.router.navigateByUrl(`products/form`);
   }
 

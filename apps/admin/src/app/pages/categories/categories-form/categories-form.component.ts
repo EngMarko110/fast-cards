@@ -24,7 +24,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
   public mainCategories = [];
   public isReadOnly: boolean;
   public formType: string;
-  public categoriesUrlParam: string;
+  public listType: string;
   private isValid: boolean;
   constructor(
     private messageService: MessageService,
@@ -61,7 +61,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
           this.currentMainCategoryId : this.formType === 'Category' ?
             this.currentCategoryId : this.formType === 'Sub Category' ?
               this.currentSubCategoryId : undefined,
-      mainCategory: !this.categoriesUrlParam && (this.formType === 'Category' || 'Sub Category') ? this.currentMainCategoryId : this.selectedMainCategory,
+      mainCategory: !this.listType && (this.formType === 'Category' || 'Sub Category') ? this.currentMainCategoryId : this.selectedMainCategory,
       category: this.formType === 'Sub Category' ? this.currentCategoryId : undefined,
       name: this.categoryForm.name.value,
       icon: this.categoryForm.icon.value,
@@ -179,8 +179,8 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
           this.getCategory();
         }
       } else {
-        this.categoriesUrlParam = params.categories;
-        if (this.categoriesUrlParam) this.formType = 'Category';
+        this.listType = params.listType;
+        if (this.listType) this.formType = 'Category';
         else {
           this.formType = 'Main Category';
           this.currentMainCategoryId = params.id;

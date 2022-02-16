@@ -31,7 +31,7 @@ const routes: Routes = [
         component: CategoriesFormComponent
       },
       {
-        path: ':categories/form',
+        path: 'categories/form/:listType',
         component: CategoriesFormComponent
       },
       {
@@ -60,6 +60,10 @@ const routes: Routes = [
       },
       {
         path: 'products/form',
+        component: ProductsFormComponent
+      },
+      {
+        path: 'products/form/:mainCategory/:category/:subCategory',
         component: ProductsFormComponent
       },
       {
