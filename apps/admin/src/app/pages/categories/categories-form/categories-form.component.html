@@ -44,24 +44,28 @@
                 placeholder="Select a Main Category"
               ></p-dropdown>
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-6">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />
               <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error"
                 >Name is required</small
               >
             </div>
-            <div class="p-field p-col">
-              <label for="icon">Icon</label>
-              <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
-              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
-                >Icon is required</small
-              >
-            </div>
-            <div class="p-field p-col">
-              <label for="color">Color</label><br />
-              <p-colorPicker formControlName="color" [disabled]="isReadOnly"></p-colorPicker>
-            </div>
+            <ng-template #showIconColor>
+              <div class="p-field p-col">
+                <label for="icon">Icon</label>
+                <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
+                <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
+                  >Icon is required</small
+                >
+              </div>
+              <div class="p-field p-col">
+                <label for="color">Color</label><br />
+                <p-colorPicker formControlName="color" [disabled]="isReadOnly"></p-colorPicker>
+              </div>
+            </ng-template>
+            <ng-container *ngIf="formType !== 'Main Category' then showIconColor"></ng-container>
+            
           </div>
         </form>
       </div>

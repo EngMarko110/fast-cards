@@ -121,4 +121,12 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     }
     return mappedSubCategories;
   }
+  filterByMainId(mainCategoryId:string){
+    if (this.listType === CategoriesNames.categories) {
+      console.log(this.listType)
+     this.categories=this.categories.filter((ele)=>{
+       return ele.mainCategory!=mainCategoryId;
+     })
+    } 
+  }
 }
