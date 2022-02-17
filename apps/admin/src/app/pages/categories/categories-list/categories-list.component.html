@@ -5,23 +5,13 @@
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <p-button
-              styleClass="p-button-success"
-              label="New"
-              icon="pi pi-plus"
-              routerLink="form"
-              (click)="createCategory()"
-            ></p-button>
+            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" routerLink="form"
+              (click)="createCategory()"></p-button>
           </div>
-          <div>
+          <div *ngIf="listType !== 'Main Categories'">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input
-                type="text"
-                pInputText
-                [(ngModel)]="searchText"
-                placeholder="Search"
-              />
+              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search" />
             </span>
             <!-- {{searchText}} -->
           </div>
@@ -30,17 +20,17 @@
     </div>
     <div class="p-grid" *ngIf="categories.length">
       <div class="p-col-12">
-        <p-table
-          [value]="categories | filter: searchText:'name'"
-          styleClass="p-datatable-gridlines"
-        >
+        <p-table [value]="categories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="name">
                 Name <p-sortIcon field="name"></p-sortIcon>
               </th>
-              <th>Icon</th>
-              <th>Color</th>
+              <ng-template #show>
+                <th>Icon</th>
+                <th>Color</th>
+              </ng-template>
+              <ng-container *ngIf="listType !== 'Main Categories' then show"></ng-container>
               <th></th>
             </tr>
           </ng-template>
@@ -48,45 +38,34 @@
             <tr>
               <td>
                 <a (click)="updateOrGetCategory(category.id, true, category.mainCategory)">
-                  {{ category.name }}</a
-                >
+                  {{ category.name }}</a>
               </td>
+
+              <ng-template #value>
+                <td>
+                  <i style="font-size: 3rem" class="pi" [ngClass]="'pi-' + category.icon"></i>
+                  <i style="font-size: 2rem;" class="pi" [ngClass]="'pi-' + category.subicon"></i>
+                </td>
+                <td>
+                  <i class="pi pi-circle-on" style="font-size: 2rem" [ngStyle]="{ color: category.color }"></i>
+                </td>
+              </ng-template>
+              <ng-container *ngIf="listType !== 'Main Categories' then value"></ng-container>
+
               <td>
-                <i
-                  style="font-size: 3rem"
-                  class="pi"
-                  [ngClass]="'pi-' + category.icon"
-                ></i>
-                <i
-                  style="font-size: 2rem;"
-                  class="pi"
-                  [ngClass]="'pi-' + category.subicon"
-                ></i>
-              </td>
-              <td>
-               <i
-                  class="pi pi-circle-on"
-                  style="font-size: 2rem"
-                  [ngStyle]="{ color: category.color }"
-                ></i>
-              </td>
-              <td>
-                <p-button
-                  (click)="deleteCategory(category.id)"
-                  styleClass="p-button-danger p-mr-2"
-                  icon="pi pi-trash"
-                ></p-button>
-                <p-button
-                  (click)="updateOrGetCategory(category.id, false, category.mainCategory)"
-                  styleClass="p-button-success p-mr-2"
-                  icon="pi pi-pencil"
-                ></p-button>
-                <p-button
-                  *ngIf="!currentCategoryId"
-                  (click)="createSideCategory(category.id, category.mainCategory)"
-                  styleClass="p-button-primary"
-                  icon="pi pi-plus"
-                ></p-button>
+                <p-button (click)="deleteCategory(category.id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
+                </p-button>
+                <p-button (click)="updateOrGetCategory(category.id, false, category.mainCategory)"
+                  styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
+                <p-button *ngIf="!currentCategoryId" (click)="createSideCategory(category.id, category.mainCategory)"
+                  styleClass="p-button-primary p-mr-2" icon="pi pi-plus"></p-button>
+            
+               <!-- <ng-template #filterBtn>
+                <p-button *ngIf="!currentCategoryId" (click)="filterByMainId(category.id, category.mainCategory)"
+                styleClass="p-button" icon="pi pi-eye"></p-button>
+               </ng-template>
+               <ng-container *ngIf="listType === 'Main Categories' then filterBtn"></ng-container>
+                -->
               </td>
             </tr>
           </ng-template>
@@ -95,8 +74,5 @@
     </div>
   </p-card>
 </div>
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"
-></p-confirmDialog>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
