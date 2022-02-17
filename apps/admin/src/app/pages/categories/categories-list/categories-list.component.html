@@ -59,13 +59,7 @@
                   styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
                 <p-button *ngIf="!currentCategoryId" (click)="createSideCategory(category.id, category.mainCategory)"
                   styleClass="p-button-primary p-mr-2" icon="pi pi-plus"></p-button>
-            
-               <!-- <ng-template #filterBtn>
-                <p-button *ngIf="!currentCategoryId" (click)="filterByMainId(category.id, category.mainCategory)"
-                styleClass="p-button" icon="pi pi-eye"></p-button>
-               </ng-template>
-               <ng-container *ngIf="listType === 'Main Categories' then filterBtn"></ng-container>
-                -->
+          
               </td>
             </tr>
           </ng-template>
