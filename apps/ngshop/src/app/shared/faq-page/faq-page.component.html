@@ -1,1 +1,23 @@
-<p>faq-page works!</p>
+<div></div>
+<div class="conatiner">
+  <div class="row">
+    <h3>Common Questions</h3>
+    <div id="accordion" class="col-sm-12 col-md-10">
+      <div class="card" *ngFor="let question of questions; let i=index">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <a class="btn btn-link" data-toggle="collapse" href="#List-{{ i }}" aria-expanded="false" aria-controls="List-{{ i }}">
+              {{question.value}}
+            </a>
+          </h5>
+        </div>
+
+        <div id="List-{{ i }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <bluebits-answering [questionId]="question.id"></bluebits-answering>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
