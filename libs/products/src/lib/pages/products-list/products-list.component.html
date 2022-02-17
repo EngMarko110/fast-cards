@@ -1,7 +1,7 @@
 <div class="products-page">
   <div class="p-grid">
     <div class="p-col-3" *ngIf="!isCategoryPage">
-      <h4>Categories</h4>
+      <h4>Products</h4>
       <div class="p-field-checkbox" *ngFor="let category of categories">
         <p-checkbox
           [(ngModel)]="category.checked"

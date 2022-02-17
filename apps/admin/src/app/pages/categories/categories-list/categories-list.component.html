@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card header="Categories" subheader="List of all categories">
+  <p-card header={{listType}} subheader={{subHeader}}>
     <div class="p-grid">
       <div class="p-col-12">
         <p-toolbar>
@@ -10,6 +10,7 @@
               label="New"
               icon="pi pi-plus"
               routerLink="form"
+              (click)="createCategory()"
             ></p-button>
           </div>
           <div>
@@ -27,7 +28,7 @@
         </p-toolbar>
       </div>
     </div>
-    <div class="p-grid">
+    <div class="p-grid" *ngIf="categories.length">
       <div class="p-col-12">
         <p-table
           [value]="categories | filter: searchText:'name'"
@@ -46,15 +47,20 @@
           <ng-template pTemplate="body" let-category>
             <tr>
               <td>
-                <a (click)="getCategoryDetails(category.id)">
+                <a (click)="updateOrGetCategory(category.id, true, category.mainCategory)">
                   {{ category.name }}</a
                 >
               </td>
               <td>
                 <i
-                  style="font-size: 2rem"
+                  style="font-size: 3rem"
                   class="pi"
                   [ngClass]="'pi-' + category.icon"
+                ></i>
+                <i
+                  style="font-size: 2rem;"
+                  class="pi"
+                  [ngClass]="'pi-' + category.subicon"
                 ></i>
               </td>
               <td>
@@ -71,12 +77,13 @@
                   icon="pi pi-trash"
                 ></p-button>
                 <p-button
-                  (click)="updateCategory(category.id)"
+                  (click)="updateOrGetCategory(category.id, false, category.mainCategory)"
                   styleClass="p-button-success p-mr-2"
                   icon="pi pi-pencil"
                 ></p-button>
                 <p-button
-                  (click)="createSubCategory(category.id)"
+                  *ngIf="!currentCategoryId"
+                  (click)="createSideCategory(category.id, category.mainCategory)"
                   styleClass="p-button-primary"
                   icon="pi pi-plus"
                 ></p-button>

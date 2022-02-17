@@ -5,53 +5,37 @@
         <h3>Register</h3>
         <p>Please enter your information</p>
       </div>
-      <p *ngIf="duplicateErr">
-       <span class="text-danger">This email is already exist.</span> 
-      </p>
     </div>
+    <!-- <p>result {{registerFormGroup.value}}</p> -->
     <form
       class="register-form"
-      (ngSubmit)="onSubmit(registerationForm.value)"
-      [formGroup]="registerationForm"
+      (ngSubmit)="onSubmit(registerFormGroup.value)"
+      [formGroup]="registerFormGroup"
     >
       <div>
-        <input type="text" formControlName="name" pInputText placeholder="Name" />
+        <input
+          type="text"
+          formControlName="name"
+          pInputText
+          placeholder="Name"
+        />
       </div>
-      <p *ngIf="isValidInput('name')">
-        <small *ngIf="validateRequired('name')" class="text-danger">
-          name is required.
-        </small>
-        </p>
       <div>
-        <input type="text" placeholder="Email" formControlName="email" #email />
+        <input type="text" placeholder="Email" formControlName="email" />
       </div>
-      <p *ngIf="isValidInput('email')">
-        <small *ngIf="validateRequired('email')" class="text-danger">
-          email is required.
-        </small>
 
-        <small *ngIf="validatePattern('email')" class="text-danger">
-          email must be in formate.
-        </small>
-      </p>
       <div>
-        <input type="password" placeholder="Password" formControlName="password" />
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
       </div>
-      <p *ngIf="isValidInput('password')">
-        <small *ngIf="validateRequired('password')" class="text-danger">
-          Passsword is required.
-        </small>
-        <br>
-        <small *ngIf="validatePattern('password')" class="text-danger">
-          Password must be 8 character in formate [A-z]/[symbol]/[0-9].
-        </small>
-      </p>
-  
-  <div>
-    <input type="Phone" placeholder="Phone" formControlName="phone" />
+      <div>
+        <input type="Phone" placeholder="Phone" formControlName="phone" />
+      </div>
+      <button type="submit">Register</button>
+      <p class="message">Have Account? <a routerLink="/login">Login</a></p>
+    </form>
   </div>
-  <button type="submit" [disabled]="registerationForm.invalid">Register</button>
-  <p class="message">Have Account? <a routerLink="/login">Login</a></p>
-  </form>
-</div>
 </div>

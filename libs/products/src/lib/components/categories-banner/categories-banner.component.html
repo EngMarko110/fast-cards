@@ -1,16 +1,9 @@
-<div class="categories-banner">
-  <h3>Categories</h3>
-  <!-- input search: {{inputSearch}} -->
+<div class="categories-banner" *ngFor="let mappedCategory of response">
+  <h3>{{mappedCategory.name}}</h3>
+ <!-- input search: {{inputSearch}} -->
   <div class="p-grid">
-    <div
-      class="p-col-2"
-      *ngFor="let category of categories | filter: inputSearch"
-    >
-      <div
-        class="category"
-        [routerLink]="'/subcategory/' + category.id"
-        [ngStyle]="{ backgroundColor: category.color }"
-      >
+    <div class="p-col-2" *ngFor="let category of mappedCategory.categories|filter:inputSearch">
+      <div class="category" [routerLink]="'/subcategory/' + category.id" [ngStyle]="{ backgroundColor: category.color }">
         <div class="category-icon">
           <i class="pi pi-{{ category.icon }}"></i>
         </div>

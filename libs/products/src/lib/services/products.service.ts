@@ -21,6 +21,11 @@ export class ProductsService {
     return this.http.get<Product[]>(this.apiURLProducts, { params: params });
   }
 
+  getProductsBySubId(subCategoryId: string): Observable<Product[]> {
+    const url = `${this.apiURLProducts}/subCategories/${subCategoryId}/product`;
+    return this.http.get<Product[]>(url);
+  }
+
   createProduct(productData: FormData): Observable<Product> {
     return this.http.post<Product>(this.apiURLProducts, productData);
   }
@@ -45,8 +50,5 @@ export class ProductsService {
 
   getFeaturedProducts(count: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiURLProducts}/get/featured/${count}`);
-  }
-  getProductsBySubCategoryId(subId: any): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiURLProducts}/subCategories/${subId}/product`);
   }
 }

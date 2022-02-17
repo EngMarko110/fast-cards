@@ -5,48 +5,33 @@
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <p-button
-              styleClass="p-button-success"
-              label="New"
-              icon="pi pi-plus"
-              routerLink="form"
-            ></p-button>
+            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" (click)="createProduct()"></p-button>
           </div>
           <div>
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input
-                type="text"
-                pInputText
-                [(ngModel)]="searchText"
-                placeholder="Search"
-              />
+              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search">
             </span>
             <!-- {{searchText}} -->
           </div>
         </p-toolbar>
       </div>
     </div>
-    <div class="p-grid">
+    <div class="p-grid" *ngIf="products.length">
       <div class="p-col-12">
-        <p-table
-          [paginator]="true"
-          [rows]="10"
-          [value]="products | filter: searchText:'name'"
-          styleClass="p-datatable-gridlines"
-          [globalFilterFields]="['name']"
-        >
+        <p-table [paginator]="true" [rows]="10" [value]="products|filter:searchText:'name'"
+          styleClass="p-datatable-gridlines" [globalFilterFields]="['name']">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">
-                Name <p-sortIcon field="name"></p-sortIcon>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
               </th>
               <th>Image</th>
-              <th pSortableColumn="price">
-                Price <p-sortIcon field="price"></p-sortIcon>
+              <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
               </th>
-              <th pSortableColumn="stock">
-                Stock <p-sortIcon field="stock"></p-sortIcon>
+              <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon>
+              </th>
+              <th pSortableColumn="mainCategory">
+                Main Category <p-sortIcon field="mainCategory"></p-sortIcon>
               </th>
               <th pSortableColumn="category">
                 Category <p-sortIcon field="category"></p-sortIcon>
@@ -62,31 +47,18 @@
           </ng-template>
           <ng-template pTemplate="body" let-product>
             <tr>
-              <td>{{ product.name }}</td>
+              <td><a (click)="updateOrGetProduct(product.id, true)">{{ product.name }}</a></td>
               <td><img [src]="product.image" style="width: 100%" alt="" /></td>
               <td>{{ product.price }}</td>
               <td>{{ product.countInStock }}</td>
+              <td>{{ product.mainCategory.name }}</td>
               <td>{{ product.category.name }}</td>
+              <td>{{ product.subCategory.name }}</td>
+              <td>{{ product.dateCreated | date: 'short' }}</td>
               <td>
-                <p *ngIf="product.subCategory">
-                  {{ product.subCategory.name }}
-                </p>
-              </td>
-              <td>{{ product.dateCreated | date: "short" }}</td>
-              <td style="white-space: nowrap">
-                <p-button styleClass="p-button-blue p-mr-1" icon="pi pi-link">
+                <p-button (click)="deleteProduct(product.id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
                 </p-button>
-                <p-button
-                  (click)="deleteProduct(product.id)"
-                  styleClass="p-button-danger p-mr-1"
-                  icon="pi pi-trash"
-                >
-                </p-button>
-                <p-button
-                  (click)="updateProduct(product.id)"
-                  styleClass="p-button-success"
-                  icon="pi pi-pencil"
-                >
+                <p-button (click)="updateOrGetProduct(product.id, false)" styleClass="p-button-success" icon="pi pi-pencil">
                 </p-button>
               </td>
             </tr>
@@ -96,9 +68,5 @@
     </div>
   </p-card>
 </div>
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"
->
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
