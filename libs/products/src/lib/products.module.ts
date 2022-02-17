@@ -28,7 +28,11 @@ const routes: Routes = [
     component: SubcategoryComponent
   },
   {
-    path: 'products/:categoryid',
+    path: 'products',
+    component: ProductsListComponent
+  },
+  {
+    path: 'products/:subcategoryid',
     component: ProductsListComponent
   },
   {
@@ -48,7 +52,7 @@ const routes: Routes = [
     RatingModule,
     InputNumberModule,
     UiModule,
-   
+
   ],
   declarations: [
     ProductsSearchComponent,

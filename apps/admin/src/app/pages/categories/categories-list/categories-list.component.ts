@@ -121,4 +121,5 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     }
     return mappedSubCategories;
   }
+
 }

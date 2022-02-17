@@ -20,7 +20,7 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
   constructor(private categoriesService: CategoriesService,private storeServ:StoreService) {}
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getMainCategories();
     this.categoriesService
       .getMainCategories()
       .pipe(takeUntil(this.endSubs$))
@@ -42,7 +42,7 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
     this.endSubs$.next();
     this.endSubs$.complete();
   }
-  private getCategories(): void {
+  private getMainCategories(): void {
     this.categoriesService.getCategories().pipe(takeUntil(this.endSubs$)).subscribe((subCats) => this.categories = subCats);
   }
   private categoriesMapper(categories: Category[], mainCategory: Category): any {
