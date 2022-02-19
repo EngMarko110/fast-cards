@@ -1,0 +1,55 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card header="Main Categories" subheader="List of all main categories">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" routerLink="form"
+              (click)="createCategory()"></p-button>
+          </div>
+          <div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search" />
+            </span>
+            <!-- {{searchText}} -->
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-grid" *ngIf="mainCategories.length">
+      <div class="p-col-12">
+        <p-table [value]="mainCategories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-category>
+            <tr>
+              <td>
+                <a (click)="updateOrGetCategory(category.id, true, category.mainCategory)">
+                  {{ category.name }}</a>
+              </td>
+              <td>
+                <p-button (click)="deleteCategory(category.id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
+                </p-button>
+                <p-button (click)="updateOrGetCategory(category.id, false, category.mainCategory)"
+                  styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
+                <p-button *ngIf="!currentCategoryId" (click)="createSideCategory(category.id, category.mainCategory)"
+                  styleClass="p-button-primary p-mr-2" icon="pi pi-plus"></p-button>
+                <p-button (click)="getCategoriesByMainId(category.id)"
+                  styleClass="p-button-info p-mr-2" icon="pi pi-search"></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+<admin-categories-list [listType]="'Categories'" [filteredCategories]="filteredCategories"></admin-categories-list>
