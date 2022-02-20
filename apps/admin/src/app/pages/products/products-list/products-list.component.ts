@@ -53,7 +53,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     if (this.mainCategory && this.category && this.subCategory) this.router.navigateByUrl(`products/form/${this.mainCategory}/${this.category}/${this.subCategory}`);
     this.router.navigateByUrl(`products/form`);
   }
-
+  createLicense(productId: string) { this.router.navigateByUrl(`licenses/${productId}/form`); }
   deleteProduct(productId: string) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this Product?',
