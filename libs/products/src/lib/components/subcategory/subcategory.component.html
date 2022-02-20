@@ -1,10 +1,13 @@
 <div class="categories-banner">
-  <h3>Sub Categories</h3>
+  <h3>{{category.name}}</h3>
   <div class="p-grid">
     <div class="p-col-2" *ngFor="let subcategory of subCategories">
-      <div class="category" [routerLink]="'/products/' + subcategory.id" [ngStyle]="{ backgroundColor: subcategory.color }">
+      <div class="category" [routerLink]="'/products/' + subcategory.id" [ngStyle]="{ backgroundColor: category.color }">
         <div class="category-icon">
-          <i class="pi pi-{{ subcategory.icon }}"></i>
+          <i class="pi pi-{{ category.icon }}"></i>
+        </div>
+        <div class="category-icon">
+          <img [src]="subcategory.icon" alt="subcategory Icon">
         </div>
         <div class="category-name">{{ subcategory.name }}</div>
       </div>
