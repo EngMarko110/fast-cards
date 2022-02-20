@@ -4,7 +4,7 @@ import { AuthGuard } from "@bluebits/users";
 import { BlogsFormComponent } from "./pages/blogs/blogs-form/blogs-form.component";
 import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
 import { CategoriesFormComponent } from "./pages/categories/categories-form/categories-form.component";
-import { CategoriesListsComponent } from "./pages/categories/categories-lists/categories-lists.component";
+import { MainCategoriesListComponent } from "./pages/categories/main-categories-list/main-categories-list.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: "categories",
-        component: CategoriesListsComponent,
+        component: MainCategoriesListComponent,
       },
       {
         path: "categories/mainCategories/form",

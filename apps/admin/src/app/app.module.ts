@@ -39,12 +39,12 @@ import { FieldsetModule } from "primeng/fieldset";
 import { AppRoutingModule } from "./app-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { CategoriesListsComponent } from "./pages/categories/categories-lists/categories-lists.component";
+import { MainCategoriesListComponent } from "./pages/categories/main-categories-list/main-categories-list.component";
+import { BlogsFormComponent } from "./pages/blogs/blogs-form/blogs-form.component";
 import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
-import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
-import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
-import { BlogsFormComponent } from './pages/blogs/blogs-form/blogs-form.component';
+import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
+import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
 
 const UX_MODULE = [
   CardModule,
@@ -71,7 +71,7 @@ const UX_MODULE = [
     SidebarComponent,
     ShellComponent,
     DashboardComponent,
-    CategoriesListsComponent,
+    MainCategoriesListComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
     ProductsListComponent,

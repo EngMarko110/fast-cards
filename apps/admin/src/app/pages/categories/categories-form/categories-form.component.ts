@@ -39,7 +39,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       mainCategory: [''],
       name: ['', Validators.required],
-      icon: ['', Validators.required],
+      icon: [''],
       color: ['#fff']
     });
 
