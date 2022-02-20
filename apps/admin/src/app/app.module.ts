@@ -39,7 +39,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { CategoriesListsComponent } from './pages/categories/categories-lists/categories-lists.component';
+import { MainCategoriesListComponent } from './pages/categories/main-categories-list/main-categories-list.component';
 
 const UX_MODULE = [
   CardModule,
@@ -66,7 +66,7 @@ const UX_MODULE = [
     SidebarComponent,
     ShellComponent,
     DashboardComponent,
-    CategoriesListsComponent,
+    MainCategoriesListComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
     ProductsListComponent,
