@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '@bluebits/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -11,9 +11,12 @@ import { takeUntil } from 'rxjs/operators';
   styles: []
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
+  @Input() private mainCategory: string;
+  @Input() private category: string;
+  @Input() private subCategory: string;
   products = [];
   endsubs$: Subject<any> = new Subject();
-searchText;
+  searchText;
   constructor(
     private productsService: ProductsService,
     private router: Router,
@@ -31,17 +34,24 @@ searchText;
   }
 
   private _getProducts() {
-    this.productsService
+    if (this.subCategory) this.productsService.getProductsBySubId(this.subCategory).pipe(takeUntil(this.endsubs$)).subscribe((products) => this.products = products);
+    else {
+      this.productsService
       .getProducts()
       .pipe(takeUntil(this.endsubs$))
       .subscribe((products) => {
         this.products = products;
         console.log({products})
       });
+    }
   }
 
-  updateProduct(productid: string) {
-    this.router.navigateByUrl(`products/form/${productid}`);
+  updateOrGetProduct(productid: string, isReadOnly: string) {
+    this.router.navigateByUrl(`products/form/${productid}/${isReadOnly}`);
+  }
+  createProduct() {
+    if (this.mainCategory && this.category && this.subCategory) this.router.navigateByUrl(`products/form/${this.mainCategory}/${this.category}/${this.subCategory}`);
+    this.router.navigateByUrl(`products/form`);
   }
 
   deleteProduct(productId: string) {

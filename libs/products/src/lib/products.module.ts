@@ -16,14 +16,23 @@ import { FormsModule } from '@angular/forms';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UiModule } from '@bluebits/ui';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
+  {
+    path: 'category/:mainCategoryid',
+    component: CategoryComponent
+  },
   {
     path: 'subcategory/:categoryid',
     component: SubcategoryComponent
   },
   {
-    path: 'products/:subCategoryId',
+    path: 'products',
+    component: ProductsListComponent
+  },
+  {
+    path: 'products/:subcategoryid',
     component: ProductsListComponent
   },
   {
@@ -43,7 +52,7 @@ const routes: Routes = [
     RatingModule,
     InputNumberModule,
     UiModule,
-   
+
   ],
   declarations: [
     ProductsSearchComponent,
@@ -53,6 +62,7 @@ const routes: Routes = [
     ProductsListComponent,
     ProductPageComponent,
     SubcategoryComponent,
+    CategoryComponent,
     FilterPipe
   ],
   exports: [

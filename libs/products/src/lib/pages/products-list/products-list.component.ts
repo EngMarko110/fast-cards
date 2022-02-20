@@ -1,21 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-//import { param } from 'jquery';
-import { Category } from "../../models/category";
-import { Product } from "../../models/product";
-import { CategoriesService } from "../../services/categories.service";
-import { ProductsService } from "../../services/products.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Category } from '../../models/category';
+import { Product } from '../../models/product';
+import { CategoriesService } from '../../services/categories.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
-  selector: "products-list",
-  templateUrl: "./products-list.component.html",
-  styles: [],
+  selector: 'products-list',
+  templateUrl: './products-list.component.html',
+  styles: []
 })
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   isCategoryPage: boolean;
-  subId: any;
 
   constructor(
     private prodService: ProductsService,
@@ -24,23 +22,21 @@ export class ProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
-    //   params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
-    // });
-    this.route.paramMap.subscribe((params) => {
-      this.subId = params.get("subCategoryId");
+    this.route.params.subscribe((params) => {
+      params.subcategoryid ? this._getProductsBySubCategoryId(params.subcategoryid) : this._getProducts();
+      params.subcategoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
     });
     this._getCategories();
-    this._getProducts();
   }
 
-  private _getProducts() {
-    this.prodService
-      .getProductsBySubCategoryId(this.subId)
-      .subscribe((resProducts) => {
-        this.products = resProducts;
-      });
+  private _getProductsBySubCategoryId(subCategoryId: string) {
+    this.prodService.getProductsBySubId(subCategoryId).subscribe((resProducts) => this.products = resProducts);
+  }
+
+  private _getProducts(categoriesFilter?: string[]) {
+    this.prodService.getProducts(categoriesFilter).subscribe((resProducts) => {
+      this.products = resProducts;
+    });
   }
 
   private _getCategories() {
@@ -54,6 +50,6 @@ export class ProductsListComponent implements OnInit {
       .filter((category) => category.checked)
       .map((category) => category.id);
 
-    // this._getProducts(selectedCategories);
+    this._getProducts(selectedCategories);
   }
 }

@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editmode ? 'Edit Category' : 'Add Category'"
+    [header]="isReadOnly ? formType + ' Details' : editmode ? 'Edit ' + formType : 'Add ' + formType"
     subheader="You can add or edit categories here"
   >
     <div class="p-grid p-mb-5" *ngIf="!isReadOnly">
@@ -29,28 +29,53 @@
       <div class="p-col-12">
         <form [formGroup]="form">
           <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
+            <div class="p-field p-col-4" *ngIf="listType">
+              <label for="mainCategory">Main Category</label>
+              <br>
+              <p-dropdown
+                [options]="mainCategories"
+                formControlName="mainCategory"
+                optionLabel="name"
+                optionValue="id"
+                [(ngModel)]="selectedMainCategory"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Main Category"
+              ></p-dropdown>
+            </div>
+            <div class="p-field p-col-6">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />
               <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error"
                 >Name is required</small
               >
             </div>
-            <div class="p-field p-col">
-              <label for="icon">Icon</label>
-              <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
-              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
-                >Icon is required</small
-              >
-            </div>
-            <div class="p-field p-col">
-              <label for="color">Color</label><br />
-              <p-colorPicker formControlName="color" [disabled]="isReadOnly"></p-colorPicker>
-            </div>
+            <ng-template #showIconColor>
+              <div class="p-field p-col">
+                <label for="icon">Icon</label>
+                <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
+                <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
+                  >Icon is required</small
+                >
+              </div>
+              <div class="p-field p-col">
+                <label for="color">Color</label><br />
+                <p-colorPicker formControlName="color" [disabled]="isReadOnly"></p-colorPicker>
+              </div>
+            </ng-template>
+            <ng-container *ngIf="formType !== 'Main Category' then showIconColor"></ng-container>
+            
           </div>
         </form>
       </div>
     </div>
   </p-card>
-  <div class="d-flex justify-content-center"><admin-sub-categories-list [parentCategory]="currentCategoryId"></admin-sub-categories-list></div>
+  <div class="d-flex justify-content-center" *ngIf="editmode">
+    <admin-categories-list
+      *ngIf="!currentSubCategoryId"
+      [mainCategory]="currentMainCategoryId" [category]="currentCategoryId" [editmode]="editmode">
+    </admin-categories-list>
+    <admin-products-list *ngIf="currentSubCategoryId" [mainCategory]="currentMainCategoryId" [category]="currentCategoryId" [subCategory]="currentSubCategoryId"></admin-products-list>
+  </div>
 </div>

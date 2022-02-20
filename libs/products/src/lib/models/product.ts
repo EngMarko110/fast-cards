@@ -1,4 +1,4 @@
-import { Category, SubCategory } from './category';
+import { Category } from './category';
 
 export class Product {
   id?: string;
@@ -9,8 +9,9 @@ export class Product {
   images?: string[];
   brand?: string;
   price?: number;
+  mainCategory?: Category;
   category?: Category;
-  subCategory?: SubCategory;
+  subCategory?: Category;
   countInStock?: number;
   // rating?: number;
   // numReviews?: number;

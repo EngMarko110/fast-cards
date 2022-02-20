@@ -6,17 +6,17 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'products-subcategory',
-  templateUrl: './subcategory.component.html',
-  styleUrls: ['./subcategory.component.css']
+  selector: 'products-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class SubcategoryComponent implements OnInit, OnDestroy {
-  public subCategories: Category[] = [];
+export class CategoryComponent implements OnInit, OnDestroy {
+  public categories: Category[] = [];
   private endsubs$: Subject<any> = new Subject();
   parentCategory: any;
   constructor(private categoriesServ: CategoriesService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((parmas) => {
-      this.parentCategory = parmas.get('categoryid');
+      this.parentCategory = parmas.get('mainCategoryid');
 
       // console.log('cateId:',parmas.get('categoryid'));
       console.log('cateId type: ', this.parentCategory);
@@ -24,16 +24,16 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._getSubCategories();
+    this._getCategories();
   }
   public ngOnDestroy(): void {
     this.endsubs$.next();
     this.endsubs$.complete();
   }
-  private _getSubCategories(): void {
-    this.categoriesServ.getSubCategories(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCats) => {
-      this.subCategories = subCats;
-      console.log(this.subCategories)
+  private _getCategories(): void {
+    this.categoriesServ.getCategories(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCats) => {
+      this.categories = subCats;
+      console.log(this.categories)
     });
   }
  
