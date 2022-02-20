@@ -16,6 +16,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
   public currentCategoryId: string;
   public subHeader: string;
   @Input() public listType: string;
+  @Input() public filteredCategories: Category[];
   @Input() private mainCategory: string;
   @Input() private category: string;
   constructor(
@@ -42,30 +43,17 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
       header: "Delete Category",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        if (this.mainCategory) {
-          if (this.category) {
-            this.categoriesService.deleteSubCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
-              this._getList();
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Category is deleted!' });
-            }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Sub Category is not deleted!' }));
-          } else {
-            this.categoriesService.deleteCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
-              this._getList();
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category is deleted!' });
-            }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category is not deleted!' }));
-          }
-        } else {
-          if (this.listType === CategoriesNames.categories) {
-            this.categoriesService.deleteCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
-              this._getList();
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category is deleted!' });
-            }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category is not deleted!' }));
-          }else {
-            this.categoriesService.deleteMainCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
-              this._getList();
-              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Main Category is deleted!' });
-            }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Main Category is not deleted!' }));
-          }
+        if (this.mainCategory && this.category) {
+          this.categoriesService.deleteSubCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Category is deleted!' });
+            this._getList();
+          }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Sub Category is not deleted!' }));
+        }
+        if (this.listType === CategoriesNames.categories || (this.mainCategory && !this.category)) {
+          this.categoriesService.deleteCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
+            this._getList();
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category is deleted!' });
+          }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category is not deleted!' }));
         }
       },
     });
@@ -90,12 +78,9 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     if (this.mainCategory) {
       if (this.category) this.router.navigateByUrl(`categories/${this.mainCategory}/subCategories/${this.category}/form`);
       else this.router.navigateByUrl(`categories/${this.mainCategory}/form`);
-    } else {
-      if (this.listType === CategoriesNames.mainCategories) this.router.navigateByUrl(`categories/mainCategories/form`);
-      else this.router.navigateByUrl(`categories/form/${this.listType.toLowerCase()}`);
-    }
+    } else this.router.navigateByUrl(`categories/form/${this.listType.toLowerCase()}`);
   }
-  private _getList() {
+  protected _getList() {
     if (this.mainCategory) {
       if (this.category) {
         this.listType = this.listType ? this.listType : CategoriesNames.subCategories;
@@ -109,8 +94,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
         this.categoriesService.getCategories(this.mainCategory).pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
       }
     } else {
-      if (this.listType === 'Main Categories') this.categoriesService.getMainCategories().pipe(takeUntil(this.endsubs$)).subscribe((mainCategories) => this.categories = mainCategories);
-      else this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
+      this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe((cats) => this.categories = cats);
     }
   }
   private categoriesMapper(subCategories: Category[], category: Category): any[] {
