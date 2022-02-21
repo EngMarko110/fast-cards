@@ -5,14 +5,14 @@
       <div class="category" [routerLink]="'/products/' + subcategory.id"
         [ngStyle]="{ backgroundColor: category.color }">
         <div class="category-icon">
-          <i class="pi pi-{{ category.icon }}"></i>
+          <i class="pi {{ category.icon }}"></i>
         </div>
         <div class="category-icon">
           <ng-template #img>
             <img [src]="subcategory.icon" alt="subcategory Icon">
           </ng-template>
           <ng-template #icon>
-            <i class="pi pi-{{ subcategory.icon }}"></i>
+            <i class="pi {{ subcategory.icon }}"></i>
           </ng-template>
           <ng-container *ngIf="subcategory.icon.includes('https://img.icons8.com/') then img;
           else then icon"></ng-container>
