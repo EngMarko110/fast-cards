@@ -14,17 +14,16 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
   public subCategories: Category[] = [];
   private endsubs$: Subject<any> = new Subject();
   parentCategory: any;
+  category:Category={};
   constructor(private categoriesServ: CategoriesService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((parmas) => {
       this.parentCategory = parmas.get('categoryid');
-
-      // console.log('cateId:',parmas.get('categoryid'));
-      console.log('cateId type: ', this.parentCategory);
     })
   }
 
   ngOnInit(): void {
     this._getSubCategories();
+    this. _getCategory();
   }
   public ngOnDestroy(): void {
     this.endsubs$.next();
@@ -33,7 +32,11 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
   private _getSubCategories(): void {
     this.categoriesServ.getSubCategories(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCats) => {
       this.subCategories = subCats;
-      console.log(this.subCategories)
+    });
+  }
+  private _getCategory(): void {
+    this.categoriesServ.getCategory(this.parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((response) => {
+      this.category = response;
     });
   }
  
