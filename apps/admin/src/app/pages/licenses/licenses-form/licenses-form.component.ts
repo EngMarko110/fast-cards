@@ -2,161 +2,49 @@ import { Location } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import {
-  CategoriesService,
-  Product,
-  ProductsService,
-} from "@bluebits/products";
+import { LicensesService, License } from "@bluebits/products";
 import { MessageService } from "primeng/api";
 import { Subject, timer } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-
-@Component({
-  selector: "admin-products-form",
-  templateUrl: "./products-form.component.html",
-  styles: [],
-})
-export class ProductsFormComponent implements OnInit, OnDestroy {
-  editmode = false;
-  form: FormGroup;
-  isSubmitted = false;
-  mainCatagories = [];
-  catagories = [];
-  subCatagories = []; //
-  selectedMainCategory: string;
-  selectedCategory: string;
-  imageDisplay: string | ArrayBuffer;
-  currentProductId: string;
-  endsubs$: Subject<any> = new Subject();
-  public isReadOnly: boolean;
-  constructor(
-    private formBuilder: FormBuilder,
-    private productsService: ProductsService,
-    private categoriesService: CategoriesService,
-    private messageService: MessageService,
-    private location: Location,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
+@Component({ selector: "admin-licenses-form", templateUrl: "./licenses-form.component.html", styles: [] })
+export class LicensesFormComponent implements OnInit, OnDestroy {
+  public editmode = false;
+  public form: FormGroup;
+  public isSubmitted = false;
+  public licenses = [];
+  public currentProductId: string;
+  public currentLicenseId: string;
+  private endsubs$: Subject<any> = new Subject();
+  constructor(private formBuilder: FormBuilder, private licensesService: LicensesService, private messageService: MessageService, private location: Location, private route: ActivatedRoute) {}
+  public ngOnInit(): void {
     this._initForm();
-    this._getMainCategories();
     this._checkEditMode();
   }
-
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.endsubs$.next();
     this.endsubs$.complete();
   }
-
-  public getCategories(parentCategoryId?: string) {
-    const parentCategory = this.editmode ? parentCategoryId : this.selectedMainCategory;
-    if (parentCategory) {
-      this.categoriesService.getCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((categories) => {
-        this.catagories = categories;
-      });
-    }
+  private _initForm(): void { this.form = this.formBuilder.group({ code: ["", Validators.required] }); }
+  private _addLicense(licenseData: License): void {
+    this.licensesService.createLicense(licenseData).pipe(takeUntil(this.endsubs$)).subscribe((license: License) => {
+      this.messageService.add({ severity: "success", summary: "Success", detail: `License is created with code ${license.code}!` });
+      timer(2000).toPromise().then(() => this.location.back());
+    }, () => this.messageService.add({ severity: "error", summary: "Error", detail: "License is not created!" }));
   }
-
-  public getSubCategories(parentCategoryId?: string) {
-    const parentCategory = this.editmode ? parentCategoryId : this.selectedCategory;
-    if (parentCategory) {
-      this.categoriesService.getSubCategories(parentCategory).pipe(takeUntil(this.endsubs$)).subscribe((subCategories) => {
-        this.subCatagories = subCategories;
-      });
-    }
+  private _updateLicense(licenseData: License): void {
+    this.licensesService.updateLicense(licenseData).pipe(takeUntil(this.endsubs$)).subscribe(() => {
+      this.messageService.add({ severity: "success", summary: "Success", detail: "License is updated!" });
+      timer(2000).toPromise().then(() => this.location.back());
+    }, () => this.messageService.add({ severity: "error", summary: "Error", detail: "License is not updated!" }));
   }
-
-  private _initForm() {
-    this.form = this.formBuilder.group({
-      name: ["", Validators.required],
-      brand: ["", Validators.required],
-      price: ["", Validators.required],
-      mainCategory: ["", Validators.required],
-      category: ["", Validators.required],
-      //
-      subCategory: ["", Validators.required],
-      //
-      countInStock: ["", Validators.required],
-      description: ["", Validators.required],
-      richDescription: [""],
-      image: ["", Validators.required],
-      isFeatured: [false],
-    });
-  }
-
-  private _getMainCategories() {
-    this.categoriesService
-      .getMainCategories()
-      .pipe(takeUntil(this.endsubs$))
-      .subscribe((categories) => {
-        this.mainCatagories = categories;
-      });
-  }
-
-  private _addLicense(productData: FormData) {
-    this.productsService
-      .createProduct(productData)
-      .pipe(takeUntil(this.endsubs$))
-      .subscribe(
-        (product: Product) => {
-          this.messageService.add({
-            severity: "success",
-            summary: "Success",
-            detail: `Product ${product.name} is created!`,
-          });
-          timer(2000)
-            .toPromise()
-            .then(() => {
-              this.location.back();
-            });
-        },
-        () => {
-          this.messageService.add({
-            severity: "error",
-            summary: "Error",
-            detail: "Product is not created!",
-          });
-        }
-      );
-  }
-
-  private _updateProduct(productFormData: FormData) {
-    this.productsService
-      .updateProduct(productFormData, this.currentProductId)
-      .pipe(takeUntil(this.endsubs$))
-      .subscribe(
-        () => {
-          this.messageService.add({
-            severity: "success",
-            summary: "Success",
-            detail: "Product is updated!",
-          });
-          timer(2000)
-            .toPromise()
-            .then(() => {
-              this.location.back();
-            });
-        },
-        () => {
-          this.messageService.add({
-            severity: "error",
-            summary: "Error",
-            detail: "Product is not updated!",
-          });
-        }
-      );
-  }
-
   private _checkEditMode(): void {
     this.route.params.pipe(takeUntil(this.endsubs$)).subscribe((params) => {
-      if (params.isReadOnly && params.isReadOnly === "true") this.isReadOnly = params.isReadOnly;
-      if (params.id) {
+      if (params.id && params.productId) {
         this.editmode = true;
-        this.currentProductId = params.id;
-        this.productsService.getProduct(params.id).pipe(takeUntil(this.endsubs$)).subscribe((product) => {
-            this.licenseForm.name.setValue(product.name);
-            this.getCategories(product.mainCategory.id);
+        this.currentProductId = params.productId;
+        this.currentLicenseId = params.id;
+        this.licensesService.getLicense(this.currentProductId, this.currentLicenseId).pipe(takeUntil(this.endsubs$)).subscribe((license) => {
+            this.licenseForm.code.setValue(license.code);
         });
       }
     });
@@ -164,10 +52,13 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     this.isSubmitted = true;
     if (this.form.invalid) return;
-    const licenseFormData = new FormData();
-    Object.keys(this.licenseForm).map((key) => licenseFormData.append(key, this.licenseForm[key].value));
-    if (this.editmode) this._updateProduct(licenseFormData);
-    else this._addLicense(licenseFormData);
+    const licenseRequest: License = {
+      id: this.currentLicenseId,
+      productId: this.currentProductId,
+      code: this.licenseForm.code.value,
+    };
+    if (this.editmode) this._updateLicense(licenseRequest);
+    else this._addLicense(licenseRequest);
   }
   public onCancle(): void { this.location.back(); }
   get licenseForm() { return this.form.controls; }

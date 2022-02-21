@@ -4,6 +4,8 @@ import { AuthGuard } from '@bluebits/users';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListsComponent } from './pages/categories/categories-lists/categories-lists.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LicensesFormComponent } from './pages/licenses/licenses-form/licenses-form.component';
+import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
@@ -70,6 +72,9 @@ const routes: Routes = [
         path: 'products/form/:id/:isReadOnly',
         component: ProductsFormComponent
       },
+      { path: 'licenses/form/:productId', component: LicensesFormComponent },
+      { path: 'licenses/form/:productId/:id', component: LicensesListComponent },
+      { path: '', component: LicensesListComponent },
       {
         path: 'users',
         component: UsersListComponent

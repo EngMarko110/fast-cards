@@ -40,6 +40,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CategoriesListsComponent } from './pages/categories/categories-lists/categories-lists.component';
+import { LicensesFormComponent } from './pages/licenses/licenses-form/licenses-form.component';
+import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
 
 const UX_MODULE = [
   CardModule,
@@ -71,6 +73,8 @@ const UX_MODULE = [
     CategoriesFormComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    LicensesFormComponent,
+    LicensesListComponent,
     UsersListComponent,
     UsersFormComponent,
     OrdersListComponent,
