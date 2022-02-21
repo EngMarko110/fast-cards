@@ -44,8 +44,11 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
       icon: "pi pi-exclamation-triangle",
       accept: () => {
         if (this.mainCategory && this.category) {
-          this.categoriesService.deleteSubCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sub Category is deleted!' });
+          this.categoriesService.deleteSubCategory(categoryId)
+          .pipe(takeUntil(this.endsubs$))
+          .subscribe(() => {
+            this.messageService.add(
+              { severity: 'success', summary: 'Success', detail: 'Sub Category is deleted!' });
             this._getList();
           }, () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Sub Category is not deleted!' }));
         }
