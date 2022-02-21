@@ -43,23 +43,9 @@
 
               <ng-template #value>
                 <td>
-                  <ng-template #img>
-                    <img [src]="category.icon" alt="category Icon">
-                  </ng-template>
-                  <ng-template #icon>
-                    <i style="font-size: 3rem" class="pi" [ngClass]="'pi-' + category.icon"></i>
-                  </ng-template>
-                  <ng-container *ngIf="category.icon.includes('https://img.icons8.com/') then img;
-                  else then icon"></ng-container>
-                  ////////////////////////
-                  <ng-template #subImg>
-                    <img [src]="category.subicon" alt="category Icon">
-                  </ng-template>
-                  <ng-template #subIcon>
-                    <i style="font-size: 2rem;" class="pi" [ngClass]="'pi-' + category.subicon"></i>
-                  </ng-template>
-                  <ng-container *ngIf="category.subicon.includes('https://img.icons8.com/') then subImg;
-                  else then subIcon"></ng-container>
+                  <img *ngIf="category.icon.includes('https')" [src]="category.icon" alt="">
+                  <i style="font-size: 3rem" class="pi {{category.icon}}"></i>
+                  <i style="font-size: 2rem;" class="pi {{category.subicon}}"></i>
                 </td>
                 <td>
                   <i class="pi pi-circle-on" style="font-size: 2rem" [ngStyle]="{ color: category.color }"></i>
