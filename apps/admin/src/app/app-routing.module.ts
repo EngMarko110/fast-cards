@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@bluebits/users';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
-import { CategoriesListsComponent } from './pages/categories/categories-lists/categories-lists.component';
+import { MainCategoriesListComponent } from './pages/categories/main-categories-list/main-categories-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LicensesFormComponent } from './pages/licenses/licenses-form/licenses-form.component';
 import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'categories',
-        component: CategoriesListsComponent
+        component: MainCategoriesListComponent
       },
       {
         path: 'categories/mainCategories/form',
@@ -74,7 +74,6 @@ const routes: Routes = [
       },
       { path: 'licenses/form/:productId', component: LicensesFormComponent },
       { path: 'licenses/form/:productId/:id', component: LicensesListComponent },
-      { path: '', component: LicensesListComponent },
       {
         path: 'users',
         component: UsersListComponent
