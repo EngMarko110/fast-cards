@@ -1,12 +1,11 @@
-.category-icon {
+.category {
+  margin: 0px 0px;
+}
+.icons {
   display: flex;
   margin-right: 25px;
 }
-#categoryicon {
+.category-icon {
   font-size: 9px;
-  margin: -5px 10px 0px -15px;
-}
-
-#subcategoryicon {
-  margin-left: 9px;
+  margin-right: 20px;
 }
