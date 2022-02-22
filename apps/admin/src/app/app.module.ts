@@ -40,6 +40,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MainCategoriesListComponent } from './pages/categories/main-categories-list/main-categories-list.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 const UX_MODULE = [
   CardModule,
@@ -75,7 +77,9 @@ const UX_MODULE = [
     UsersFormComponent,
     OrdersListComponent,
     OrdersDetailComponent,
-    FilterPipe
+    FilterPipe,
+    BlogsComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
