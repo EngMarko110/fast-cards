@@ -1,3 +1,4 @@
+import { BlogsComponent } from './../../../admin/src/app/pages/blogs/blogs.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { AboutComponent } from './shared/about/about.component';
 import { ContactsComponent } from './shared/contacts/contacts.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path:'contacts',component:ContactsComponent},
   {path:'about',component:AboutComponent},
   {path:'privacy-ploicy',component:PrivacyPolicyComponent},
+  {path:'blogs',component:BlogsComponent},
   {path:'FAQ',component:FaqPageComponent},
   {
     path: 'user', loadChildren: () => import('./../../../../libs/users/src/lib/user-profile/user-profile.module')
