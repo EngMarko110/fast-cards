@@ -44,7 +44,7 @@
                 placeholder="Select a Main Category"
               ></p-dropdown>
             </div>
-            <div class="p-field p-col-6">
+            <div class="p-field p-col">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" [readOnly]="isReadOnly" pInputText />
               <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error"

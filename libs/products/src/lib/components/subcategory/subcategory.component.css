@@ -1,15 +1,11 @@
-<<<<<<< HEAD
-.category-icon {
+.category {
+  margin: 0px 0px;
+}
+.icons {
   display: flex;
   margin-right: 25px;
 }
-#categoryicon {
+.category-icon {
   font-size: 9px;
-  margin: -5px 10px 0px -15px;
+  margin-right: 20px;
 }
-
-#subcategoryicon {
-  margin-left: 9px;
-}
-=======
->>>>>>> 204f40d7d0d61d20e5076415d954677cf5c365d8

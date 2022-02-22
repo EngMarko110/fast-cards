@@ -1,38 +1,22 @@
 <div class="categories-banner" *ngFor="let mappedCategory of response">
   <h3>{{mappedCategory.name}}</h3>
- <!-- input search: {{inputSearch}} -->
   <div class="p-grid">
     <div class="p-col-2" *ngFor="let category of mappedCategory.categories|filter:inputSearch">
-      <div class="category" [routerLink]="'/subcategory/' + category.id" [ngStyle]="{ backgroundColor: category.color }">
+      <div class="category" [routerLink]="'/subcategory/' + category.id"
+        [ngStyle]="{ backgroundColor: category.color }">
         <div class="category-icon">
-          <i class="pi pi-{{ category.icon }}"></i>
+          <i class="pi {{ category.icon }}"></i>
+          <ng-template #img>
+            <img [src]="category.icon" alt="category Icon">
+          </ng-template>
+          <ng-template #icon>
+            <i class="pi {{ category.icon }}"></i>
+          </ng-template>
+          <ng-container *ngIf="category.icon.includes('https://img.icons8.com/') then img;
+            else then icon"></ng-container>
         </div>
         <div class="category-name">{{ category.name }}</div>
       </div>
     </div>
   </div>
 </div>
-<!-- <div class="container-fluid" style="min-height:80vh">
-  <div class="row mb-2">
-    <h3 class="col text-light">Categories</h3>
-  </div>
-  <div class="row">
-    <div class="col-sm-4 col-md-3 mb-3" *ngFor="let category of categories">
-      <div class="card  w-100" [routerLink]="'/category/' + category.id" [ngStyle]="{ backgroundColor: category.color }"
-        style="cursor: pointer;">
-
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <i class="w-100  text-color pi pi-{{ category.icon }}"></i>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title text-color">{{ category.name }}</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div> -->

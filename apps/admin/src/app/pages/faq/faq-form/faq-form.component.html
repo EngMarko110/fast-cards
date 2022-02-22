@@ -1,0 +1,44 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card subheader="You can add or edit Questions here">
+    <div class="p-grid p-mb-5">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              styleClass="p-button-primary p-mr-2"
+              label="Update : Create"
+              icon="pi pi-plus"
+            ></p-button>
+            <p-button
+              styleClass="p-button-secondary"
+              label="Cancle"
+              icon="pi pi-arrow-circle-left"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <form formGroup="form">
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+              <label for="name">Question</label>
+              <input formControlName="name" id="name" type="text" pInputText />
+            </div>
+            <div class="p-field p-col-12">
+              <label for="blogs">Answer!</label><br />
+              <p-editor
+                formControlName="blogs"
+                [style]="{ height: '320px' }"
+              ></p-editor>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

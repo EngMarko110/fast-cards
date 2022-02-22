@@ -31,7 +31,6 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
           const categoriesObj = this.categoriesMapper(categoriesForMainCategory, mainCategory);
           this.response.push(categoriesObj);
         }
-        console.log({categories});
       });
       this.storeServ.getInputValue().subscribe((value)=>{
         this.inputSearch=value;
@@ -43,7 +42,9 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
     this.endSubs$.complete();
   }
   private getMainCategories(): void {
-    this.categoriesService.getCategories().pipe(takeUntil(this.endSubs$)).subscribe((subCats) => this.categories = subCats);
+    this.categoriesService.getCategories().pipe(takeUntil(this.endSubs$)).subscribe((subCats) => {
+      this.categories = subCats;
+    });
   }
   private categoriesMapper(categories: Category[], mainCategory: Category): any {
     const mappedCategories = { name: mainCategory.name, categories };
