@@ -1,8 +1,6 @@
-import { FaqComponent } from './pages/faq/faq.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@bluebits/users';
-import { BlogsComponent } from './pages/blogs/blogs.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { MainCategoriesListComponent } from './pages/categories/main-categories-list/main-categories-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -92,14 +90,7 @@ const routes: Routes = [
         path: 'orders/:id',
         component: OrdersDetailComponent
       },
-      {
-        path: 'blogs',
-        component: BlogsComponent
-      },
-      {
-        path: 'FAQ',
-        component: FaqComponent
-      },
+     
     ]
   }
 ];

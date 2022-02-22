@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { SEO } from './../modles/seo';
+import { SEO } from '../models/seo';
 import { HttpClient } from '@angular/common/http';
 import { environment as env} from './../../../../../environments/environment';
 import { Injectable } from '@angular/core';
