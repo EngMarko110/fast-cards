@@ -1,13 +1,13 @@
+
 import { SeoService } from './../../../../../../libs/ui/src/lib/services/seo.service';
-import { SEO } from '../../../../../../libs/ui/src/lib/modles/seo';
-import { Question } from './../models/questions';
+import { SEO } from '../../../../../../libs/ui/src/lib/models/seo';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
-  selector: 'bluebits-faq-page',
-  templateUrl: './faq-page.component.html',
-  styleUrls: ['./faq-page.component.scss']
+  selector: "bluebits-faq-page",
+  templateUrl: "./faq-page.component.html",
+  styleUrls: ["./faq-page.component.scss"],
 })
 export class FaqPageComponent implements OnInit, OnDestroy {
   private endsubs$: Subject<any> = new Subject();
