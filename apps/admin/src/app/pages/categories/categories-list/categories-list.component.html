@@ -6,7 +6,8 @@
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" routerLink="form"
-              (click)="createCategory()"></p-button>
+              (click)="createCategory()">
+            </p-button>
           </div>
           <div *ngIf="listType !== 'Main Categories'">
             <span class="p-input-icon-left">
