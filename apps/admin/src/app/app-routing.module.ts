@@ -18,6 +18,7 @@ import { TextSystemListComponent } from "./pages/textsystem/text-system-list/tex
 //import { TextSystemReplyComponent } from "./pages/textsystem/text-system-reply/text-system-reply.component";
 import { UsersFormComponent } from "./pages/users/users-form/users-form.component";
 import { UsersListComponent } from "./pages/users/users-list/users-list.component";
+import { WalletListComponent } from "./pages/wallets/wallet-list/wallet-list.component";
 import { ShellComponent } from "./shared/shell/shell.component";
 
 const routes: Routes = [
@@ -97,6 +98,10 @@ const routes: Routes = [
       {
         path: "orders/:id",
         component: OrdersDetailComponent,
+      },
+      {
+        path: "wallets",
+        component: WalletListComponent,
       },
       {
         path: "blogs",

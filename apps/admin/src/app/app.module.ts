@@ -47,6 +47,8 @@ import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
 import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
 import { AllNotificationsComponent } from "./pages/notifications/all-notifications/all-notifications.component";
+import { WalletListComponent } from './pages/wallets/wallet-list/wallet-list.component';
+import { WalletInfoComponent } from './pages/wallets/wallet-info/wallet-info.component';
 //import { TextSystemReplyComponent } from './pages/textsystem/text-system-reply/text-system-reply.component';
 
 const UX_MODULE = [
@@ -91,6 +93,8 @@ const UX_MODULE = [
     BlogsFormComponent,
     TextSystemListComponent,
     AllNotificationsComponent,
+    WalletListComponent,
+    WalletInfoComponent,
     // TextSystemReplyComponent,
   ],
   imports: [
