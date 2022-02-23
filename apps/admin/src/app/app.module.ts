@@ -48,6 +48,7 @@ import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
 import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
 //import { TextSystemReplyComponent } from './pages/textsystem/text-system-reply/text-system-reply.component';
 
+
 const UX_MODULE = [
   CardModule,
   ToastModule,

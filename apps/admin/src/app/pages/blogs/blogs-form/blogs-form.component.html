@@ -8,14 +8,18 @@
           <div class="p-toolbar-group-right">
             <p-button
               styleClass="p-button-primary p-mr-2"
-              label="Update : Create"
+              [label]="blogId? 'Update' : 'Create'"
               icon="pi pi-plus"
+              (click)="onSubmit()"
+
             ></p-button>
             <p-button
               styleClass="p-button-secondary"
               label="Cancle"
               icon="pi pi-arrow-circle-left"
+              routerLink="/blogs"
             ></p-button>
+            
           </div>
         </p-toolbar>
       </div>
@@ -23,18 +27,23 @@
 
     <div class="p-grid">
       <div class="p-col-12">
-        <form formGroup="form">
+        <form [formGroup]="form">
+          {{form.value|json}}
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-              <label for="name">Topic title</label>
-              <input formControlName="name" id="name" type="text" pInputText />
+              <label for="title">Question</label>
+              <input formControlName="title" id="name" type="text" pInputText />
+              <small *ngIf="form.controls.title.invalid && isSubmitted" class="p-error"
+              >Title is required</small>
             </div>
             <div class="p-field p-col-12">
-              <label for="faq">Full Topic</label><br />
+              <label for="topic">Topic!</label><br />
               <p-editor
-                formControlName="faq"
+                formControlName="topic"
                 [style]="{ height: '320px' }"
               ></p-editor>
+              <small *ngIf="form.controls.topic.invalid && isSubmitted" class="p-error"
+              >Topic is required</small>
             </div>
           </div>
         </form>

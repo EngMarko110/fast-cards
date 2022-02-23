@@ -16,7 +16,7 @@
     </div>
     <br /><br />
     <p-table
-      value="faq"
+      [value]="faqList"
       styleClass="p-datatable-gridlines"
       responsiveLayout="scroll"
     >
@@ -29,9 +29,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-faq>
         <tr>
-          <td>{{ faq.code }}</td>
-          <td>{{ faq.name }}</td>
-          <td>{{ faq.category }}</td>
+          <td>{{ faq.title }}</td>
+          <td>{{ faq.topic }}</td>
+          <td>
+            <p-button (click)="deleteFAQ(faq._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
+            </p-button>
+            <p-button  routerLink="form/{{faq._id}}"
+              styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
+          </td>
         </tr>
       </ng-template>
     </p-table>
