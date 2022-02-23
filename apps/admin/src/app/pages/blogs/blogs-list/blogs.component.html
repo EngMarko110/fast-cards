@@ -16,7 +16,7 @@
     </div>
     <br /><br />
     <p-table
-      value="Blogs"
+      [value]="blogsList"
       styleClass="p-datatable-gridlines"
       responsiveLayout="scroll"
     >
@@ -27,11 +27,16 @@
           <th>Delete / Edit</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-faq>
+      <ng-template pTemplate="body" let-blog>
         <tr>
-          <td>{{ blogs.code }}</td>
-          <td>{{ blogs.name }}</td>
-          <td>{{ blogs.category }}</td>
+          <td>{{ blog.title }}</td>
+          <td>{{ blog.topic }}</td>
+          <td>
+            <p-button (click)="deleteBlog(blog._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
+            </p-button>
+            <p-button  routerLink="form/{{blog._id}}"
+              styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
+          </td>
         </tr>
       </ng-template>
     </p-table>

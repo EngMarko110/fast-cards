@@ -1,7 +1,7 @@
 import { SeoService } from './../../../../../../../libs/ui/src/lib/services/seo.service';
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute ,Router} from "@angular/router";
 import { MessageService } from "primeng/api";
 import { Subject, timer } from "rxjs";
 import { takeUntil } from 'rxjs/operators';
@@ -25,7 +25,8 @@ export class FaqFormComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private formBuilder: FormBuilder,
     private seoServ: SeoService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router:Router
   ) {
     this.activatedRoute.paramMap.subscribe((param)=>{
       this.faqId=param.get('id');
@@ -70,12 +71,13 @@ export class FaqFormComponent implements OnInit, OnDestroy {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `Question ${faq.title} is created!`
+            detail: `Question  is created!`
           });
           timer(2000)
             .toPromise()
             .then(() => {
               // this.location.back();
+              this.router.navigateByUrl('/faq')
             });
         },
         () => {
@@ -100,8 +102,7 @@ export class FaqFormComponent implements OnInit, OnDestroy {
           timer(2000)
             .toPromise()
             .then(() => {
-              // this.location.back();
-              // console.log('')
+              this.router.navigateByUrl('/faq')
             });
         },
         () => {
