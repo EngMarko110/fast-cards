@@ -73,7 +73,7 @@ const routes: Routes = [
         component: ProductsFormComponent
       },
       { path: 'licenses/form/:productId', component: LicensesFormComponent },
-      { path: 'licenses/form/:productId/:id', component: LicensesListComponent },
+      { path: 'licenses/form/:productId/:id', component: LicensesFormComponent },
       {
         path: 'users',
         component: UsersListComponent

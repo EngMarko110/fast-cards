@@ -5,4 +5,5 @@ export * from './lib/services/products.service';
 export * from './lib/models/category';
 export * from './lib/models/product';
 export * from './lib/models/license';
+export * from './lib/models/requests/IConfirmOrderRequest';
 export * from './lib/models/enums/categories.enum';

@@ -31,7 +31,7 @@
               <td>{{ license.code }}</td>
               <td>
                 <p-button (click)="deleteLicense(license.id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash"></p-button>
-                <p-button (click)="updateLicense(license.id)" styleClass="p-button-success" icon="pi pi-pencil"></p-button>
+                <p-button  *ngIf="!license.sold" (click)="updateLicense(license.id)" styleClass="p-button-success" icon="pi pi-pencil"></p-button>
               </td>
             </tr>
           </ng-template>

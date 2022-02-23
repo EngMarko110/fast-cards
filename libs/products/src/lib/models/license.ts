@@ -1,1 +1,1 @@
-export class License { id?: string; productId: string; code: string; }
+export class License { id?: string; product: string; code: string; sold?: boolean; }
