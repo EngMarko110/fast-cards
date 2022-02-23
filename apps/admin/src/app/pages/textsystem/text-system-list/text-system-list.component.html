@@ -27,13 +27,15 @@
           <th>Subject!</th>
           <th>Client Massage!</th>
           <th>Status!</th>
+          <th>Reply!</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-faq>
         <tr>
-          <td>{{ ticketSystem.code }}</td>
-          <td>{{ ticketSystem.name }}</td>
-          <td>{{ ticketSystem.category }}</td>
+          <td>{{ ticketSystem.subject }}</td>
+          <td>{{ ticketSystem.massage }}</td>
+          <td>{{ ticketSystem.stauts }}</td>
+          <td>{{ ticketSystem.reply }}</td>
         </tr>
       </ng-template>
     </p-table>

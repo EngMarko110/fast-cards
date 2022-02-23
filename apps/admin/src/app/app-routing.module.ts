@@ -9,6 +9,7 @@ import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
+import { AllNotificationsComponent } from "./pages/notifications/all-notifications/all-notifications.component";
 import { OrdersDetailComponent } from "./pages/orders/orders-detail/orders-detail.component";
 import { OrdersListComponent } from "./pages/orders/orders-list/orders-list.component";
 import { ProductsFormComponent } from "./pages/products/products-form/products-form.component";
@@ -106,6 +107,10 @@ const routes: Routes = [
         component: BlogsFormComponent,
       },
       {
+        path: "blogs/form/id",
+        component: BlogsFormComponent,
+      },
+      {
         path: "faq", //for faq list
         component: FaqListComponent,
       },
@@ -122,8 +127,12 @@ const routes: Routes = [
         component: LicenseKeyComponent,
       },
       {
-        path: "textSystem",
+        path: "ticketSystem",
         component: TextSystemListComponent,
+      },
+      {
+        path: "notifications",
+        component: AllNotificationsComponent,
       },
       /*
       ,

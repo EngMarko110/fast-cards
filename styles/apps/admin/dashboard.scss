@@ -1,3 +1,8 @@
+.pi-user {
+  margin-left: 10px;
+  font-size: 24px;
+}
+
 .d-item {
   display: flex;
   text-align: center;
@@ -26,7 +31,12 @@
 
 .d-products {
   background-color: #4158d0;
-  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
 }
 
 .d-users {
