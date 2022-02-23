@@ -13,8 +13,12 @@ export class Product {
   category?: Category;
   subCategory?: Category;
   countInStock?: number;
-  // rating?: number;
-  // numReviews?: number;
+  availableLicence?: string[];
+  soldLicence?: string[];
   isFeatured?: boolean;
   dateCreated?: string;
+  licenceStock?: number;
+  // These key aren't belong to product database model but these are used in request object
+  orderStatus?: string;
+  soldKeys?: string[];
 }

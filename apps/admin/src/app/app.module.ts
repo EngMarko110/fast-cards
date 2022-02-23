@@ -45,7 +45,8 @@ import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
-
+import { LicensesFormComponent } from './pages/licenses/licenses-form/licenses-form.component';
+import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
 
 const UX_MODULE = [
   CardModule,
@@ -77,6 +78,8 @@ const UX_MODULE = [
     CategoriesFormComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    LicensesFormComponent,
+    LicensesListComponent,
     UsersListComponent,
     UsersFormComponent,
     OrdersListComponent,

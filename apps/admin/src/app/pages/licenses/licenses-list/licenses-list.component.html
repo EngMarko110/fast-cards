@@ -1,0 +1,43 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card header="Licenses" subheader="List of all licenses">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" (click)="createLicense()"></p-button>
+          </div>
+          <div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search">
+            </span>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-grid" *ngIf="licenses.length">
+      <div class="p-col-12">
+        <p-table [paginator]="true" [rows]="10" [value]="licenses|filter:searchText:'code'"
+          styleClass="p-datatable-gridlines" [globalFilterFields]="['code']">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="code">License Code <p-sortIcon field="code"></p-sortIcon></th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-license>
+            <tr>
+              <td>{{ license.code }}</td>
+              <td>
+                <p-button (click)="deleteLicense(license.id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash"></p-button>
+                <p-button  *ngIf="!license.sold" (click)="updateLicense(license.id)" styleClass="p-button-success" icon="pi pi-pencil"></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

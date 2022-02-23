@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card [header]="editmode ? 'Edit License' : 'Add License'" subheader="You can add or edit licenses here">
+    <div class="p-grid p-mb-5">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button styleClass="p-button-primary p-mr-2" [label]="editmode ? 'Update' : 'Create'" icon="pi pi-plus" (click)="onSubmit()"></p-button>
+            <p-button styleClass="p-button-secondary" label="Cancle" icon="pi pi-arrow-circle-left" (click)="onCancle()"></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-12">
+        <form [formGroup]="form">
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+              <label for="code">License Code</label>
+              <input formControlName="code" id="code" type="text" pInputText />
+              <small *ngIf="licenseForm.code.invalid && isSubmitted" class="p-error">License Code is required</small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
