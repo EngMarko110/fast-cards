@@ -111,4 +111,4 @@ const UX_MODULE = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
