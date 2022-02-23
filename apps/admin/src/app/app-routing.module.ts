@@ -13,6 +13,8 @@ import { OrdersDetailComponent } from "./pages/orders/orders-detail/orders-detai
 import { OrdersListComponent } from "./pages/orders/orders-list/orders-list.component";
 import { ProductsFormComponent } from "./pages/products/products-form/products-form.component";
 import { ProductsListComponent } from "./pages/products/products-list/products-list.component";
+import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
+//import { TextSystemReplyComponent } from "./pages/textsystem/text-system-reply/text-system-reply.component";
 import { UsersFormComponent } from "./pages/users/users-form/users-form.component";
 import { UsersListComponent } from "./pages/users/users-list/users-list.component";
 import { ShellComponent } from "./shared/shell/shell.component";
@@ -119,6 +121,16 @@ const routes: Routes = [
         path: "LicenseKey",
         component: LicenseKeyComponent,
       },
+      {
+        path: "textSystem",
+        component: TextSystemListComponent,
+      },
+      /*
+      ,
+      {
+        path: "text-system-reply",
+        component: TextSystemReplyComponent,
+      },*/
     ],
   },
 ];

@@ -45,6 +45,8 @@ import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
+import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
+//import { TextSystemReplyComponent } from './pages/textsystem/text-system-reply/text-system-reply.component';
 
 const UX_MODULE = [
   CardModule,
@@ -86,6 +88,8 @@ const UX_MODULE = [
     FaqListComponent,
     FaqFormComponent,
     BlogsFormComponent,
+    TextSystemListComponent,
+    // TextSystemReplyComponent,
   ],
   imports: [
     BrowserModule,
