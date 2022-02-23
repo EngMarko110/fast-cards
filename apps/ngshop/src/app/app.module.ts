@@ -27,7 +27,7 @@ import { ContactsComponent } from './shared/contacts/contacts.component';
 import { AboutComponent } from './shared/about/about.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { FaqPageComponent } from './shared/faq-page/faq-page.component';
-import { AnsweringComponent } from './shared/faq-page/answering/answering.component';
+import { BlogsComponent } from './shared/blogs/blogs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +40,7 @@ import { AnsweringComponent } from './shared/faq-page/answering/answering.compon
     AboutComponent,
     PrivacyPolicyComponent,
     FaqPageComponent,
-    AnsweringComponent,
-    
+    BlogsComponent,
   ],
   imports: [
     BrowserModule,

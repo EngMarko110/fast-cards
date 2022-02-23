@@ -6,21 +6,22 @@
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" routerLink="form"
-              (click)="createCategory()"></p-button>
+              (click)="createCategory()">
+            </p-button>
           </div>
           <div *ngIf="listType !== 'Main Categories'">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search" />
             </span>
-            <!-- {{searchText}} -->
           </div>
         </p-toolbar>
       </div>
     </div>
     <div class="p-grid" *ngIf="categories.length">
       <div class="p-col-12">
-        <p-table *ngIf="!filteredCategories || !filteredCategories.length" [value]="categories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
+        <p-table *ngIf="!filteredCategories || !filteredCategories.length"
+          [value]="categories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="name">
@@ -43,8 +44,9 @@
 
               <ng-template #value>
                 <td>
-                  <i style="font-size: 3rem" class="pi" [ngClass]="'pi-' + category.icon"></i>
-                  <i style="font-size: 2rem;" class="pi" [ngClass]="'pi-' + category.subicon"></i>
+                  <img *ngIf="category.icon.includes('https')" [src]="category.icon" alt="">
+                  <i style="font-size: 3rem" class="pi {{category.icon}}"></i>
+                  <i style="font-size: 2rem;" class="pi {{category.subicon}}"></i>
                 </td>
                 <td>
                   <i class="pi pi-circle-on" style="font-size: 2rem" [ngStyle]="{ color: category.color }"></i>
@@ -59,12 +61,13 @@
                   styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
                 <p-button *ngIf="!currentCategoryId" (click)="createSideCategory(category.id, category.mainCategory)"
                   styleClass="p-button-primary p-mr-2" icon="pi pi-plus"></p-button>
-          
+
               </td>
             </tr>
           </ng-template>
         </p-table>
-        <p-table *ngIf="filteredCategories && filteredCategories.length" [value]="filteredCategories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
+        <p-table *ngIf="filteredCategories && filteredCategories.length"
+          [value]="filteredCategories | filter: searchText:'name'" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="name">
@@ -103,7 +106,7 @@
                   styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
                 <p-button *ngIf="!currentCategoryId" (click)="createSideCategory(category.id, category.mainCategory)"
                   styleClass="p-button-primary p-mr-2" icon="pi pi-plus"></p-button>
-          
+
               </td>
             </tr>
           </ng-template>

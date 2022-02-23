@@ -51,7 +51,7 @@ export class MainCategoriesListComponent extends CategoriesListComponent impleme
           this._getList();
           this.localMessageService.add({ severity: 'success', summary: 'Success', detail: 'Main Category is deleted!' });
         }, () => this.localMessageService.add({ severity: 'error', summary: 'Error', detail: 'Main Category is not deleted!' }));
-        location.reload();
+        // location.reload();
       },
     });
   }
