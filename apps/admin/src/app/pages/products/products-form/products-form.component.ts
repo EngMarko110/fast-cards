@@ -27,6 +27,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
   selectedCategory: string;
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
+  soldLicence: string[];
   endsubs$: Subject<any> = new Subject();
   public isReadOnly: boolean;
   constructor(
@@ -158,6 +159,7 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
         .getProduct(params.id)
         .pipe(takeUntil(this.endsubs$))
         .subscribe((product) => {
+            this.soldLicence = product.soldLicence;
             this.productForm.name.setValue(product.name);
             this.productForm.mainCategory.setValue(product.mainCategory.id);
             this.productForm.category.setValue(product.category.id);

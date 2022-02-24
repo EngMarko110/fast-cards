@@ -224,4 +224,7 @@
       </div>
     </div>
   </p-card>
+  <div class="d-flex justify-content-center" *ngIf="editmode">
+    <admin-licenses-list *ngIf="currentProductId" [productId]="currentProductId" [soldLicence]="soldLicence"></admin-licenses-list>
+  </div>
 </div>
