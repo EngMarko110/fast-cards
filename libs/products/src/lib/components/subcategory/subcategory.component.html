@@ -2,30 +2,16 @@
   <h3>{{ category.name }}</h3>
   <div class="p-grid">
     <div class="p-col-2" *ngFor="let subcategory of subCategories">
-      <div
-        class="category"
-        [routerLink]="'/products/' + subcategory.id"
-        [ngStyle]="{ backgroundColor: category.color }"
-      >
+      <div class="category" [routerLink]="'/products/' + subcategory.id"
+        [ngStyle]="{ backgroundColor: category.color }">
         <div class="icons">
           <div class="category-icon">
-            <i class="pi {{ category.icon }}"></i>
+            <img #imgIcon  [src]="category.icon" (error)="imgIcon.hidden=true" [hidden]="imgIcon.hidden" alt="category Icon" />
+            <i class="pi {{category.icon }}"></i>
           </div>
-          <div class="category-icon">
-            <ng-template #img>
-              <img [src]="subcategory.icon" alt="subcategory Icon" />
-            </ng-template>
-            <ng-template #icon>
+           <div class="category-icon"> 
+              <img #imgSub  [src]="subcategory.icon" (error)="imgSub.hidden=true" [hidden]="imgSub.hidden" alt="subcategory Icon" />
               <i class="pi {{ subcategory.icon }}"></i>
-            </ng-template>
-            <ng-container
-              *ngIf="
-                subcategory.icon.includes('https://img.icons8.com/');
-                then img;
-                else then;
-                icon
-              "
-            ></ng-container>
           </div>
         </div>
         <div class="category-name">{{ subcategory.name }}</div>

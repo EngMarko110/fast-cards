@@ -44,9 +44,12 @@
 
               <ng-template #value>
                 <td>
-                  <img *ngIf="category.icon.includes('https')" [src]="category.icon" alt="">
-                  <i style="font-size: 3rem" class="pi {{category.icon}}"></i>
+                  <!-- <img *ngIf="category.icon.includes('https')" [src]="category.icon" alt=""> -->
+                  <img #imgSubIcon  [src]="category.subicon" (error)="imgSubIcon.hidden=true" [hidden]="imgSubIcon.hidden" alt="category Icon" />
                   <i style="font-size: 2rem;" class="pi {{category.subicon}}"></i>
+                  
+                  <img #imgIcon  [src]="category.icon" (error)="imgIcon.hidden=true" [hidden]="imgIcon.hidden" alt="sub category Icon" />
+                  <i style="font-size: 3rem" class="pi {{category.icon}}"></i>
                 </td>
                 <td>
                   <i class="pi pi-circle-on" style="font-size: 2rem" [ngStyle]="{ color: category.color }"></i>

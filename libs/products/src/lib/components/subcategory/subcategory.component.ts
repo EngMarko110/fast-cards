@@ -14,7 +14,7 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
   public subCategories: Category[] = [];
   private endsubs$: Subject<any> = new Subject();
   parentCategory: any;
-  category:Category={};
+  category: Category = {};
   constructor(private categoriesServ: CategoriesService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((parmas) => {
       this.parentCategory = parmas.get('categoryid');
@@ -23,7 +23,7 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._getSubCategories();
-    this. _getCategory();
+    this._getCategory();
   }
   public ngOnDestroy(): void {
     this.endsubs$.next();
@@ -39,6 +39,6 @@ export class SubcategoryComponent implements OnInit, OnDestroy {
       this.category = response;
     });
   }
- 
+
 
 }
