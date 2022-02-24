@@ -31,7 +31,7 @@
       <ng-template pTemplate="body" let-faq>
         <tr>
           <td>{{ faq.title }}</td>
-          <td>{{ faq.topic }}</td>
+          <td [innerHTML]="faq.topic"></td>
           <td>
             <p-button
               (click)="deleteFAQ(faq._id)"

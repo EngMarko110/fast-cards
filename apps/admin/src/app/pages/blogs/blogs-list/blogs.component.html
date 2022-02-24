@@ -30,7 +30,7 @@
       <ng-template pTemplate="body" let-blog>
         <tr>
           <td>{{ blog.title }}</td>
-          <td>{{ blog.topic }}</td>
+          <td [innerHTML]="blog.topic"></td>
           <td>
             <p-button (click)="deleteBlog(blog._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
             </p-button>
