@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="admin-faq-list">
   <p-card header="FAQ!" subheader="List of FAQ!">
     <div class="p-grid">
@@ -32,10 +33,17 @@
           <td>{{ faq.title }}</td>
           <td>{{ faq.topic }}</td>
           <td>
-            <p-button (click)="deleteFAQ(faq._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
+            <p-button
+              (click)="deleteFAQ(faq._id)"
+              styleClass="p-button-danger p-mr-2"
+              icon="pi pi-trash"
+            >
             </p-button>
-            <p-button  routerLink="form/{{faq._id}}"
-              styleClass="p-button-success p-mr-2" icon="pi pi-pencil"></p-button>
+            <p-button
+              routerLink="form/{{ faq._id }}"
+              styleClass="p-button-success p-mr-2"
+              icon="pi pi-pencil"
+            ></p-button>
           </td>
         </tr>
       </ng-template>

@@ -14,15 +14,23 @@
     </div>
     <div class="p-col-1 tools">
       <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" id="authdropdown" data-toggle="dropdown"
-          aria-expanded="false">
+        <button
+          class="btn dropdown-toggle"
+          type="button"
+          id="authdropdown"
+          data-toggle="dropdown"
+          aria-expanded="false"
+        >
           <ng-template #auth>
-            <span>{{username}}</span>
+            <span>{{ username }}</span>
           </ng-template>
           <ng-template #noAuth>
-            <i class="pi pi-user p-text-secondary" style="font-size: 1.5rem"></i>
+            <i
+              class="pi pi-user p-text-secondary"
+              style="font-size: 1.5rem"
+            ></i>
           </ng-template>
-          <ng-container *ngIf="username then auth ; else noAuth"></ng-container>
+          <ng-container *ngIf="username; then auth; else noAuth"></ng-container>
         </button>
 
         <div class="dropdown-menu text-center" aria-labelledby="authdropdown">
@@ -35,7 +43,6 @@
             <a class="dropdown-item text-info" routerLink="/register">
               Register <i class="fas fa-sign-in-alt"></i>
             </a>
-            
           </ng-template>
           <ng-template #logout>
             <a class="dropdown-item text-info" routerLink="/user/profile">
@@ -52,12 +59,13 @@
               Logout <i class="fas fa-sign-out-alt"></i>
             </a>
           </ng-template>
-          <ng-container *ngIf="username then logout ; else login"></ng-container>
-
+          <ng-container
+            *ngIf="username; then logout; else login"
+          ></ng-container>
         </div>
       </div>
       <orders-cart-icon></orders-cart-icon>
-
+      <div><i style="font-size: 32px" class="pi pi-bell"></i></div>
     </div>
   </div>
 </header>

@@ -1,23 +1,27 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@bluebits/users';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "@bluebits/users";
 import { BlogsFormComponent } from "./pages/blogs/blogs-form/blogs-form.component";
 import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
-import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
-import { MainCategoriesListComponent } from './pages/categories/main-categories-list/main-categories-list.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LicensesFormComponent } from './pages/licenses/licenses-form/licenses-form.component';
-import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
+import { CategoriesFormComponent } from "./pages/categories/categories-form/categories-form.component";
+import { MainCategoriesListComponent } from "./pages/categories/main-categories-list/main-categories-list.component";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { LicensesFormComponent } from "./pages/licenses/licenses-form/licenses-form.component";
+//import { LicensesListComponent } from './pages/licenses/licenses-list/licenses-list.component';
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
-import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
-import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
-import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
-import { ProductsListComponent } from './pages/products/products-list/products-list.component';
-import { UsersFormComponent } from './pages/users/users-form/users-form.component';
-import { UsersListComponent } from './pages/users/users-list/users-list.component';
-import { ShellComponent } from './shared/shell/shell.component';
+import { AllNotificationsComponent } from "./pages/notifications/all-notifications/all-notifications.component";
+import { OrdersListComponent } from "./pages/orders/orders-list/orders-list.component";
+import { OrdersDetailComponent } from "./pages/orders/orders-detail/orders-detail.component";
+import { ProductsFormComponent } from "./pages/products/products-form/products-form.component";
+import { ProductsListComponent } from "./pages/products/products-list/products-list.component";
+import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
+import { UsersFormComponent } from "./pages/users/users-form/users-form.component";
+import { UsersListComponent } from "./pages/users/users-list/users-list.component";
+//import { TextSystemReplyComponent } from "./pages/textsystem/text-system-reply/text-system-reply.component";
+import { WalletListComponent } from "./pages/wallets/wallet-list/wallet-list.component";
+import { ShellComponent } from "./shared/shell/shell.component";
 
 const routes: Routes = [
   {
@@ -77,8 +81,11 @@ const routes: Routes = [
         path: "products/form/:id/:isReadOnly",
         component: ProductsFormComponent,
       },
-      { path: 'licenses/form/:productId', component: LicensesFormComponent },
-      { path: 'licenses/form/:productId/:id', component: LicensesFormComponent },
+      { path: "licenses/form/:productId", component: LicensesFormComponent },
+      {
+        path: "licenses/form/:productId/:id",
+        component: LicensesFormComponent,
+      },
       {
         path: "users",
         component: UsersListComponent,
@@ -100,11 +107,19 @@ const routes: Routes = [
         component: OrdersDetailComponent,
       },
       {
+        path: "wallets",
+        component: WalletListComponent,
+      },
+      {
         path: "blogs",
         component: BlogsComponent,
       },
       {
         path: "blogs/form",
+        component: BlogsFormComponent,
+      },
+      {
+        path: "blogs/form/id",
         component: BlogsFormComponent,
       },
       {
@@ -123,6 +138,20 @@ const routes: Routes = [
         path: "LicenseKey",
         component: LicenseKeyComponent,
       },
+      {
+        path: "ticketSystem",
+        component: TextSystemListComponent,
+      },
+      {
+        path: "notifications",
+        component: AllNotificationsComponent,
+      },
+      /*
+      ,
+      {
+        path: "text-system-reply",
+        component: TextSystemReplyComponent,
+      },*/
     ],
   },
 ];
