@@ -44,8 +44,15 @@ import { BlogsFormComponent } from "./pages/blogs/blogs-form/blogs-form.componen
 import { BlogsComponent } from "./pages/blogs/blogs-list/blogs.component";
 import { FaqFormComponent } from "./pages/faq/faq-form/faq-form.component";
 import { FaqListComponent } from "./pages/faq/faq-list/faq-list.component";
+import { LicensesFormComponent } from "./pages/licenses/licenses-form/licenses-form.component";
 import { LicenseKeyComponent } from "./pages/license-key/license-key.component";
+import { TextSystemListComponent } from "./pages/textsystem/text-system-list/text-system-list.component";
+import { AllNotificationsComponent } from "./pages/notifications/all-notifications/all-notifications.component";
+import { WalletListComponent } from "./pages/wallets/wallet-list/wallet-list.component";
+import { WalletInfoComponent } from "./pages/wallets/wallet-info/wallet-info.component";
+//import { TextSystemReplyComponent } from './pages/textsystem/text-system-reply/text-system-reply.component';
 
+import { LicensesListComponent } from "./pages/licenses/licenses-list/licenses-list.component";
 
 const UX_MODULE = [
   CardModule,
@@ -77,6 +84,8 @@ const UX_MODULE = [
     CategoriesFormComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    LicensesFormComponent,
+    LicensesListComponent,
     UsersListComponent,
     UsersFormComponent,
     OrdersListComponent,
@@ -87,6 +96,11 @@ const UX_MODULE = [
     FaqListComponent,
     FaqFormComponent,
     BlogsFormComponent,
+    TextSystemListComponent,
+    AllNotificationsComponent,
+    WalletListComponent,
+    WalletInfoComponent,
+    // TextSystemReplyComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,4 +122,4 @@ const UX_MODULE = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

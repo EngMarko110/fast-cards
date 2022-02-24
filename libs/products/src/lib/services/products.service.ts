@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Product } from '../models/product';
+import { IConfirmOrderRequest } from '../models/requests/IConfirmOrderRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,12 @@ export class ProductsService {
     return this.http.get<Product>(`${this.apiURLProducts}/${productId}`);
   }
 
-  updateProduct(productData: FormData, productid: string): Observable<Product> {
+  updateProduct(productData: FormData | Product, productid: string): Observable<Product> {
     return this.http.put<Product>(`${this.apiURLProducts}/${productid}`, productData);
+  }
+
+  updateProducts(requestBody: IConfirmOrderRequest): Observable<{ message: string; success: boolean }> {
+    return this.http.put<{ message: string; success: boolean }>(`${this.apiURLProducts}/many/order`, requestBody);
   }
 
   deleteProduct(productId: string): Observable<any> {
