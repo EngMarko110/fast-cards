@@ -5,8 +5,9 @@
       <div class="category" [routerLink]="'/subcategory/' + category.id"
         [ngStyle]="{ backgroundColor: category.color }">
         <div class="category-icon">
-          <img #imgIcon  [src]="category.icon" (error)="imgIcon.hidden=true" [hidden]="imgIcon.hidden" alt="category Icon" />
-          <i class="pi {{ category.icon }}"></i>
+          <img [src]="category.icon"  alt="category Icon" />
+          <!-- <img #imgIcon  [src]="category.icon" (error)="imgIcon.hidden=true" [hidden]="imgIcon.hidden" alt="category Icon" /> -->
+          <!-- <i class="pi {{ category.icon }}"></i> -->
         </div>
         <div class="category-name">{{ category.name }}</div>
       </div>

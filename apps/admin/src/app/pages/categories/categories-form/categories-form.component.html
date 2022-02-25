@@ -53,8 +53,8 @@
             </div>
             <ng-template #showIconColor>
               <div class="p-field p-col">
-                <label for="icon">Icon</label>
-                <input formControlName="icon" id="icon" type="text" [readOnly]="isReadOnly" pInputText />
+                <label for="icon">Img Src</label>
+                <input formControlName="icon" id="icon"  type="text" [readOnly]="isReadOnly" pInputText />
                 <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
                   >Icon is required</small
                 >

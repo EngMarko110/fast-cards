@@ -6,12 +6,13 @@
         [ngStyle]="{ backgroundColor: category.color }">
         <div class="icons">
           <div class="category-icon">
-            <img #imgIcon  [src]="category.icon" (error)="imgIcon.hidden=true" [hidden]="imgIcon.hidden" alt="category Icon" />
-            <i class="pi {{category.icon }}"></i>
+            <img  [src]="category.icon" alt="category Icon" />
+            <!-- <i class="pi {{category.icon }}"></i> -->
           </div>
            <div class="category-icon"> 
-              <img #imgSub  [src]="subcategory.icon" (error)="imgSub.hidden=true" [hidden]="imgSub.hidden" alt="subcategory Icon" />
-              <i class="pi {{ subcategory.icon }}"></i>
+              <img   [src]="subcategory.icon"  alt="subcategory Icon" />
+              <!-- <img #imgSub  [src]="subcategory.icon" (error)="imgSub.hidden=true" [hidden]="imgSub.hidden" alt="subcategory Icon" />
+              <i class="pi {{ subcategory.icon }}"></i> -->
           </div>
         </div>
         <div class="category-name">{{ subcategory.name }}</div>
