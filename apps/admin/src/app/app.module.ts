@@ -53,6 +53,7 @@ import { WalletInfoComponent } from "./pages/wallets/wallet-info/wallet-info.com
 //import { TextSystemReplyComponent } from './pages/textsystem/text-system-reply/text-system-reply.component';
 
 import { LicensesListComponent } from "./pages/licenses/licenses-list/licenses-list.component";
+import { SafehtmlPipe } from './shared/pipes/safehtml.pipe';
 
 const UX_MODULE = [
   CardModule,
@@ -100,6 +101,7 @@ const UX_MODULE = [
     AllNotificationsComponent,
     WalletListComponent,
     WalletInfoComponent,
+    SafehtmlPipe,
     // TextSystemReplyComponent,
   ],
   imports: [

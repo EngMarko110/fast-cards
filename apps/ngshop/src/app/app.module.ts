@@ -28,6 +28,8 @@ import { AboutComponent } from './shared/about/about.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { FaqPageComponent } from './shared/faq-page/faq-page.component';
 import { BlogsComponent } from './shared/blogs/blogs.component';
+import { SafehtmlPipe } from './shared/pipes/safehtml.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { BlogsComponent } from './shared/blogs/blogs.component';
     PrivacyPolicyComponent,
     FaqPageComponent,
     BlogsComponent,
+    SafehtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { BlogsComponent } from './shared/blogs/blogs.component';
     UsersModule,
     ButtonModule,
     UserProfileModule,
-    CoreModule
+    CoreModule,
+    // SafehtmlPipe
   ],
   
   providers: [

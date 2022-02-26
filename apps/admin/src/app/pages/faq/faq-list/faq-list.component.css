@@ -1,3 +1,9 @@
 .admin-faq-list {
   padding: 25px 25px 25px 25px;
 }
+.link{
+  color: rgb(21, 110, 226);
+}
+.link:hover{
+  text-decoration: underline;
+}

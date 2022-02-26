@@ -3,13 +3,13 @@ import { SEO } from "./../../../../../../../libs/ui/src/lib/models/seo";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService, ConfirmationService } from "primeng/api";
 
 @Component({
   selector: "faq-list",
   templateUrl: "./faq-list.component.html",
   styleUrls: ["./faq-list.component.css"],
+
 })
 export class FaqListComponent implements OnInit, OnDestroy {
   private endsubs$: Subject<any> = new Subject();
@@ -19,9 +19,8 @@ export class FaqListComponent implements OnInit, OnDestroy {
     private seoServ: SeoService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    
+  ) { }
 
   ngOnInit(): void {
     this.getAllFAQ();

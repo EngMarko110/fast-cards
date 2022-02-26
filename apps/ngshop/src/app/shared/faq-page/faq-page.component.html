@@ -1,7 +1,9 @@
 <div></div>
 <div class="conatiner">
   <div class="row">
-    <h3>Common Questions & Answers</h3>
+    <div  class="col-sm-12">
+      <h3>FAQ?</h3>
+    </div>
     <div id="accordion" class="col-sm-12 col-md-10">
       <div class="card" *ngFor="let question of faqList; let i=index">
         <div class="card-header" id="headingOne">
@@ -14,7 +16,7 @@
           </h5>
         </div>
         <div id="List-{{ i }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body" [innerHTML]="question.topic">
+          <div class="card-body" [innerHTML]="question.topic|safehtml">
             <!-- <p> {{question.topic}}</p> -->
           </div>
         </div>

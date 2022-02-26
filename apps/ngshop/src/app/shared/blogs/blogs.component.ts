@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit ,ViewEncapsulation} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SEO } from '../../../../../../libs/ui/src/lib/models/seo';
@@ -7,7 +7,8 @@ import { SeoService } from '../../../../../../libs/ui/src/lib/services/seo.servi
 @Component({
   selector: 'bluebits-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.scss']
+  styleUrls: ['./blogs.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BlogsComponent implements OnInit, OnDestroy {
   private endsubs$: Subject<any> = new Subject();

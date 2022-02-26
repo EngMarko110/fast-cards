@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit ,ViewEncapsulation} from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { Subject } from "rxjs";
@@ -10,6 +10,8 @@ import { SeoService } from "../../../../../../../libs/ui/src/lib/services/seo.se
   selector: "admin-blogs",
   templateUrl: "./blogs.component.html",
   styleUrls: ["./blogs.component.css"],
+  // encapsulation: ViewEncapsulation.None,
+
 })
 export class BlogsComponent implements OnInit ,OnDestroy {
   private endsubs$: Subject<any> = new Subject();

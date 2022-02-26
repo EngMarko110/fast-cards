@@ -15,8 +15,8 @@
           </h5>
         </div>
         <div id="List-{{ i }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body" [innerHTML]="blog.topic">
-            <!-- <p> {{question.topic}}</p> -->
+          <div class="card-body" [innerHTML]="blog.topic|safehtml">
+            <!-- <p> {{question.topic|safehtml}}</p> -->
           </div>
         </div>
       </div>

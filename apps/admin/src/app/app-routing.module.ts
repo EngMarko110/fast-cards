@@ -119,7 +119,7 @@ const routes: Routes = [
         component: BlogsFormComponent,
       },
       {
-        path: "blogs/form/id",
+        path: "blogs/form/:id",
         component: BlogsFormComponent,
       },
       {

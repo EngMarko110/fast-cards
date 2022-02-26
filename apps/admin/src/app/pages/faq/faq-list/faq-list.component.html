@@ -5,22 +5,13 @@
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <p-button
-              styleClass="p-button-success"
-              label="New"
-              icon="pi pi-plus"
-              routerLink="form"
-            ></p-button>
+            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus" routerLink="form"></p-button>
           </div>
         </p-toolbar>
       </div>
     </div>
     <br /><br />
-    <p-table
-      [value]="faqList"
-      styleClass="p-datatable-gridlines"
-      responsiveLayout="scroll"
-    >
+    <p-table [value]="faqList" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>
           <th>Question ?</th>
@@ -30,20 +21,22 @@
       </ng-template>
       <ng-template pTemplate="body" let-faq>
         <tr>
-          <td>{{ faq.title }}</td>
-          <td [innerHTML]="faq.topic"></td>
+           <td>
+            <p>{{ faq.title|slice:0:50 }}
+              <span *ngIf="faq.title.length>=50">...</span>
+            </p>
+          </td>
           <td>
-            <p-button
-              (click)="deleteFAQ(faq._id)"
-              styleClass="p-button-danger p-mr-2"
-              icon="pi pi-trash"
-            >
+            <div [innerHTML]="faq.topic|slice:0:50|safehtml" >
+              <span *ngIf="faq.topic.length>=50">...</span>
+            </div>
+            
+          </td>
+          <td>
+            <p-button (click)="deleteFAQ(faq._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
             </p-button>
-            <p-button
-              routerLink="form/{{ faq._id }}"
-              styleClass="p-button-success p-mr-2"
-              icon="pi pi-pencil"
-            ></p-button>
+            <p-button routerLink="form/{{ faq._id }}" styleClass="p-button-success p-mr-2" icon="pi pi-pencil">
+            </p-button>
           </td>
         </tr>
       </ng-template>

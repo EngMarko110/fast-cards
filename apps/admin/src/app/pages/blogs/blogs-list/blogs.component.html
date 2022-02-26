@@ -29,8 +29,17 @@
       </ng-template>
       <ng-template pTemplate="body" let-blog>
         <tr>
-          <td>{{ blog.title }}</td>
-          <td [innerHTML]="blog.topic"></td>
+          <td>
+            <p>
+              {{ blog.title|slice:0:50 }}
+              <span *ngIf="blog.title.length>=50">...</span>
+            </p>          
+          </td>
+          <td>
+            <div [innerHTML]="blog.topic|slice:0:50|safehtml">
+              <span *ngIf="blog.topic.length>=50">...</span>
+            </div>           
+          </td>
           <td>
             <p-button (click)="deleteBlog(blog._id)" styleClass="p-button-danger p-mr-2" icon="pi pi-trash">
             </p-button>

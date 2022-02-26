@@ -20,13 +20,16 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     private prodService: ProductsService,
     private route: ActivatedRoute,
     private cartService: CartService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      if (params.productid) {
-        this._getProduct(params.productid);
-      }
+    console.log('init');
+    
+    this.route.paramMap.subscribe((params) => {
+        console.log('prodID: ',params.get('productid'));
+        this._getProduct(params.get('productid'));
     });
   }
 
