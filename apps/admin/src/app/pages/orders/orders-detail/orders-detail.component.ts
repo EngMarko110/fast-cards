@@ -34,6 +34,30 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
     this.endsubs$.complete();
   }
 
+  onStatusChange(event) {
+    if (!this.hasEnoughLicensesForDelivery() && event.value === "3") {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Product has no enough license codes for delivery!' });
+      this.getNeededLicensesForEachProductMessage();
+    } else {
+      this.orderService
+      .updateOrder({ status: event.value }, this.order.id)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(
+        () => {
+            const requestBody = this.prepareRequestBody(this.order, event.value);
+            this.updateProducts(requestBody);
+          },
+          () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Order is not updated!'
+            });
+          }
+        );
+    }
+  }
+
   private _mapOrderStatus() {
     this.orderStatuses = Object.keys(ORDER_STATUS).map((key) => {
       return {
@@ -83,20 +107,22 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
     }, (error) => this.messageService.add({ severity: 'failed', summary: 'Failed', detail: 'Order isnot updated!' }));
   }
 
-  onStatusChange(event) {
-    const requestBody = this.prepareRequestBody(this.order, event.value);
-    this.orderService
-      .updateOrder({ status: event.value }, this.order.id)
-      .pipe(takeUntil(this.endsubs$))
-      .subscribe(
-        () => { this.updateProducts(requestBody); },
-        () => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Order is not updated!'
-          });
-        }
-      );
+  private hasEnoughLicensesForDelivery(): boolean {
+    return !this.getOrderItemsWithMissingLicenses().length;
+  }
+
+  private getNeededLicensesForEachProductMessage(): void {
+    let message: string = '';
+    const orderItems = this.getOrderItemsWithMissingLicenses();
+    for (const orderItem of orderItems) {
+      const diff = orderItem.quantity - orderItem.product.licenceStock;
+      message += `At least ${diff} licenses are needed for product ${orderItem.product.name}\n`;
+    }
+    this.messageService.add({ severity: 'failed', summary: 'Failed', detail: message });
+  }
+
+  private getOrderItemsWithMissingLicenses(): any[] {
+    const filteredOrderItems: any[] = this.order.orderItems.filter((orderItem) => orderItem.product.licenceStock < orderItem.quantity);
+    return filteredOrderItems;
   }
 }
