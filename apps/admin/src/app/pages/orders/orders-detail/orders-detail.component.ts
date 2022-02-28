@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService, ORDER_STATUS } from '@bluebits/orders';
 import { IConfirmOrderRequest, LicensesService, ProductsService } from '@bluebits/products';
 import { MessageService } from 'primeng/api';
@@ -21,7 +21,9 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
     private orderService: OrdersService,
     private productsService: ProductsService,
     private messageService: MessageService,
-    private route: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private router: Router
+    
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +70,7 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
   }
 
   private _getOrder() {
-    this.route.params.subscribe((params) => {
+    this.activatedroute.params.subscribe((params) => {
       if (params.id) {
         this.orderService
           .getOrder(params.id)
@@ -97,6 +99,7 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
       if (messageObj.success) {
         const request = { soldKeys: requestBody.soldKeys, orderStatus: requestBody.orderStatus };
         this.updateLicenses(request);
+        this.router.navigateByUrl('/orders');
       }
     });
   }

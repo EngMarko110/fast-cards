@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,11 +11,12 @@ import { OrderItem, OrdersService } from '../../../../../../orders/src';
 })
 export class OrderItemsComponent implements OnInit {
 orderId;
-order:any;
+orderItems:OrderItem[];
 endsubs$: Subject<any> = new Subject();
+
 constructor(
   private orderService: OrdersService,
-  private route: ActivatedRoute
+  private route: ActivatedRoute,
 ) {}
 
 ngOnInit(): void {
@@ -34,12 +35,13 @@ private _getOrder() {
         .getOrder(params.get('orderId'))
         .pipe(takeUntil(this.endsubs$))
         .subscribe((order) => {
-          this.order = order;
+          this.orderItems = order.orderItems;
         });
   });
 }
 
-
-
-
 }
+
+
+
+

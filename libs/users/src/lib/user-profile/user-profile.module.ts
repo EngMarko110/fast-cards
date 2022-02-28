@@ -22,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from "primeng/tag";
 import { FieldsetModule } from "primeng/fieldset";
 import { CardModule } from "primeng/card";
+import { LicensesListComponent } from './user-orders/order-items/licenses-list/licenses-list.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { CardModule } from "primeng/card";
     UserProfileComponent,
     OrderSummaryComponent,
     OrderItemsComponent,
+    LicensesListComponent,
   ],
   imports: [
     CommonModule,
