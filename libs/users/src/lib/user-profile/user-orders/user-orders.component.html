@@ -1,42 +1,53 @@
-<div class="row border border-left-0 border-right-0 border-top-0 mb-4 p-2">
-    <div class="col">
-        <h4>Orders List ({{this.orderList.length}})</h4>
-    </div>
-</div>
-<div class="table-responsive-sm">
-    <table class="table table-hover text-center table-striped">
-        <thead class="text-light">
+  <p-card header="Orders" subheader="List of all orders">
+    <div class="p-grid">
+      <!-- {{orderList|json}} -->
+      <div class="p-col-12">
+        <p-table [value]="orderList" styleClass="p-datatable-gridlines">
+          <ng-template pTemplate="header">
             <tr>
-                <!-- <th scope="col">Order Num</th> -->
-                <th scope="col">Price</th>
-                <th scope="col">Product</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
+              <th pSortableColumn="totalPrice">
+                Total Price <p-sortIcon field="totalPrice"></p-sortIcon>
+              </th>
+              <th pSortableColumn="dateOrdered">
+                Date Ordered <p-sortIcon field="dateOrdered"></p-sortIcon>
+              </th>
+              <th pSortableColumn="status">
+                Status <p-sortIcon field="status"></p-sortIcon>
+              </th>
+              <th></th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of orderList ;let i=index">
-                <td>{{order.totalPrice}}</td>
-                <td>
-                    <users-order-items [orderItems]=order.orderItems></users-order-items>
-                </td>
-                <td>{{order.dateOrdered}} </td>
-                <td>{{order.status}}</td>
-               
+          </ng-template>
+          <ng-template pTemplate="body" let-order>
+            <tr>
+              <td>{{ order.totalPrice }}</td>
+              <td>{{ order.dateOrdered | date: "short" }}</td>
+              <td>
+                <p-tag
+                  [value]="orderStatus[order.status].label"
+                  [severity]="orderStatus[order.status].color"
+                ></p-tag>
+              </td>
+              <td>
+                <!-- <p-button
+                *ngIf="!showFlag"
+                (click)="showOrder(order._id,order.orderItems)"
+                  styleClass="p-button-success"
+                  icon="pi pi-eye-slash"
+                ></p-button> -->
+                <p-button
+                routerLink="items/{{order._id}}"
+                  styleClass="p-button-success"
+                  icon="pi pi-eye"
+                ></p-button>
+              </td>
             </tr>
-            
-        </tbody>
-
-    </table>
-</div>
-<!-- </ng-template>
-  <ng-template #alert>
-    <div class="row p-5 d-flex justify-content-center align-items-center">
-      <div class="alert  alert-light" role="alert">
-        You are not make any order back to <a routerLink="/" class="alert-link">Home</a>.
-        OR to your <a routerLink="/user/cart" class="alert-link">Carts</a>.
+          </ng-template>
+        </p-table>
       </div>
     </div>
-  </ng-template>
-  <ng-container *ngIf="orderList.length!==0 then orders; else alert"></ng-container>
-   -->
+  </p-card> 
+
+<router-outlet></router-outlet>
+
+
+

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrderItem } from '../../../../../../orders/src';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { OrderItem, OrdersService } from '../../../../../../orders/src';
 
 @Component({
   selector: 'users-order-items',
@@ -7,10 +10,36 @@ import { OrderItem } from '../../../../../../orders/src';
   styleUrls: ['./order-items.component.css']
 })
 export class OrderItemsComponent implements OnInit {
-@Input() orderItems:OrderItem[]
-  constructor() { }
+orderId;
+order:any;
+endsubs$: Subject<any> = new Subject();
+constructor(
+  private orderService: OrdersService,
+  private route: ActivatedRoute
+) {}
 
-  ngOnInit(): void {
-  }
+ngOnInit(): void {
+  this._getOrder();
+}
+
+ngOnDestroy() {
+  this.endsubs$.next();
+  this.endsubs$.complete();
+}
+
+
+private _getOrder() {
+  this.route.paramMap.subscribe((params) => {
+      this.orderService
+        .getOrder(params.get('orderId'))
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe((order) => {
+          this.order = order;
+        });
+  });
+}
+
+
+
 
 }
