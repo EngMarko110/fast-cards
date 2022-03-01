@@ -27,7 +27,8 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
       .subscribe((categories) => {
         this.mainCategories = categories;
         for (const mainCategory of this.mainCategories) {
-          const categoriesForMainCategory = this.categories.filter((category) => category.mainCategory === mainCategory.id);
+          const categoriesForMainCategory = this.categories.filter((category) =>
+           category.mainCategory === mainCategory.id);
           const categoriesObj = this.categoriesMapper(categoriesForMainCategory, mainCategory);
           this.response.push(categoriesObj);
         }
