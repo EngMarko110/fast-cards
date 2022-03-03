@@ -1,44 +1,33 @@
-import { SubcategoryComponent } from './components/subcategory/subcategory.component';
-import { FilterPipe } from './../../../../apps/ngshop/src/app/shared/pipes/filter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrdersModule } from '@bluebits/orders';
+import { FilterPipe } from './../../../../apps/ngshop/src/app/shared/pipes/filter.pipe';
 import { ProductsSearchComponent } from './components/products-search/products-search.component';
-import { CategoriesBannerComponent } from './components/categories-banner/categories-banner.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductItemComponent } from './components/product-item/product-item.component';
+import { ProductItemComponent } from './components/products/product-item/product-item.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RatingModule } from 'primeng/rating';
-import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { FormsModule } from '@angular/forms';
-import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UiModule } from '@bluebits/ui';
-// import { CategoryComponent } from './components/category/category.component';
+import { MainCategoryComponent } from './components/categories/main-category/main-category.component';
+import { CategoryComponent } from './components/categories/category/category.component';
+import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
+import { ProductModule } from './components/products/product.module';
 
 const routes: Routes = [
-  // {
-  //   path: 'category/:mainCategoryid',
-  //   component: CategoryComponent
-  // },
   {
     path: 'subcategory/:categoryid',
     component: SubcategoryComponent
   },
   {
-    path: 'products',
-    component: ProductsListComponent
+    path: 'products', loadChildren: () => import('./components/products/product.module')
+      .then(m => m.ProductModule),
+
   },
-  {
-    path: 'products/:subcategoryid',
-    component: ProductsListComponent
-  },
-  {
-    path: 'product/:productid',
-    component: ProductPageComponent
-  }
+
 ];
 @NgModule({
   imports: [
@@ -52,26 +41,22 @@ const routes: Routes = [
     RatingModule,
     InputNumberModule,
     UiModule,
+    ProductModule
 
   ],
   declarations: [
     ProductsSearchComponent,
-    CategoriesBannerComponent,
-    ProductItemComponent,
     FeaturedProductsComponent,
-    ProductsListComponent,
-    ProductPageComponent,
+    FilterPipe,
+    MainCategoryComponent,
+    CategoryComponent,
     SubcategoryComponent,
-    // CategoryComponent,
-    FilterPipe
   ],
   exports: [
     ProductsSearchComponent,
-    CategoriesBannerComponent,
-    ProductItemComponent,
+    MainCategoryComponent,
     FeaturedProductsComponent,
-    ProductsListComponent,
-    ProductPageComponent
+    
   ]
 })
 export class ProductsModule { }

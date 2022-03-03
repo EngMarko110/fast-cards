@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CartItem, CartService } from '@bluebits/orders';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Product } from '../../models/product';
-import { ProductsService } from '../../services/products.service';
+import { Product } from '../../../models/product';
+import { ProductsService } from '../../../services/products.service';
 
 @Component({
   selector: 'products-product-page',
@@ -24,9 +24,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     
   }
 
-  ngOnInit(): void {
-    console.log('init');
-    
+  ngOnInit(): void {    
     this.route.paramMap.subscribe((params) => {
         console.log('prodID: ',params.get('productid'));
         this._getProduct(params.get('productid'));

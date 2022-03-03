@@ -1,0 +1,4 @@
+<div class="categories-banner" *ngFor="let mainItem of mainCategories">
+    <h3>{{mainItem.name}}</h3>
+    <bluebits-category [maincategoryID]="mainItem.id"></bluebits-category>
+  </div>

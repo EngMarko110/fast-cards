@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartService, CartItem } from '@bluebits/orders';
-import { Product } from '../../models/product';
+import { Product } from '../../../models/product';
 
 @Component({
   selector: 'products-product-item',

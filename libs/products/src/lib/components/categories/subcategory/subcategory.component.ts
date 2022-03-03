@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
-import { CategoriesService } from '@bluebits/products';
+import { CategoriesService, Category } from '@bluebits/products';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Category } from '../../..';
+// import { Category } from '../../../';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
